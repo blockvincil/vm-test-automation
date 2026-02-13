@@ -92,6 +92,8 @@ public class GridPage {
         // 🔹 Adjust zoom level for balances table
         adjustZoom(15);
 
+        System.out.println("Data reading started");
+
         List<Map<String, String>> tableData = new ArrayList<>();
         List<WebElement> rows = driver.findElements(agGridRows);
 
@@ -179,6 +181,7 @@ public class GridPage {
             tableData.add(rowData);
         }
 
+        System.out.println("Data reading ended");
         adjustZoom(100);
         return tableData;
     }
