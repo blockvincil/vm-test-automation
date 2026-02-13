@@ -1,0 +1,12 @@
+{
+  "eventRuleHierarchiesPage": {
+    "importData": "importData",
+    "b1_openingClosingInconsistent": "b1_openingClosingInconsistent",
+    "csvImport": "csvImport",
+    "purge": "purge",
+    "b1_balanceMissingOrInconsistent": "b1_balanceMissingOrInconsistent",
+    "b1_missingMandatoryFields": "b1_missingMandatoryFields",
+    "b1_accountMappingNotFound": "b1_accountMappingNotFound",
+    "b1_failedInTransformation": "b1_failedInTransformation"
+  }
+}
