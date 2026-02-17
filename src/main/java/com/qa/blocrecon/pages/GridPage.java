@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.DataNormalizerUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -52,12 +53,11 @@ public class GridPage {
     }
 
     // For fetching source data AND cash items data as it is
+
     public List<Map<String, String>> getGridRawData(List<String> columns) {
 
         // 🔹 Adjust zoom level for balances table
         adjustZoom(15);
-
-        System.out.println("Data reading started");
 
         List<Map<String, String>> tableData = new ArrayList<>();
         List<WebElement> rows = driver.findElements(agGridRows);
@@ -72,8 +72,8 @@ public class GridPage {
                         .getText()
                         .trim();
 
-                // 🔹 Normalization
-                value = normalizeValue(colId, value);
+                // 🔥 Centralized normalization
+                value = DataNormalizerUtil.normalize(colId, value);
 
                 rowData.put(colId, value);
             }
@@ -81,49 +81,187 @@ public class GridPage {
             tableData.add(rowData);
         }
 
-        System.out.println("Data reading ended");
         adjustZoom(100);
         return tableData;
     }
 
+
+//    public List<Map<String, String>> getGridRawData(List<String> columns) {
+//
+//        // 🔹 Adjust zoom level for balances table
+//        adjustZoom(15);
+//
+//        List<Map<String, String>> tableData = new ArrayList<>();
+//        List<WebElement> rows = driver.findElements(agGridRows);
+//
+//        for (WebElement row : rows) {
+//
+//            Map<String, String> rowData = new LinkedHashMap<>();
+//
+//            for (String colId : columns) {
+//
+//                String value = row.findElement(getCellByColId(colId))
+//                        .getText()
+//                        .trim();
+//
+//                // 🔹 Normalization
+//                value = normalizeValue(colId, value);
+//
+//                rowData.put(colId, value);
+//            }
+//
+//            tableData.add(rowData);
+//        }
+//
+//        adjustZoom(100);
+//        return tableData;
+//    }
+
     // For fetching cash items data as per balances table AND cash balances data
+//    public List<Map<String, String>> getGridRawData(List<String> columns, String dataFetchPurpose) {
+//
+//        // 🔹 Adjust zoom level for balances table
+//        adjustZoom(15);
+//
+//        List<Map<String, String>> tableData = new ArrayList<>();
+//        List<WebElement> rows = driver.findElements(agGridRows);
+//
+//        // 🔹 Used only for balancesValidation logic
+//        Set<String> uniqueSubAccountSourceBatch = new HashSet<>();
+//
+//        for (WebElement row : rows) {
+//
+//            Map<String, String> rowData = new LinkedHashMap<>();
+//
+//            String statusValue = "";
+//            String subAccountValue = "";
+//
+//            // 🔹 First pass: read required control fields (status & subaccount)
+//            if ("cashItems_balancesValidation".equalsIgnoreCase(dataFetchPurpose)) {
+//
+//                statusValue = row.findElement(getCellByColId("status"))
+//                        .getText()
+//                        .trim();
+//
+//                if (!"Validated".equalsIgnoreCase(statusValue)) {
+//                    continue; // Skip row immediately
+//                }
+//
+//                subAccountValue = row.findElement(getCellByColId("subaccount"))
+//                        .getText()
+//                        .trim();
+//
+//                String sourceBatchValue = row.findElement(getCellByColId("source_batch_id"))
+//                        .getText()
+//                        .trim();
+//
+//                // Create uniqueness key
+//                String uniquenessKey = subAccountValue + "|" + sourceBatchValue;
+//
+//                // If combination already processed → skip
+//                if (!uniqueSubAccountSourceBatch.add(uniquenessKey)) {
+//                    continue;
+//                }
+//            }
+//
+//            // 🔹 Normal column extraction
+//            for (String colId : columns) {
+//
+//                String value = row.findElement(getCellByColId(colId))
+//                        .getText()
+//                        .trim();
+//
+//                value = normalizeValue(colId, value);
+//
+//                // 🔹 Special handling for cashBalances → balance_id split
+//                if ("cashBalances".equalsIgnoreCase(dataFetchPurpose)
+//                        && "balance_id".equalsIgnoreCase(colId)
+//                        && value.contains("BAT")) {
+//
+//                    int batIndex = value.lastIndexOf("BAT");
+//
+//                    if (batIndex > 0) {
+//
+//                        String batchId = value.substring(0, batIndex);
+//                        if (batchId.endsWith("_")) {
+//                            batchId = batchId.substring(0, batchId.length() - 1);
+//                        }
+//
+//                        String sourceBatchId = value.substring(batIndex);
+//
+//                        rowData.put("source_batch_id", sourceBatchId);
+//                        rowData.put("batch_id", batchId);
+//                    }
+//
+//                }
+//                // 🔹 NEW: Reduce precision for closingbalance ONLY for cashBalances
+//                else if ("cashBalances".equalsIgnoreCase(dataFetchPurpose)
+//                        && "closingbalance".equalsIgnoreCase(colId)
+//                        && !value.isEmpty()) {
+//
+//                    try {
+//                        BigDecimal bd = new BigDecimal(value);
+//                        bd = bd.setScale(1, RoundingMode.HALF_UP);
+//                        value = bd.toPlainString();
+//                    } catch (NumberFormatException e) {
+//                        // Optional: log if needed
+//                    }
+//
+//                    rowData.put(colId, value);
+//                }
+//                else {
+//                    rowData.put(colId, value);
+//                }
+//            }
+//
+//            tableData.add(rowData);
+//        }
+//
+//        adjustZoom(100);
+//        return tableData;
+//    }
+
     public List<Map<String, String>> getGridRawData(List<String> columns, String dataFetchPurpose) {
 
-        // 🔹 Adjust zoom level for balances table
         adjustZoom(15);
-
-        System.out.println("Data reading started");
 
         List<Map<String, String>> tableData = new ArrayList<>();
         List<WebElement> rows = driver.findElements(agGridRows);
 
-        // 🔹 Used only for balancesValidation logic
-        Set<String> uniqueSubAccounts = new HashSet<>();
+        Set<String> uniqueSubAccountSourceBatch = new HashSet<>();
 
         for (WebElement row : rows) {
 
             Map<String, String> rowData = new LinkedHashMap<>();
 
-            String statusValue = "";
-            String subAccountValue = "";
-
-            // 🔹 First pass: read required control fields (status & subaccount)
+            // 🔹 Special filtering logic for balances validation
             if ("cashItems_balancesValidation".equalsIgnoreCase(dataFetchPurpose)) {
 
-                statusValue = row.findElement(getCellByColId("status"))
+                String statusValue = row.findElement(getCellByColId("status"))
                         .getText()
                         .trim();
+
+                statusValue = DataNormalizerUtil.normalize("status", statusValue);
 
                 if (!"Validated".equalsIgnoreCase(statusValue)) {
-                    continue; // Skip row immediately
+                    continue;
                 }
 
-                subAccountValue = row.findElement(getCellByColId("subaccount"))
+                String subAccountValue = row.findElement(getCellByColId("subaccount"))
                         .getText()
                         .trim();
 
-                // If subaccount already processed → skip
-                if (!uniqueSubAccounts.add(subAccountValue)) {
+                subAccountValue = DataNormalizerUtil.normalize("subaccount", subAccountValue);
+
+                String sourceBatchValue = row.findElement(getCellByColId("source_batch_id"))
+                        .getText()
+                        .trim();
+
+                sourceBatchValue = DataNormalizerUtil.normalize("source_batch_id", sourceBatchValue);
+
+                String uniquenessKey = subAccountValue + "|" + sourceBatchValue;
+
+                if (!uniqueSubAccountSourceBatch.add(uniquenessKey)) {
                     continue;
                 }
             }
@@ -135,7 +273,7 @@ public class GridPage {
                         .getText()
                         .trim();
 
-                value = normalizeValue(colId, value);
+                value = DataNormalizerUtil.normalize(colId, value);
 
                 // 🔹 Special handling for cashBalances → balance_id split
                 if ("cashBalances".equalsIgnoreCase(dataFetchPurpose)
@@ -147,33 +285,21 @@ public class GridPage {
                     if (batIndex > 0) {
 
                         String batchId = value.substring(0, batIndex);
+
                         if (batchId.endsWith("_")) {
                             batchId = batchId.substring(0, batchId.length() - 1);
                         }
 
                         String sourceBatchId = value.substring(batIndex);
 
-                        rowData.put("source_batch_id", sourceBatchId);
-                        rowData.put("batch_id", batchId);
+                        rowData.put("source_batch_id",
+                                DataNormalizerUtil.normalize("source_batch_id", sourceBatchId));
+
+                        rowData.put("batch_id",
+                                DataNormalizerUtil.normalize("batch_id", batchId));
                     }
 
-                }
-                // 🔹 NEW: Reduce precision for closingbalance ONLY for cashBalances
-                else if ("cashBalances".equalsIgnoreCase(dataFetchPurpose)
-                        && "closingbalance".equalsIgnoreCase(colId)
-                        && !value.isEmpty()) {
-
-                    try {
-                        BigDecimal bd = new BigDecimal(value);
-                        bd = bd.setScale(1, RoundingMode.HALF_UP);
-                        value = bd.toPlainString();
-                    } catch (NumberFormatException e) {
-                        // Optional: log if needed
-                    }
-
-                    rowData.put(colId, value);
-                }
-                else {
+                } else {
                     rowData.put(colId, value);
                 }
             }
@@ -181,10 +307,10 @@ public class GridPage {
             tableData.add(rowData);
         }
 
-        System.out.println("Data reading ended");
         adjustZoom(100);
         return tableData;
     }
+
 
 
 }

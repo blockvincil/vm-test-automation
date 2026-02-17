@@ -31,7 +31,6 @@ public class CashReconTest extends BaseTest {
 
     @BeforeMethod
     public void loginToApp() {
-//        gridPage = new GridPage(driver);
         loginPage = new LoginPage(driver);
         homePage = loginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username"), prop.getProperty("password"));
         homePage.disableResponsiveSidebar();
@@ -120,7 +119,7 @@ public class CashReconTest extends BaseTest {
         // 5. Fetch data from Excel
         InputStream is = getClass()
                 .getClassLoader()
-                .getResourceAsStream("dataFiles/correctAutomationWithStatus.xlsx");
+                .getResourceAsStream("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         List<Map<String, String>> excelData =
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", sourceColumnKeyMapping, requiredColumns);
@@ -176,7 +175,7 @@ public class CashReconTest extends BaseTest {
         // 3. Fetch data with status and status details from Excel
         InputStream is = getClass()
                 .getClassLoader()
-                .getResourceAsStream("dataFiles/correctAutomationWithStatus.xlsx");
+                .getResourceAsStream("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         List<Map<String, String>> excelData =
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
@@ -305,7 +304,7 @@ public class CashReconTest extends BaseTest {
         // 5. Fetch data from Excel
         InputStream is = getClass()
                 .getClassLoader()
-                .getResourceAsStream("dataFiles/openingClosingInconsistentWithStatus.xlsx");
+                .getResourceAsStream("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
 
         List<Map<String, String>> excelData =
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", sourceColumnKeyMapping, requiredColumns);
@@ -421,7 +420,7 @@ public class CashReconTest extends BaseTest {
         // 3. Read the required columns from the excel file
         InputStream is = getClass()
                 .getClassLoader()
-                .getResourceAsStream("dataFiles/openingClosingInconsistentWithStatus.xlsx");
+                .getResourceAsStream("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
 
         List<Map<String, String>> excelData =
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
@@ -479,7 +478,7 @@ public class CashReconTest extends BaseTest {
         // 3. Read the required columns from the excel file
         InputStream is = getClass()
                 .getClassLoader()
-                .getResourceAsStream("dataFiles/balanceMissingOrInconsistentWithStatus.xlsx");
+                .getResourceAsStream("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
 
         List<Map<String, String>> excelData =
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
@@ -537,7 +536,7 @@ public class CashReconTest extends BaseTest {
         // 3. Read the required columns from the excel file
         InputStream is = getClass()
                 .getClassLoader()
-                .getResourceAsStream("dataFiles/missingMandatoryFieldsWithStatus.xlsx");
+                .getResourceAsStream("dataFiles/excelFiles/missingMandatoryFieldsWithStatus.xlsx");
 
         List<Map<String, String>> excelData =
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
@@ -595,7 +594,7 @@ public class CashReconTest extends BaseTest {
         // 3. Read the required columns from the excel file
         InputStream is = getClass()
                 .getClassLoader()
-                .getResourceAsStream("dataFiles/accountMappingNotFoundWithStatus.xlsx");
+                .getResourceAsStream("dataFiles/excelFiles/accountMappingNotFoundWithStatus.xlsx");
 
         List<Map<String, String>> excelData =
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
@@ -653,7 +652,7 @@ public class CashReconTest extends BaseTest {
         // 3. Read the required columns from the excel file
         InputStream is = getClass()
                 .getClassLoader()
-                .getResourceAsStream("dataFiles/failedInTransformationWithStatus.xlsx");
+                .getResourceAsStream("dataFiles/excelFiles/failedInTransformationWithStatus.xlsx");
 
         List<Map<String, String>> excelData =
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
@@ -680,6 +679,147 @@ public class CashReconTest extends BaseTest {
 
         // 8. Compare Cash Items data with expected data
         Assert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+    }
 
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data")
+    @Test(priority = 11, groups = "Cash Items", description = "Importing invalid data from two batches - Check if data is present in source")
+    public void importingInvalidDataFromTwoBatches_3a() throws Exception {
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
+                "openingbalancedbcr_5", "closingbalance", "closingbalancedbcr_7", "itemdate", "openingbalancedate",
+                "closingbalancedate", "description");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.searchReconAndTriggerEvent(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getB2_openingClosingInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 3. Navigate to source explorer and select source
+        sourceExplorerPage = homePage.goToSourceExplorer();
+        sourceExplorerPage.selectSource("auto1");
+
+        // 4. Check if source table is not empty
+        Assert.assertTrue(sourceExplorerPage.isSourcesDataPresent(), "Source table is empty but event is completed");
+
+        // 5. Fetch data from CSV
+        InputStream is1 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
+
+        List<Map<String, String>> twoBatchesCombinedCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is1,
+                        sourceColumnKeyMapping,
+                        requiredColumns
+                );
+
+        InputStream is2 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/openingClosingInconsistentWithStatus2.csv");
+
+        List<Map<String, String>> secondBatchCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is2,
+                        sourceColumnKeyMapping,
+                        requiredColumns
+                );
+
+        // Append
+        twoBatchesCombinedCsvData.addAll(secondBatchCsvData);
+
+//      Debug print
+        for (Map<String, String> row : twoBatchesCombinedCsvData)
+            System.out.println(row);
+
+        // 6. Fetch required data from source through UI
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> sourceGridData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+        System.out.println("\n");
+        for (Map<String, String> row : sourceGridData)
+            System.out.println(row);
+
+        // 7. Compare Excel data with source data
+        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, sourceGridData));
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data")
+    @Test(priority = 12, groups = "Cash Items", description = "Importing invalid data from two batches - Verify that no entries are recorded in cash balances for the failed subaccounts")
+    public void importingInvalidDataFromTwoBatches_3b() throws Exception {
+
+        /*  Assumptions:
+            1. Test data is properly imported to the source
+               (This test case does not perform source vs test data validation)
+
+            2. Test data has flown into cash items after validations
+               (This test case does not perform cash items vs enriched source data validation)
+         */
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumnsFromCashItems = Arrays.asList("account", "fund", "subaccount", "currency", "closingbalance",
+                "closingbalance_dbcr", "batch_id", "source_batch_id");
+
+        List<String> requiredColumnsFromCashBalances = Arrays.asList("account", "fund", "subaccount", "currency", "closingbalance",
+                "closingbalance_dbcr", "balance_id");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.searchReconAndTriggerEvent(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getB2_openingClosingInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 3. Navigate to cash items and select recon
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        // 4. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 5. Fetch required data from Cash Items through UI
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> cashItemsGridData = gridPage.getGridRawData(requiredColumnsFromCashItems, "cashItems_balancesValidation");
+
+//      Debug print
+        for (Map<String, String> row : cashItemsGridData)
+            System.out.println(row);
+
+        // 6. Navigate to cash balances and select recon
+        cashBalancesPage = homePage.goToCashBalances();
+        cashBalancesPage.selectRecon(prop.getProperty("recon_name"));
+
+        Assert.assertTrue(cashBalancesPage.isCashBalancesDataPresent(), "Cash balances table is empty but event is completed");
+
+        // 7. Fetch required data from Cash Balances through UI
+        List<Map<String, String>> cashBalancesData = gridPage.getGridRawData(requiredColumnsFromCashBalances, "cashBalances");
+//      Debug print
+        System.out.println("\n");
+        for (Map<String, String> row : cashBalancesData)
+            System.out.println(row);
+
+        // 8. Compare Cash Items data with Cash Balances data
+        Assert.assertTrue(ListUtil.compare2DMaps(cashItemsGridData, cashBalancesData));
     }
 }

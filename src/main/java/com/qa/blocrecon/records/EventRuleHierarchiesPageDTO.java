@@ -12,4 +12,9 @@ public class EventRuleHierarchiesPageDTO {
     private String b1_missingMandatoryFields;
     private String b1_accountMappingNotFound;
     private String b1_failedInTransformation;
+    private String b2_openingClosingInconsistent;
+    private String b2_balanceMissingOrInconsistent;
+    private String b2_missingMandatoryFields;
+    private String b2_accountMappingNotFound;
+    private String b2_failedInTransformation;
 }
