@@ -1,0 +1,14 @@
+Sub Account,Currency,Amount,DB/CR,Opening Balance,Opening Balance DB/CR,Closing Balance,Closing Balance DB/CR,Item Date,Opening Balance Date,Closing Balance Date,Description,Status,Status Details
+autoSub1,INR,1000,CR,4000,CR,8000,CR,2024/10/30,2024/10/30,2024/10/30,import1,Validated,
+autoSub1,INR,500,CR,4000,CR,8000,CR,2024/10/30,2024/10/30,2024/10/30,import1,Validated,
+autoSub1,INR,500,DB,4000,CR,8000,CR,2024/10/30,2024/10/30,2024/10/30,import1,Validated,
+autoSub1,INR,1000,DB,4000,CR,8000,CR,2024/10/30,2024/10/30,2024/10/30,import1,Validated,
+autoSub1,INR,1500,CR,4000,CR,8000,CR,2024/10/30,2024/10/30,2024/10/30,import1,Validated,
+autoSub1,INR,1000,CR,4000,CR,8000,CR,2024/10/30,2024/10/30,2024/10/30,import1,Validated,
+autoSub1,INR,1500,CR,4000,CR,8000,CR,2024/10/30,2024/10/30,2024/10/30,import1,Validated,
+autoSub2,INR,1000,CR,500,CR,1000,CR,2025/03/17,2025/03/17,2025/03/17,import1,Validated,
+autoSub2,INR,1000,CR,500,CR,1000,CR,2025/03/17,2025/03/17,2025/03/17,import1,Validated,
+autoSub2,INR,1500,DB,500,CR,1000,CR,2025/03/17,2025/03/17,2025/03/17,GOOD,Validated,
+autoSub3,INR,1000,CR,500,CR,6500,CR,2025/03/17,2025/03/17,2025/03/17,import1,Failed,Balance Missing or Inconsistent
+autoSub3,INR,5000,CR,500,CR,7500,CR,2025/03/17,2025/03/17,2025/03/17,import1,Failed,Balance Missing or Inconsistent
+autoSub3,INR,1500,DB,500,CR,8500,CR,2025/03/17,2025/03/17,2025/03/17,GOOD,Failed,Balance Missing or Inconsistent

@@ -47,13 +47,4 @@ public class CashBalancesPage {
         return eleUtil.getElementsCount(cashBalancesDataRows) > 0;
     }
 
-    /**
-     * Adjusts the zoom level of the page.
-     *
-     * @param zoomPercentage The zoom percentage to set.
-     */
-    private void adjustZoom(int zoomPercentage) {
-        js.executeScript("document.body.style.zoom='" + zoomPercentage + "%'");
-    }
-
 }

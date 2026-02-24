@@ -9,6 +9,7 @@
     "b1_accountMappingNotFound": "b1_accountMappingNotFound",
     "b1_failedInTransformation": "b1_failedInTransformation",
     "b2_openingClosingInconsistent": "b2_openingClosingInconsistent",
+    "b2_openingInconsistentWithLastClosing": "b2_openingInconsistentWithLastClosing",
     "b2_balanceMissingOrInconsistent": "b2_balanceMissingOrInconsistent",
     "b2_missingMandatoryFields": "b2_missingMandatoryFields",
     "b2_accountMappingNotFound": "b2_accountMappingNotFound",

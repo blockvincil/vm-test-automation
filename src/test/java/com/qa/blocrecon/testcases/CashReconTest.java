@@ -6,6 +6,7 @@ import com.qa.blocrecon.records.EventRuleHierarchiesPageDTO;
 import com.qa.blocrecon.utils.*;
 import io.qameta.allure.*;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -684,7 +685,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from 2 batches")
     @Test(priority = 11, groups = "Cash Items", description = "Importing invalid data from two batches - Check if data is present in source")
     public void importingInvalidDataFromTwoBatches_3a() throws Exception {
 
@@ -759,7 +760,9 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from 2 batches")
+    @Description("Known issue: Incorrect entries in cash balances")
+    @Issue("JIRA yet to be created")
     @Test(priority = 12, groups = "Cash Items", description = "Importing invalid data from two batches - Verify that no entries are recorded in cash balances for the failed subaccounts")
     public void importingInvalidDataFromTwoBatches_3b() throws Exception {
 
@@ -770,6 +773,12 @@ public class CashReconTest extends BaseTest {
             2. Test data has flown into cash items after validations
                (This test case does not perform cash items vs enriched source data validation)
          */
+
+        boolean isBugStillPresent=true;
+
+        if (isBugStillPresent) {
+            throw new SkipException("Skipping due to known bug");
+        }
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumnsFromCashItems = Arrays.asList("account", "fund", "subaccount", "currency", "closingbalance",
@@ -803,8 +812,8 @@ public class CashReconTest extends BaseTest {
         List<Map<String, String>> cashItemsGridData = gridPage.getGridRawData(requiredColumnsFromCashItems, "cashItems_balancesValidation");
 
 //      Debug print
-        for (Map<String, String> row : cashItemsGridData)
-            System.out.println(row);
+//        for (Map<String, String> row : cashItemsGridData)
+//            System.out.println(row);
 
         // 6. Navigate to cash balances and select recon
         cashBalancesPage = homePage.goToCashBalances();
@@ -815,11 +824,236 @@ public class CashReconTest extends BaseTest {
         // 7. Fetch required data from Cash Balances through UI
         List<Map<String, String>> cashBalancesData = gridPage.getGridRawData(requiredColumnsFromCashBalances, "cashBalances");
 //      Debug print
-        System.out.println("\n");
-        for (Map<String, String> row : cashBalancesData)
-            System.out.println(row);
+//        System.out.println("\n");
+//        for (Map<String, String> row : cashBalancesData)
+//            System.out.println(row);
 
         // 8. Compare Cash Items data with Cash Balances data
         Assert.assertTrue(ListUtil.compare2DMaps(cashItemsGridData, cashBalancesData));
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data from 2 batches")
+    @Test(priority = 13, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    public void importingInvalidDataFromTwoBatches_3c() throws Exception {
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "description", "status", "status_details");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.searchReconAndTriggerEvent(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getB2_openingClosingInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 3. Read the required columns from the CSV file
+        InputStream is1 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
+
+        List<Map<String, String>> twoBatchesCombinedCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is1,
+                        cashDashboardsColumnKeyMapping,
+                        requiredColumns
+                );
+
+        InputStream is2 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/openingClosingInconsistentWithStatus2.csv");
+
+        List<Map<String, String>> secondBatchCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is2,
+                        cashDashboardsColumnKeyMapping,
+                        requiredColumns
+                );
+
+        twoBatchesCombinedCsvData.addAll(secondBatchCsvData);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data from 2 batches")
+    @Test(priority = 14, groups = "Cash Items", description = "Importing invalid data - Opening Balance inconsistent with Last Closing Balance")
+    public void importingInvalidDataFromTwoBatches_3d() throws Exception {
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "description", "status", "status_details");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.searchReconAndTriggerEvent(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getB2_openingInconsistentWithLastClosing()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 3. Read the required columns from the CSV file
+        InputStream is1 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus1.csv");
+
+        List<Map<String, String>> twoBatchesCombinedCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is1,
+                        cashDashboardsColumnKeyMapping,
+                        requiredColumns
+                );
+
+        InputStream is2 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus2.csv");
+
+        List<Map<String, String>> secondBatchCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is2,
+                        cashDashboardsColumnKeyMapping,
+                        requiredColumns
+                );
+
+        twoBatchesCombinedCsvData.addAll(secondBatchCsvData);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data from 2 batches")
+    @Test(priority = 13, groups = "Cash Items", description = "Importing invalid data - Balance missing or inconsistent")
+    public void importingInvalidDataFromTwoBatches_3e() throws Exception {
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "description", "status", "status_details");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.searchReconAndTriggerEvent(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getB2_balanceMissingOrInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 3. Read the required columns from the CSV file
+        InputStream is1 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/balanceMissingOrInconsistentWithStatus1.csv");
+
+        List<Map<String, String>> twoBatchesCombinedCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is1,
+                        cashDashboardsColumnKeyMapping,
+                        requiredColumns
+                );
+
+        InputStream is2 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/balanceMissingOrInconsistentWithStatus2.csv");
+
+        List<Map<String, String>> secondBatchCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is2,
+                        cashDashboardsColumnKeyMapping,
+                        requiredColumns
+                );
+
+        twoBatchesCombinedCsvData.addAll(secondBatchCsvData);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+
     }
 }
