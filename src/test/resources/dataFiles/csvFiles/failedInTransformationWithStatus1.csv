@@ -1,0 +1,14 @@
+Sub Account,Currency,Amount,DB/CR,Opening Balance,Opening Balance DB/CR,Closing Balance,Closing Balance DB/CR,Item Date,Opening Balance Date,Closing Balance Date,Description,Status,Status Details
+autoSub1,INR,1000,CR,0.00,CR,4000,CR,2024/10/31,2024/10/31,2024/10/31,BAD,Failed,Failed In Transformations
+autoSub1,INR,500,CR,0.00,CR,4000,CR,2024/10/31,2024/10/31,2024/10/31,GOOD,Failed,Failed In Transformations
+autoSub1,INR,500,DB,0.00,CR,4000,CR,2024/10/31,2024/10/31,2024/10/31,GOOD,Failed,Failed In Transformations
+autoSub1,INR,1000,DB,0.00,CR,4000,CR,2024/10/31,2024/10/31,2024/10/31,BAD,Failed,Failed In Transformations
+autoSub1,INR,1500,CR,0.00,CR,4000,CR,2024/10/31,2024/10/31,2024/10/31,BAD,Failed,Failed In Transformations
+autoSub1,INR,1000,CR,0.00,CR,4000,CR,2024/10/31,2024/10/31,2024/10/31,BAD,Failed,Failed In Transformations
+autoSub1,INR,1500,CR,0.00,CR,4000,CR,2024/10/31,2024/10/31,2024/10/31,BAD,Failed,Failed In Transformations
+autoSub2,INR,1000,CR,0.00,CR,500,CR,2025/03/17,2025/03/17,2025/03/17,BAD,Failed,Failed In Transformations
+autoSub2,INR,1000,CR,0.00,CR,500,CR,2025/03/17,2025/03/17,2025/03/17,BAD,Failed,Failed In Transformations
+autoSub2,INR,1500,DB,0.00,CR,500,CR,2025/03/17,2025/03/17,2025/03/17,BAD,Failed,Failed In Transformations
+autoSub3,INR,1000,CR,0.00,CR,500,CR,2025/03/17,2025/03/17,2025/03/17,BAD,Failed,Failed In Transformations
+autoSub3,INR,1000,CR,0.00,CR,500,CR,2025/03/17,2025/03/17,2025/03/17,BAD,Failed,Failed In Transformations
+autoSub3,INR,1500,DB,0.00,CR,500,CR,2025/03/17,2025/03/17,2025/03/17,BAD,Failed,Failed In Transformations
