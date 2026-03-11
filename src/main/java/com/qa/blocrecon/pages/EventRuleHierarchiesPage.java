@@ -3,6 +3,8 @@ package com.qa.blocrecon.pages;
 import com.qa.blocrecon.constants.AppConstants;
 import com.qa.blocrecon.utils.ElementsUtil;
 import com.qa.blocrecon.utils.WaitUtil;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.apache.commons.collections.CollectionUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -77,6 +79,7 @@ public class EventRuleHierarchiesPage {
      @param eventName The name of the event to trigger.
      */
     public void searchReconAndTriggerEvent(String reconName, String eventName) {
+        Allure.step("Search for a recon and trigger the specified event");
         searchAndSelectRecon(reconName);
         selectEventAndTrigger(eventName);
         waitUtil.waitFor(5);

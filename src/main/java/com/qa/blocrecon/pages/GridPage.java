@@ -1,10 +1,12 @@
 package com.qa.blocrecon.pages;
 
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import utils.DataNormalizerUtil;
+import com.qa.blocrecon.utils.DataNormalizerUtil;
+import io.qameta.allure.Step;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -36,6 +38,7 @@ public class GridPage {
 
     // For fetching source data AND cash items data as it is
     public List<Map<String, String>> getGridRawData(List<String> columns) {
+        Allure.step("Fetch required data from the Grid for validation");
 
         // 🔹 Adjust zoom level for balances table
         adjustZoom(15);

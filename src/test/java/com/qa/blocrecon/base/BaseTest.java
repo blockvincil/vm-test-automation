@@ -8,20 +8,19 @@ import com.qa.blocrecon.services.EventService;
 import com.qa.blocrecon.utils.DatabaseUtil;
 import com.qa.blocrecon.utils.ElementsUtil;
 import com.qa.blocrecon.utils.WaitUtil;
-import io.qameta.allure.testng.AllureTestNg;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
 
 import java.sql.SQLException;
 import java.util.Properties;
 
-@Listeners({AllureTestNg.class})
+@Getter
 public class BaseTest {
 
-    protected WebDriver driver;
+    public WebDriver driver;
     protected Properties prop;
 
     // Utilities
@@ -36,6 +35,7 @@ public class BaseTest {
     // Backend services
     protected EventService eventService;
 
+    
     @BeforeMethod
     public void setUp() throws SQLException {
 

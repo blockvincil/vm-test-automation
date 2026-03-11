@@ -1,4 +1,4 @@
-package utils;
+package com.qa.blocrecon.utils;
 
 import java.math.BigDecimal;
 import java.util.Set;

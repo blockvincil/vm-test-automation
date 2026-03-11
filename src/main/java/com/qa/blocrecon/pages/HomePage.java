@@ -3,6 +3,7 @@ package com.qa.blocrecon.pages;
 import com.qa.blocrecon.constants.AppConstants;
 import com.qa.blocrecon.utils.ElementsUtil;
 import com.qa.blocrecon.utils.WaitUtil;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -95,6 +96,7 @@ public class HomePage {
      @throws InterruptedException If the thread is interrupted during the wait.
      */
     public EventRuleHierarchiesPage goToEventRuleHierarchies() throws InterruptedException {
+        Allure.step("Navigate to Event Rule Hierarchies dashboard");
         clickProcessSetup();
         waitUtil.waitFor(1);
         clickEventRuleHierarchies();
@@ -109,6 +111,7 @@ public class HomePage {
      @throws InterruptedException If the thread is interrupted during the wait.
      */
     public SourceExplorerPage goToSourceExplorer() throws InterruptedException {
+        Allure.step("Navigate to Source Explorer dashboard");
         clickExplorers();
         waitUtil.waitFor(1);
         clickSourceExplorer();
@@ -134,6 +137,7 @@ public class HomePage {
      @return An instance of the CashItemsPage.
      */
     public CashItemsPage goToCashItems() {
+        Allure.step("Navigate to Cash Items dashboard");
         clickCashRecon();
         waitUtil.waitFor(1);
         clickCashItems();
@@ -145,6 +149,7 @@ public class HomePage {
      Disables the responsive sidebar.
      */
     public void disableResponsiveSidebar() {
+        Allure.step("Disable responsive sidebar");
         doClickSettingsDropdown();
         clickResponsiveSidebarSlider();
         doClickSettingsDropdown();

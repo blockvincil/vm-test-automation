@@ -3,6 +3,7 @@ package com.qa.blocrecon.pages;
 import com.qa.blocrecon.constants.AppConstants;
 import com.qa.blocrecon.utils.ElementsUtil;
 import com.qa.blocrecon.utils.WaitUtil;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -67,6 +68,7 @@ public class LoginPage {
      * @return The HomePage object.
      */
     public HomePage enterCredentialsAndClickLoginButton(String username, String password) {
+        Allure.step("Enter username, password and login");
         enterUsername(username);
         enterPassword(password);
         clickLoginButton();

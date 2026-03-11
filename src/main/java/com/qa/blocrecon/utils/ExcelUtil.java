@@ -1,5 +1,6 @@
 package com.qa.blocrecon.utils;
 
+import io.qameta.allure.Allure;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import utils.DataNormalizerUtil;
+import com.qa.blocrecon.utils.DataNormalizerUtil;
 
 public class ExcelUtil {
 
@@ -19,6 +20,8 @@ public class ExcelUtil {
             String sheetName,
             Map<String, String> columnKeyMapping,
             List<String> requiredColIds) {
+
+        Allure.step("Read data from excel file");
 
         List<Map<String, String>> data = new ArrayList<>();
 

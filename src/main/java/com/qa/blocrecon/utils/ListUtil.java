@@ -1,5 +1,7 @@
 package com.qa.blocrecon.utils;
 
+import io.qameta.allure.Allure;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,8 @@ public class ListUtil {
     public static boolean compare2DMaps(
             List<Map<String, String>> list1,
             List<Map<String, String>> list2) {
+
+        Allure.step("Compare data");
 
         if (list1.size() != list2.size()) {
             return false;

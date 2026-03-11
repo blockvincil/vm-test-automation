@@ -18,4 +18,5 @@ public class EventRuleHierarchiesPageDTO {
     private String b2_missingMandatoryFields;
     private String b2_accountMappingNotFound;
     private String b2_failedInTransformation;
+    private String b2_duplicateBatchIdentified;
 }

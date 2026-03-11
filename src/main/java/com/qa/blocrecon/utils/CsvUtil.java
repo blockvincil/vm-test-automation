@@ -2,7 +2,7 @@ package com.qa.blocrecon.utils;
 
 import java.io.*;
 import java.util.*;
-import utils.DataNormalizerUtil;
+import com.qa.blocrecon.utils.DataNormalizerUtil;
 import java.util.stream.Collectors;
 
 public class CsvUtil {

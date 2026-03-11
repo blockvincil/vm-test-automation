@@ -2,12 +2,14 @@
 
 <suite name="BlocRecon Automation Suite" verbose="1" parallel="false">
 
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+        <listener class-name="utils.RetryListener"/>
+    </listeners>
     <test name="Cash Recon Tests">
-
         <classes>
             <class name="com.qa.blocrecon.testcases.CashReconTest"/>
         </classes>
-
     </test>
 
 </suite>
