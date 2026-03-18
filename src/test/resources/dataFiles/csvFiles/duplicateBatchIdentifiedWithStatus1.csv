@@ -1,0 +1,4 @@
+Sub Account,Currency,Amount,DB/CR,Opening Balance,Opening Balance DB/CR,Closing Balance,Closing Balance DB/CR,Item Date,Opening Balance Date,Closing Balance Date,Description,Status,Status Details
+autoSub4,INR,1000,CR,0,CR,1000,CR,2024/10/31,2024/10/31,2024/10/31,BAD,Validated,
+autoSub4,INR,500,CR,0,CR,1000,CR,2024/10/31,2024/10/31,2024/10/31,GOOD,Validated,
+autoSub4,INR,500,DB,0,CR,1000,CR,2024/10/31,2024/10/31,2024/10/31,GOOD,Validated,

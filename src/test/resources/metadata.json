@@ -1,12 +1,19 @@
 {
   "eventRuleHierarchiesPage": {
     "importData": "importData",
-    "b1_openingClosingInconsistent": "b1_openingClosingInconsistent",
     "csvImport": "csvImport",
     "purge": "purge",
+    "b1_openingClosingInconsistent": "b1_openingClosingInconsistent",
     "b1_balanceMissingOrInconsistent": "b1_balanceMissingOrInconsistent",
     "b1_missingMandatoryFields": "b1_missingMandatoryFields",
     "b1_accountMappingNotFound": "b1_accountMappingNotFound",
-    "b1_failedInTransformation": "b1_failedInTransformation"
+    "b1_failedInTransformation": "b1_failedInTransformation",
+    "b2_openingClosingInconsistent": "b2_openingClosingInconsistent",
+    "b2_openingInconsistentWithLastClosing": "b2_openingInconsistentWithLastClosing",
+    "b2_balanceMissingOrInconsistent": "b2_balanceMissingOrInconsistent",
+    "b2_missingMandatoryFields": "b2_missingMandatoryFields",
+    "b2_accountMappingNotFound": "b2_accountMappingNotFound",
+    "b2_failedInTransformation": "b2_failedInTransformation",
+    "b2_duplicateBatchIdentified": "b2_duplicateBatchIdentified"
   }
 }

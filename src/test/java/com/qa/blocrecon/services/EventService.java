@@ -1,6 +1,8 @@
 package com.qa.blocrecon.services;
 
 import com.qa.blocrecon.db.EventLockRepository;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 
 public class EventService {
@@ -24,6 +26,7 @@ public class EventService {
      * @param reconId The reconciliation ID to check.
      */
     public void assertLatestEventCompleted(String reconId) {
+        Allure.step("Check if the latest triggered event is completed using DB query");
         assertLatestEventCompleted(reconId, DEFAULT_TIMEOUT_SEC);
     }
 

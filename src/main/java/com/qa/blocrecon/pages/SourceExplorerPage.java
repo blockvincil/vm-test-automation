@@ -3,6 +3,8 @@ package com.qa.blocrecon.pages;
 import com.qa.blocrecon.constants.AppConstants;
 import com.qa.blocrecon.utils.ElementsUtil;
 import com.qa.blocrecon.utils.WaitUtil;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -43,6 +45,7 @@ public class SourceExplorerPage {
      * @param sourceName The name of the source to select.
      */
     public void selectSource(String sourceName) {
+        Allure.step("Select a source");
         eleUtil.doSelectByVisibleText(selectSourceDropdown, sourceName);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(sourceDataLoader, AppConstants.time3, AppConstants.time10);
@@ -56,6 +59,7 @@ public class SourceExplorerPage {
      * @return true if the table is not empty, false otherwise.
      */
     public boolean isSourcesDataPresent() {
+        Allure.step("Check if some data is present in the source");
         // eleUtil.waitForElementToDisappear(sourceDataLoader, AppConstants.time10);
         return eleUtil.getElementsCount(sourceDataRows) > 0;
     }

@@ -3,6 +3,7 @@ package com.qa.blocrecon.pages;
 import com.qa.blocrecon.constants.AppConstants;
 import com.qa.blocrecon.utils.ElementsUtil;
 import com.qa.blocrecon.utils.WaitUtil;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -40,6 +41,7 @@ public class CashItemsPage {
      * @param reconName The name of the reconciliation to select.
      */
     public void selectRecon(String reconName) {
+        Allure.step("Select recon on Cash Items dashboard");
         eleUtil.doSelectByVisibleText(cashItemsDropdown, reconName);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
@@ -52,6 +54,7 @@ public class CashItemsPage {
      * @return true if the table is not empty, false otherwise.
      */
     public boolean isCashItemsDataPresent() {
+        Allure.step("Check if some data is present in Cash Items dashboard");
         // eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time10);
         return eleUtil.getElementsCount(cashItemsDataRows) > 0;
     }
