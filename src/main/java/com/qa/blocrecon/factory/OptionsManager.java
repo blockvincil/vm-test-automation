@@ -8,8 +8,9 @@ public class OptionsManager {
 
         ChromeOptions options = new ChromeOptions();
 
-        boolean headless = Boolean.parseBoolean(
-                System.getProperty("headless", "false"));
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"))
+                || System.getenv("JENKINS_URL") != null
+                || System.getenv("CI") != null;
 
         if (headless) {
             options.addArguments("--headless=new");
