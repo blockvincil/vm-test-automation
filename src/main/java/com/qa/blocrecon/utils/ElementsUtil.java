@@ -92,7 +92,12 @@ public class ElementsUtil {
 
     public void doClick(By locator, int timeout) {
         WebElement element = waitUtil.waitForElementToBeClickable(locator, timeout);
-        element.click();
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            // Fallback to JS click if the element is intercepted by overlays/loaders
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        }
     }
 
     public void doSendKeys(By locator, String value, int timeout) {
@@ -139,7 +144,11 @@ public class ElementsUtil {
 
     public void doClick(By locator) {
         WebElement element = driver.findElement(locator);
-        element.click();
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        }
     }
 
     public void doSelectByVisibleText(By locator, String visibleText) {
