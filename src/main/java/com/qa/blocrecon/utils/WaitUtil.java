@@ -86,14 +86,22 @@ public class WaitUtil {
     }
     
     /**
-     * Waits for the loader to become visible
-     * @param loaderLocator Locator of the loader element
+     * Waits for the loader to become visible.
+     * If the loader never appears (e.g. it appeared and disappeared too fast,
+     * which is common in headless/CI environments), this method will silently
+     * proceed instead of throwing a TimeoutException.
+     *
+     * @param loaderLocator    Locator of the loader element
      * @param timeoutInSeconds Maximum time to wait in seconds
-     * @throws TimeoutException if the loader does not become visible within the timeout
      */
     public void waitForLoaderVisible(By loaderLocator, int timeoutInSeconds) {
-        new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
-                .until(ExpectedConditions.visibilityOfElementLocated(loaderLocator));
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
+                    .until(ExpectedConditions.visibilityOfElementLocated(loaderLocator));
+        } catch (TimeoutException e) {
+            // Loader may have appeared and disappeared faster than the poll interval,
+            // or the action completed instantly. Safe to proceed.
+        }
     }
 
 }
