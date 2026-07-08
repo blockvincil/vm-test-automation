@@ -199,4 +199,28 @@ public class EventRuleHierarchiesPageDTO {
     public void setCase_7f(String case_7f) {
         this.case_7f = case_7f;
     }
+//    private String importData;
+//    private String csvImport;
+//    private String purge;
+//    private String b1_openingClosingInconsistent;
+//    private String b1_balanceMissingOrInconsistent;
+//    private String b1_missingMandatoryFields;
+//    private String b1_accountMappingNotFound;
+//    private String b1_failedInTransformation;
+//    private String b2_openingClosingInconsistent;
+//    private String b2_openingInconsistentWithLastClosing;
+//    private String b2_balanceMissingOrInconsistent;
+//    private String b2_missingMandatoryFields;
+//    private String b2_accountMappingNotFound;
+//    private String b2_failedInTransformation;
+//    private String b2_duplicateBatchIdentified;
+//    private String case_4a;
+//    private String case_4b;
+//    private String case_4c;
+//    private String case_4d;
+//    private String case_4e;
+//    private String case_7i;
+//    private String case_7f;
+
+  
 }

@@ -37,6 +37,7 @@ public class CashReconTest extends BaseTest {
     @BeforeClass
     public void loadTestData() {
         eventRuleHierarchiesPageDTO = JsonDataReader.getEventRuleHierarchiesPageData();
+        System.out.println(eventRuleHierarchiesPageDTO);
     }
 
     @BeforeMethod
