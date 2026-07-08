@@ -43,7 +43,7 @@ public class HomePage {
     }
 
     private void doClickSettingsDropdown() {
-        eleUtil.doClick(settingDropdown, AppConstants.time10);
+        eleUtil.doClick(settingDropdown, AppConstants.time60);
     }
 
     public void clickProcessSetup() {
@@ -72,7 +72,7 @@ public class HomePage {
 
     private void clickCashItems() {
         waitUtil.waitForElementToBeClickable(cashItems, AppConstants.time10).click();
-        waitUtil.waitForElementToBeClickable(cashItemsDropdown, AppConstants.time20);
+        waitUtil.waitForElementToBeClickable(cashItemsDropdown, AppConstants.time60);
     }
 
     private void clickEventRuleHierarchies() {

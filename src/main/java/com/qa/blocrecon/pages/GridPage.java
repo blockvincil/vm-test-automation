@@ -32,7 +32,7 @@ public class GridPage {
      *
      * @param zoomPercentage The percentage to which the page should be zoomed.
      */
-    private void adjustZoom(int zoomPercentage) {
+    public void adjustZoom(int zoomPercentage) {
         js.executeScript("document.body.style.zoom='" + zoomPercentage + "%'");
     }
 

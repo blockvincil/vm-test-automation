@@ -1,8 +1,10 @@
 package com.qa.blocrecon.factory;
 
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class OptionsManager {
@@ -11,8 +13,12 @@ public class OptionsManager {
         ChromeOptions options = new ChromeOptions();
 
         // Basic options
-        options.addArguments("--start-maximized");
+//        options.addArguments("--headless=new");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-popup-blocking");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
 
         // Suppress "Chrome is being controlled..." message
         options.setExperimentalOption("useAutomationExtension", false);
@@ -25,5 +31,15 @@ public class OptionsManager {
         options.setExperimentalOption("prefs", prefs);
 
         return options;
+    }
+
+    public EdgeOptions getEdgeOptions() {
+
+        EdgeOptions edgeOptions = new EdgeOptions();
+
+        edgeOptions.addArguments("--disable-notifications");
+        edgeOptions.addArguments("--remote-allow-origins=*");
+
+        return edgeOptions;
     }
 }

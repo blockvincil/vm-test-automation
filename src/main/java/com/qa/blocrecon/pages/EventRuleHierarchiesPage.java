@@ -4,14 +4,9 @@ import com.qa.blocrecon.constants.AppConstants;
 import com.qa.blocrecon.utils.ElementsUtil;
 import com.qa.blocrecon.utils.WaitUtil;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
-import org.apache.commons.collections.CollectionUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 public class EventRuleHierarchiesPage {
     WebDriver driver;
@@ -30,13 +25,14 @@ public class EventRuleHierarchiesPage {
 
     private final By reconList = By.xpath("//ul[@class='flex-nowrap px-0 nav flex-column nav-tabs']");
     private final By eventsList = By.xpath("//span[@title='Events']/ancestor::ul");
-    private final By searchBar = By.xpath("//input[@placeholder='Search...']");
+    private final By reconSearchBar = By.xpath("//input[@placeholder='Search...']");
+    private final By eventSearchBar = By.xpath("//*[text()='Events']/following::input[@placeholder='Search...'][1]");
     private final By triggerEventButton = By.xpath("//button[text()='Trigger Event']");
     private final By eventTriggeredNotification = By.xpath("//div[@class='notification-message' and text()='Event triggered successfully']");
 
     /*****************************************************Dynamic Locators*************************************************/
 
-    private By reconSearchResult(String searchTerm) {
+    private By searchResule(String searchTerm) {
         return By.xpath("//a[@title = '" + searchTerm + "']");
     }
 
@@ -48,9 +44,16 @@ public class EventRuleHierarchiesPage {
 
     private void searchAndSelectRecon(String reconName) {
         waitUtil.waitForElementVisible(reconList, AppConstants.time10);
-        eleUtil.doSendKeys(searchBar, reconName, AppConstants.time3);
-        eleUtil.doClick(reconSearchResult(reconName), AppConstants.time10);
+        eleUtil.doSendKeys(reconSearchBar, reconName, AppConstants.time3);
+        eleUtil.doClick(searchResule(reconName), AppConstants.time10);
         waitUtil.waitForElementsVisible(eventsList, AppConstants.time10);
+    }
+
+    private void searchAndSelectEvent(String eventName) {
+        waitUtil.waitForElementVisible(eventsList, AppConstants.time10);
+        eleUtil.doSendKeys(eventSearchBar, eventName, AppConstants.time3);
+        eleUtil.doClick(searchResule(eventName), AppConstants.time10);
+        waitUtil.waitForElementVisible(triggerEventButton, AppConstants.time20);
     }
 
     private void selectEvent(String eventName) {
@@ -82,6 +85,14 @@ public class EventRuleHierarchiesPage {
         Allure.step("Search for a recon and trigger the specified event");
         searchAndSelectRecon(reconName);
         selectEventAndTrigger(eventName);
+        waitUtil.waitFor(5);
+    }
+
+    public void selectReconAndEventAndTrigger(String reconName, String eventName) {
+        Allure.step("Search for a recon, search for an event and trigger the specified event");
+        searchAndSelectRecon(reconName);
+        searchAndSelectEvent(eventName);
+        triggerEvent();
         waitUtil.waitFor(5);
     }
 

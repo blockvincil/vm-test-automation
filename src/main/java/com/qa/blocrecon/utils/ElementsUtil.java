@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ElementsUtil {
 
@@ -186,6 +187,14 @@ public class ElementsUtil {
 
     public List<WebElement> getElements(By locator) {
         return driver.findElements(locator);
+    }
+
+    public List<String> getTextAsList(By locator) {
+        List<WebElement> elements = driver.findElements(locator);
+
+        return elements.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 }
 

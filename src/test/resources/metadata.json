@@ -14,6 +14,13 @@
     "b2_missingMandatoryFields": "b2_missingMandatoryFields",
     "b2_accountMappingNotFound": "b2_accountMappingNotFound",
     "b2_failedInTransformation": "b2_failedInTransformation",
-    "b2_duplicateBatchIdentified": "b2_duplicateBatchIdentified"
+    "b2_duplicateBatchIdentified": "b2_duplicateBatchIdentified",
+    "case_4a": "case_4a",
+    "case_4b": "case_4b",
+    "case_4c": "case_4c",
+    "case_4d": "case_4d",
+    "case_4e": "case_4e",
+    "case_7i": "case_7i",
+    "case_7f": "case_7f"
   }
 }

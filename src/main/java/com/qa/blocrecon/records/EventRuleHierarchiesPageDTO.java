@@ -19,4 +19,11 @@ public class EventRuleHierarchiesPageDTO {
     private String b2_accountMappingNotFound;
     private String b2_failedInTransformation;
     private String b2_duplicateBatchIdentified;
+    private String case_4a;
+    private String case_4b;
+    private String case_4c;
+    private String case_4d;
+    private String case_4e;
+    private String case_7i;
+    private String case_7f;
 }

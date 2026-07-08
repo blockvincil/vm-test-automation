@@ -36,7 +36,7 @@ public class LoginPage {
      * @param username The username to enter.
      */
     private void enterUsername(String username) {
-        eleUtil.doSendKeys(usernameTextBox, username, AppConstants.time3);
+        eleUtil.doSendKeys(usernameTextBox, username, AppConstants.time60);
     }
 
     /**
@@ -58,7 +58,7 @@ public class LoginPage {
      * Waits for the settings icon to be clickable.
      */
     private void waitForSettingsIconPresence() {
-        waitUtil.waitForElementToBeClickable(settingDropdown, AppConstants.time20);
+        waitUtil.waitForElementToBeClickable(settingDropdown, AppConstants.time60);
     }
 
     /**
