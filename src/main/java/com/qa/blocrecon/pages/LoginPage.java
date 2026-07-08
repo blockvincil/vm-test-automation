@@ -72,7 +72,7 @@ public class LoginPage {
         enterUsername(username);
         enterPassword(password);
         clickLoginButton();
-        waitUtil.waitForLoaderVisible(loader, AppConstants.time20);
+        //waitUtil.waitForLoaderVisible(loader, AppConstants.time20);
         waitUtil.waitForLoaderInvisible(loader, AppConstants.time20);
         waitForSettingsIconPresence();
         return new HomePage(driver);
