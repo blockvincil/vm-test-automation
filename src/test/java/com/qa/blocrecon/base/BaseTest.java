@@ -9,7 +9,6 @@ import com.qa.blocrecon.services.EventService;
 import com.qa.blocrecon.utils.DatabaseUtil;
 import com.qa.blocrecon.utils.ElementsUtil;
 import com.qa.blocrecon.utils.WaitUtil;
-import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,7 +22,6 @@ import org.openqa.selenium.edge.EdgeOptions;
 import java.sql.SQLException;
 import java.util.Properties;
 
-@Getter
 public class BaseTest {
 
     public WebDriver driver;
@@ -83,5 +81,9 @@ public class BaseTest {
         if (dbUtil != null) {
             dbUtil.disconnect();
         }
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }
