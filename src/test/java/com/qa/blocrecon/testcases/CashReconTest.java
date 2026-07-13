@@ -1,11 +1,8 @@
 package com.qa.blocrecon.testcases;
 
 import com.qa.blocrecon.base.BaseTest;
-import org.openqa.selenium.By;
+import com.qa.blocrecon.factory.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
 import utils.TestListener;
 import com.qa.blocrecon.pages.*;
@@ -106,7 +103,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
                 "openingbalancedbcr_5", "closingbalance", "closingbalancedbcr_7", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description");
+                "closingbalancedate");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -169,7 +166,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -193,8 +190,8 @@ public class CashReconTest extends BaseTest {
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
 
 //      Debug print
-//        for (Map<String, String> row : excelData)
-//            System.out.println(row);
+        for (Map<String, String> row : excelData)
+            System.out.println(row);
 
         // 4. Navigate to cash items and select recon & view
         cashItemsPage = homePage.goToCashItems();
@@ -207,9 +204,9 @@ public class CashReconTest extends BaseTest {
         gridPage = new GridPage(driver);
         List<Map<String, String>> cashItemsGridData = gridPage.getGridRawData(requiredColumns);
 //      Debug print
-//        System.out.println("\n");
-//        for (Map<String, String> row : cashItemsGridData)
-//            System.out.println(row);
+        System.out.println("\n");
+        for (Map<String, String> row : cashItemsGridData)
+            System.out.println(row);
 
         // 7. Compare Excel data with cash items data
         Assert.assertTrue(ListUtil.compare2DMaps(excelData, cashItemsGridData));
@@ -291,7 +288,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
                 "openingbalancedbcr_5", "closingbalance", "closingbalancedbcr_7", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description");
+                "closingbalancedate");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -414,7 +411,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -472,7 +469,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -530,7 +527,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -588,7 +585,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -646,7 +643,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -703,7 +700,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
                 "openingbalancedbcr_5", "closingbalance", "closingbalancedbcr_7", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description");
+                "closingbalancedate");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -785,7 +782,7 @@ public class CashReconTest extends BaseTest {
                (This test case does not perform cash items vs enriched source data validation)
          */
 
-        boolean isBugStillPresent=true;
+        boolean isBugStillPresent = true;
 
         if (isBugStillPresent) {
             throw new SkipException("Skipping due to known bug");
@@ -853,7 +850,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1003,7 +1000,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1078,7 +1075,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1153,7 +1150,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1301,7 +1298,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 19, groups = "Cash Items", description = "Importing invalid data from two batches - Duplicate Batch Identified")
     public void importingInvalidData_3i() throws Exception {
 
-        boolean isBugStillPresent=true;
+        boolean isBugStillPresent = true;
 
         if (isBugStillPresent) {
             throw new SkipException("Skipping due to known bug");
@@ -1310,7 +1307,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1390,7 +1387,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1452,7 +1449,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1638,7 +1635,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1708,7 +1705,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1780,7 +1777,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1852,7 +1849,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1902,7 +1899,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -1970,7 +1967,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -2011,8 +2008,8 @@ public class CashReconTest extends BaseTest {
         twoBatchesCombinedCsvData.addAll(secondBatchCsvData);
 
 //      Debug print
-//        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
-//            System.out.println(excelDatum);
+        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
+            System.out.println(excelDatum);
 
         // 4. Navigate to cash items and select recon
         cashItemsPage = homePage.goToCashItems();
@@ -2026,9 +2023,9 @@ public class CashReconTest extends BaseTest {
         List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
 
 //      Debug print
-//        System.out.println("\n");
-//        for (Map<String, String> row : rawData)
-//            System.out.println(row);
+        System.out.println("\n");
+        for (Map<String, String> row : rawData)
+            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
         Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
@@ -2060,7 +2057,7 @@ public class CashReconTest extends BaseTest {
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -2111,7 +2108,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 28, groups = "Cash Items", description = "Right click cases - Ignore Item")
+    @Test(priority = 28, groups = "Cash Items", description = "Right click cases with MC - Ignore Item")
     public void rightClickCases_6a() throws Exception {
 
         /*
@@ -2120,22 +2117,25 @@ public class CashReconTest extends BaseTest {
              (This test case does not perform source vs test data validation)
         */
 
+        // Store the Chrome driver instance for switching back later
+        WebDriver chromeDriver = driver;
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
-                "closingbalancedate", "description", "status", "status_details");
+                "closingbalancedate", "status", "status_details");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
         eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
-                prop.getProperty("recon_name"),
+                prop.getProperty("mc_recon_name"),
                 eventRuleHierarchiesPageDTO.getB1_balanceMissingOrInconsistent()
         );
 
         // 2. Backend verification (Event status validation)
         eventService.assertLatestEventCompleted(
-                prop.getProperty("recon_id")
+                prop.getProperty("mc_recon_id")
         );
 
         // 3. Read the required columns from the excel file
@@ -2152,7 +2152,112 @@ public class CashReconTest extends BaseTest {
 
         // 4. Navigate to cash items and select recon & view
         cashItemsPage = homePage.goToCashItems();
-        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+        cashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+
+
+        gridPage.adjustZoom(15);
+        String firstFailedAssetId = cashItemsPage.getAssetIdForFirstFailedRecord();
+        System.out.println(firstFailedAssetId);
+
+        cashItemsPage.ignoreItem();
+
+        // Open a new Edge browser after existing operations
+        WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
+                Boolean.parseBoolean(prop.getProperty("remote")),
+                prop.getProperty("selenium.grid.url")
+        );
+        edgeDriver.get(prop.getProperty("url").trim());
+
+        try {
+            // Perform operations in Edge browser here
+            LoginPage edgeLoginPage = new LoginPage(edgeDriver);
+            HomePage edgeHomePage = edgeLoginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username2"), prop.getProperty("password2"));
+            edgeHomePage.disableResponsiveSidebar();
+
+            CashItemsPage edgeCashItemsPage = edgeHomePage.goToCashItems();
+            edgeCashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+            GridPage edgeGridPage = new GridPage(edgeDriver);
+            edgeGridPage.adjustZoom(15);
+            edgeCashItemsPage.approve();
+            edgeGridPage.adjustZoom(100);
+
+            // Switch back to Chrome for validation
+            driver = chromeDriver;
+            cashItemsPage.refresh();
+
+            // Perform validation in Chrome
+            Assert.assertEquals(cashItemsPage.getStatusBasedOnAssetId(firstFailedAssetId), "Ignored", "Wrong status");
+
+        } finally {
+            // Close the Edge browser instance
+            edgeDriver.quit();
+        }
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing valid data")
+    @Test(priority = 29, groups = "Cash Items", description = "Right click cases with MC - Ignore Batch")
+    public void rightClickCases_6b() throws Exception {
+
+        /*
+          Assumptions:
+          1. Test data is properly imported to the source
+             (This test case does not perform source vs test data validation)
+        */
+
+        WebDriver chromeDriver = driver;
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "status", "status_details");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("mc_recon_name"),
+                eventRuleHierarchiesPageDTO.getB1_balanceMissingOrInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("mc_recon_id")
+        );
+
+        // 3. Read the required columns from the excel file
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
+
+        List<Map<String, String>> excelData =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : excelData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
 
         // 5. Check if Cash Items table is not empty
         Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
@@ -2170,10 +2275,444 @@ public class CashReconTest extends BaseTest {
         softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
 
         gridPage.adjustZoom(15);
-//        System.out.println(firstFailedAssetId);
 
-        cashItemsPage.ignoreItem();
+        cashItemsPage.ignoreBatch();
 
+        // Open a new Edge browser after existing operations
+        WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
+                Boolean.parseBoolean(prop.getProperty("remote")),
+                prop.getProperty("selenium.grid.url")
+        );
+        edgeDriver.get(prop.getProperty("url").trim());
+
+        try {
+            // Perform operations in Edge browser here
+            LoginPage edgeLoginPage = new LoginPage(edgeDriver);
+            HomePage edgeHomePage = edgeLoginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username2"), prop.getProperty("password2"));
+            edgeHomePage.disableResponsiveSidebar();
+
+            CashItemsPage edgeCashItemsPage = edgeHomePage.goToCashItems();
+            edgeCashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+            GridPage edgeGridPage = new GridPage(edgeDriver);
+            edgeGridPage.adjustZoom(15);
+            edgeCashItemsPage.approve();
+            edgeGridPage.adjustZoom(100);
+
+            // Switch back to Chrome for validation
+            driver = chromeDriver;
+            cashItemsPage.refresh();
+
+            List<String> statusListFromUi = cashItemsPage.getStatusBasedOnBatchId(cashItemsPage.getBatchIdForFirstFailedRecord());
+            boolean allIgnored = statusListFromUi.stream()
+                    .allMatch(status -> status.equals("Ignored"));
+            Assert.assertTrue(allIgnored, "Wrong status");
+        } finally {
+            // Close the Edge browser instance
+            edgeDriver.quit();
+        }
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing valid data")
+    @Test(priority = 30, groups = "Cash Items", description = "Right click cases with MC - Ignore File")
+    public void rightClickCases_6c() throws Exception {
+
+        /*
+          Assumptions:
+          1. Test data is properly imported to the source
+             (This test case does not perform source vs test data validation)
+        */
+
+        WebDriver chromeDriver = driver;
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "status", "status_details");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("mc_recon_name"),
+                eventRuleHierarchiesPageDTO.getB1_balanceMissingOrInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("mc_recon_id")
+        );
+
+        // 3. Read the required columns from the excel file
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
+
+        List<Map<String, String>> excelData =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : excelData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+
+        gridPage.adjustZoom(15);
+
+        cashItemsPage.ignoreFile();
+
+        // Open a new Edge browser after existing operations
+        WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
+                Boolean.parseBoolean(prop.getProperty("remote")),
+                prop.getProperty("selenium.grid.url")
+        );
+        edgeDriver.get(prop.getProperty("url").trim());
+
+        try {
+            // Perform operations in Edge browser here
+            LoginPage edgeLoginPage = new LoginPage(edgeDriver);
+            HomePage edgeHomePage = edgeLoginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username2"), prop.getProperty("password2"));
+            edgeHomePage.disableResponsiveSidebar();
+
+            CashItemsPage edgeCashItemsPage = edgeHomePage.goToCashItems();
+            edgeCashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+            GridPage edgeGridPage = new GridPage(edgeDriver);
+            edgeGridPage.adjustZoom(15);
+            edgeCashItemsPage.approve();
+            edgeGridPage.adjustZoom(100);
+
+            // Switch back to Chrome for validation
+            driver = chromeDriver;
+            cashItemsPage.refresh();
+
+            List<String> statusListFromUi = cashItemsPage.getStatusBasedOnFileName("balanceMissingOrInconsistentWithStatus.xlsx");
+//        System.out.println(statusListFromUi);
+            boolean allIgnored = statusListFromUi.stream()
+                    .allMatch(status -> status.equals("Ignored"));
+            Assert.assertTrue(allIgnored, "Wrong status");
+        } finally {
+            // Close the Edge browser instance
+            edgeDriver.quit();
+
+        }
+
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data from 2 batches")
+    @Test(priority = 31, groups = "Cash Items", description = "Right click cases - Add Item to Batch")
+    public void rightClickCases_6f() throws Exception {
+        /*
+          Assumptions:
+          1. Test data is properly imported to the source
+             (This test case does not perform source vs test data validation)
+        */
+
+        WebDriver chromeDriver = driver;
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("mc_recon_name"),
+                eventRuleHierarchiesPageDTO.getCase_7f()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("mc_recon_id")
+        );
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        gridPage = new GridPage(driver);
+        gridPage.adjustZoom(15);
+
+        String batchIdForFirstFailedRecord = cashItemsPage.getBatchIdForFirstFailedRecord();
+
+        cashItemsPage.addItemToBatch();
+
+        // Open a new Edge browser after existing operations
+        WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
+                Boolean.parseBoolean(prop.getProperty("remote")),
+                prop.getProperty("selenium.grid.url")
+        );
+        edgeDriver.get(prop.getProperty("url").trim());
+
+        try {
+            // Perform operations in Edge browser here
+            LoginPage edgeLoginPage = new LoginPage(edgeDriver);
+            HomePage edgeHomePage = edgeLoginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username2"), prop.getProperty("password2"));
+            edgeHomePage.disableResponsiveSidebar();
+
+            CashItemsPage edgeCashItemsPage = edgeHomePage.goToCashItems();
+            edgeCashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+            GridPage edgeGridPage = new GridPage(edgeDriver);
+            edgeGridPage.adjustZoom(15);
+            edgeCashItemsPage.approve();
+            edgeGridPage.adjustZoom(100);
+
+            // Switch back to Chrome for validation
+            driver = chromeDriver;
+            cashItemsPage.refresh();
+
+            List<String> statusListFromUi = cashItemsPage.getStatusBasedOnBatchId(batchIdForFirstFailedRecord);
+            boolean allValidated = statusListFromUi.stream()
+                    .allMatch(status -> status.equals("Validated"));
+            Assert.assertTrue(allValidated, "Wrong status");
+        } finally {
+            // Close the Edge browser instance
+            edgeDriver.quit();
+        }
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing valid data")
+    @Test(priority = 32, groups = "Cash Items", description = "Right click cases - Update Batch Balances")
+    public void rightClickCases_6g() throws Exception {
+
+        /*
+          Assumptions:
+          1. Test data is properly imported to the source
+             (This test case does not perform source vs test data validation)
+        */
+
+        WebDriver chromeDriver = driver;
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "status", "status_details");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("mc_recon_name"),
+                eventRuleHierarchiesPageDTO.getB1_balanceMissingOrInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("mc_recon_id")
+        );
+
+        // 3. Read the required columns from the excel file
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
+
+        List<Map<String, String>> excelData =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : excelData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+
+        gridPage.adjustZoom(15);
+
+        String batchIdForFirstFailedRecord = cashItemsPage.getBatchIdForFirstFailedRecord();
+
+        cashItemsPage.updateBatchBalances(4500);
+
+        // Open a new Edge browser after existing operations
+        WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
+                Boolean.parseBoolean(prop.getProperty("remote")),
+                prop.getProperty("selenium.grid.url")
+        );
+        edgeDriver.get(prop.getProperty("url").trim());
+
+        try {
+            // Perform operations in Edge browser here
+            LoginPage edgeLoginPage = new LoginPage(edgeDriver);
+            HomePage edgeHomePage = edgeLoginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username2"), prop.getProperty("password2"));
+            edgeHomePage.disableResponsiveSidebar();
+
+            CashItemsPage edgeCashItemsPage = edgeHomePage.goToCashItems();
+            edgeCashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+            GridPage edgeGridPage = new GridPage(edgeDriver);
+            edgeGridPage.adjustZoom(15);
+            edgeCashItemsPage.approve();
+            edgeGridPage.adjustZoom(100);
+
+            // Switch back to Chrome for validation
+            driver = chromeDriver;
+            cashItemsPage.refresh();
+
+            List<String> statusListFromUi = cashItemsPage.getStatusBasedOnBatchId(batchIdForFirstFailedRecord);
+            boolean allValidated = statusListFromUi.stream()
+                    .allMatch(status -> status.equals("Validated"));
+            Assert.assertTrue(allValidated, "Wrong status");
+        } finally {
+            // Close the Edge browser instance
+            edgeDriver.quit();
+        }
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data from 2 batches")
+    @Test(priority = 33, groups = "Cash Items", description = "Right click cases - Add Batch")
+    public void rightClickCases_6h() throws Exception {
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "status", "status_details");
+
+        WebDriver chromeDriver = driver;
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("mc_recon_name"),
+                eventRuleHierarchiesPageDTO.getB2_openingInconsistentWithLastClosing()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("mc_recon_id")
+        );
+
+        // 3. Read the required columns from the CSV file
+        InputStream is1 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus1.csv");
+
+        List<Map<String, String>> twoBatchesCombinedCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is1,
+                        cashDashboardsColumnKeyMapping,
+                        requiredColumns
+                );
+
+        InputStream is2 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus2.csv");
+
+        List<Map<String, String>> secondBatchCsvData =
+                CsvUtil.readCsvNormalizedWithRequiredHeaders(
+                        is2,
+                        cashDashboardsColumnKeyMapping,
+                        requiredColumns
+                );
+
+        twoBatchesCombinedCsvData.addAll(secondBatchCsvData);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData), "Data mismatch in Cash Items");
+
+        gridPage.adjustZoom(15);
+
+        String batchIdForFirstFailedRecord = cashItemsPage.getBatchIdForFirstFailedRecord();
+
+        cashItemsPage.addBatchAndReprocess();
+
+        // Open a new Edge browser after existing operations
+        WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
+                Boolean.parseBoolean(prop.getProperty("remote")),
+                prop.getProperty("selenium.grid.url")
+        );
+        edgeDriver.get(prop.getProperty("url").trim());
+
+        try {
+            // Perform operations in Edge browser here
+            LoginPage edgeLoginPage = new LoginPage(edgeDriver);
+            HomePage edgeHomePage = edgeLoginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username2"), prop.getProperty("password2"));
+            edgeHomePage.disableResponsiveSidebar();
+
+            CashItemsPage edgeCashItemsPage = edgeHomePage.goToCashItems();
+            edgeCashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+            GridPage edgeGridPage = new GridPage(edgeDriver);
+            edgeGridPage.adjustZoom(15);
+            edgeCashItemsPage.approve();
+            edgeGridPage.adjustZoom(100);
+
+            // Switch back to Chrome for validation
+            driver = chromeDriver;
+            cashItemsPage.refresh();
+
+        List<String> statusListFromUi = cashItemsPage.getStatusBasedOnBatchId(batchIdForFirstFailedRecord);
+        boolean allValidated = statusListFromUi.stream()
+                .allMatch(status -> status.equals("Validated"));
+        Assert.assertTrue(allValidated, "Wrong status");
+    } finally {
+            // Close the Edge browser instance
+            edgeDriver.quit();
+        }
     }
 
 }

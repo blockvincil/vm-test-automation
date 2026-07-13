@@ -51,4 +51,23 @@ public class DriverFactory {
     public static WebDriver getDriver() {
         return tlDriver.get();
     }
+
+    public static WebDriver createStandaloneEdgeDriver(boolean remote, String gridUrl) {
+        OptionsManager optionsManager = new OptionsManager();
+        WebDriver edgeDriver;
+
+        if (remote && gridUrl != null && !gridUrl.trim().isEmpty()) {
+            try {
+                edgeDriver = new RemoteWebDriver(new URL(gridUrl), optionsManager.getEdgeOptions());
+            } catch (MalformedURLException e) {
+                throw new RuntimeException("Invalid Selenium Grid URL: " + gridUrl, e);
+            }
+        } else {
+            edgeDriver = new EdgeDriver(optionsManager.getEdgeOptions());
+        }
+
+        edgeDriver.manage().deleteAllCookies();
+        edgeDriver.manage().window().maximize();
+        return edgeDriver;
+    }
 }

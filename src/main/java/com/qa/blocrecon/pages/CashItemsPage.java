@@ -34,7 +34,10 @@ public class CashItemsPage {
     private final By assetIdForFirstFailedRecord = By.xpath("(//*[text()='Failed'])[1]/../div[@col-id='asset_id']");
     private final By batchIdForFirstFailedRecord = By.xpath("(//*[text()='Failed'])[1]/../div[@col-id='batch_id']");
     private final By firstFailedRecord = By.xpath("//*[text()='Failed']");
+    private final By firstPendingRecord = By.xpath("//*[text()='Pending']");
     private final By ignoreItemButton = By.xpath("//span[text()='Ignore Item']");
+    private final By approveOrRejectButton = By.xpath("//span[text()='Approve/Reject']");
+    private final By approveButton = By.xpath("//button[text()='Approve']");
     private final By ignoreBatchButton = By.xpath("//span[text()='Ignore Batch']");
     private final By ignoreFileButton = By.xpath("//span[text()='Ignore File']");
     private final By addBatchButton = By.xpath("//span[text()='Add Batch']");
@@ -44,6 +47,7 @@ public class CashItemsPage {
     private final By updateBatchBalancesDialogBox_clisingBalanceTextBox = By.xpath("//input[@name='closingbalance']");
     private final By submitButton = By.xpath("//button[text()='Submit']");
     private final By reprocessButton = By.xpath("//button[@title='reprocess']");
+    private final By refreshButton = By.xpath("//button[@title='refresh']");
 
     /*****************************************************Dynamic Locators*************************************************/
 
@@ -71,6 +75,14 @@ public class CashItemsPage {
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
         waitUtil.waitFor(1);
+
+    }
+
+    public void refresh() {
+            eleUtil.doClick(refreshButton, AppConstants.time10);
+            eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+            eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
+            waitUtil.waitFor(1);
 
     }
     /**
@@ -118,6 +130,18 @@ public class CashItemsPage {
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
         waitUtil.waitFor(1);
+//        System.out.println("Ignore item done");
+    }
+
+    public void approve() {
+        Allure.step("Approve");
+        rightClick(firstPendingRecord);
+        eleUtil.doClick(approveOrRejectButton);
+        eleUtil.doClick(approveButton, AppConstants.time10);
+        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+        eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
+        waitUtil.waitFor(1);
+//        System.out.println("Ignore item done");
     }
 
     public void ignoreBatch() {
@@ -181,7 +205,7 @@ public class CashItemsPage {
     }
 
     public String getStatusBasedOnAssetId(String assetId) {
-        return eleUtil.doGetText(returnStatusBasedOnAssetId(assetId), AppConstants.time5);
+        return eleUtil.doGetText(returnStatusBasedOnAssetId(assetId), AppConstants.time10);
     }
 
     public List<String> getStatusBasedOnBatchId(String batchId) {
