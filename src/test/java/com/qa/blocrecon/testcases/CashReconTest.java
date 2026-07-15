@@ -2721,4 +2721,96 @@ public class CashReconTest extends BaseTest {
         }
     }
 
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data from 2 batches")
+    @Test(priority = 34, groups = "Cash Items", description = "Right click cases - Approve Duplicates")
+    public void rightClickCases_6i() throws Exception {
+        /*
+          Assumptions:
+          1. Test data is properly imported to the source
+             (This test case does not perform source vs test data validation)
+        */
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "status", "status_details");
+
+        WebDriver chromeDriver = driver;
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("mc_recon_name"),
+                eventRuleHierarchiesPageDTO.getCase_7i()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("mc_recon_id")
+        );
+
+        // 3. Fetch data with status and status details from Excel
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
+        List<Map<String, String>> excelData =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
+
+//      Debug print
+//        for (Map<String, String> row : excelData)
+//            System.out.println(row);
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        gridPage = new GridPage(driver);
+        gridPage.adjustZoom(15);
+
+        String batchIdForFirstFailedRecord = cashItemsPage.getBatchIdForFirstFailedRecord();
+
+        cashItemsPage.approveDuplicates();
+
+        WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
+                Boolean.parseBoolean(prop.getProperty("remote")),
+                prop.getProperty("selenium.grid.url")
+        );
+        edgeDriver.get(prop.getProperty("url").trim());
+
+        try {
+            // Perform operations in Edge browser here
+            LoginPage edgeLoginPage = new LoginPage(edgeDriver);
+            HomePage edgeHomePage = edgeLoginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username2"), prop.getProperty("password2"));
+            edgeHomePage.disableResponsiveSidebar();
+
+            CashItemsPage edgeCashItemsPage = edgeHomePage.goToCashItems();
+            edgeCashItemsPage.selectRecon(prop.getProperty("mc_recon_name"));
+
+            GridPage edgeGridPage = new GridPage(edgeDriver);
+            edgeGridPage.adjustZoom(15);
+            edgeCashItemsPage.approve();
+            edgeGridPage.adjustZoom(100);
+
+            // Switch back to Chrome for validation
+            driver = chromeDriver;
+            cashItemsPage.refresh();
+
+            List<String> statusListFromUi = cashItemsPage.getStatusDetailsBasedOnBatchId(batchIdForFirstFailedRecord);
+            boolean statusCheck = statusListFromUi.stream()
+                    .allMatch(status -> status.equals("Duplicate Batch Identified"));
+            Assert.assertFalse(statusCheck, "Wrong status");
+        } finally {
+            // Close the Edge browser instance
+            edgeDriver.quit();
+        }
+    }
+
 }
