@@ -70,7 +70,7 @@ public class CashItemsPage {
     /******************************************************** Methods *****************************************************/
 
 
-    private void reprocess() {
+    public void reprocess() {
         eleUtil.doClick(reprocessButton, AppConstants.time10);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);

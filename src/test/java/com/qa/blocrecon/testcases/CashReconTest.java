@@ -2703,13 +2703,19 @@ public class CashReconTest extends BaseTest {
 
             // Switch back to Chrome for validation
             driver = chromeDriver;
-            cashItemsPage.refresh();
+            cashItemsPage.reprocess();
+//            cashItemsPage.refresh();
 
-        List<String> statusListFromUi = cashItemsPage.getStatusBasedOnBatchId(batchIdForFirstFailedRecord);
-        boolean allValidated = statusListFromUi.stream()
-                .allMatch(status -> status.equals("Validated"));
-        Assert.assertTrue(allValidated, "Wrong status");
-    } finally {
+            List<String> statusListFromUi = cashItemsPage.getStatusBasedOnBatchId(batchIdForFirstFailedRecord);
+
+//          // Debug print
+//          System.out.println("\n");
+//          System.out.println(statusListFromUi);
+
+            boolean allValidated = statusListFromUi.stream()
+                    .allMatch(status -> status.equals("Validated"));
+            Assert.assertTrue(allValidated, "Wrong status");
+        } finally {
             // Close the Edge browser instance
             edgeDriver.quit();
         }
