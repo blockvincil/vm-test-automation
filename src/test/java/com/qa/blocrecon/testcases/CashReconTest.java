@@ -1682,11 +1682,13 @@ public class CashReconTest extends BaseTest {
         softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
 
         gridPage.adjustZoom(15);
-//        System.out.println(firstFailedAssetId);
+
+        String firstFailedAssetId = cashItemsPage.getAssetIdForFirstFailedRecord();
+        System.out.println(firstFailedAssetId);
 
         cashItemsPage.ignoreItem();
 
-        Assert.assertEquals(cashItemsPage.getStatusBasedOnAssetId(cashItemsPage.getAssetIdForFirstFailedRecord()), "Ignored", "Wrong status");
+        Assert.assertEquals(cashItemsPage.getStatusBasedOnAssetId(cashItemsPage.getStatusBasedOnAssetId(firstFailedAssetId)), "Ignored", "Wrong status");
     }
 
     @Owner("QA")
