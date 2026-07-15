@@ -98,7 +98,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 1, groups = "Cash Items", description = "Importing valid data - Check if data is present in source")
-    public void importingValidData_1a() throws Exception {
+    public void _1a() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
@@ -155,7 +155,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 2, groups = "Cash Items", description = "Importing valid data - Check if data is present with Validated status in cash items")
-    public void importingValidData_1b() throws Exception {
+    public void _1b() throws Exception {
 
         /*
           Assumptions:
@@ -217,7 +217,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 3, groups = "Cash Items", description = "Importing valid data - Check if entries are recorded properly in cash balances")
-    public void importingValidData_1c() throws Exception {
+    public void _1c() throws Exception {
 
         /*  Assumptions:
             1. Test data is properly imported to the source
@@ -283,7 +283,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data")
     @Test(priority = 4, groups = "Cash Items", description = "Importing invalid data - Check if data is present in source")
-    public void importingInvalidData_2a() throws Exception {
+    public void _2a() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
@@ -340,7 +340,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data")
     @Test(priority = 5, groups = "Cash Items", description = "Importing invalid data - Verify that no entries are recorded in cash balances for the failed subaccounts")
-    public void importingInvalidData_2b() throws Exception {
+    public void _2b() throws Exception {
 
         /*  Assumptions:
             1. Test data is properly imported to the source
@@ -406,7 +406,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data")
     @Test(priority = 6, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
-    public void importingInvalidData_2c() throws Exception {
+    public void _2c() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -464,7 +464,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data")
     @Test(priority = 7, groups = "Cash Items", description = "Importing invalid data - Balance missing or inconsistent")
-    public void importingInvalidData_2d() throws Exception {
+    public void _2d() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -522,7 +522,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data")
     @Test(priority = 8, groups = "Cash Items", description = "Importing invalid data - Missing Mandatory Fields")
-    public void importingInvalidData_2e() throws Exception {
+    public void _2e() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -580,7 +580,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data")
     @Test(priority = 9, groups = "Cash Items", description = "Importing invalid data - Account Mapping Not Found")
-    public void importingInvalidData_2f() throws Exception {
+    public void _2f() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -638,7 +638,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data")
     @Test(priority = 10, groups = "Cash Items", description = "Importing invalid data - Failed In Transformations")
-    public void importingInvalidData_2g() throws Exception {
+    public void _2g() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -695,7 +695,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 11, groups = "Cash Items", description = "Importing invalid data from two batches - Check if data is present in source")
-    public void importingInvalidDataFromTwoBatches_3a() throws Exception {
+    public void _3a() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
@@ -772,7 +772,7 @@ public class CashReconTest extends BaseTest {
     @Description("Known issue: Incorrect entries in cash balances")
     @Issue("JIRA yet to be created")
     @Test(priority = 12, groups = "Cash Items", description = "Importing invalid data from two batches - Verify that no entries are recorded in cash balances for the failed subaccounts")
-    public void importingInvalidDataFromTwoBatches_3b() throws Exception {
+    public void _3b() throws Exception {
 
         /*  Assumptions:
             1. Test data is properly imported to the source
@@ -845,7 +845,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 13, groups = "Cash Items", description = "Importing invalid data from two batches - Opening/Closing balance inconsistent")
-    public void importingInvalidDataFromTwoBatches_3c() throws Exception {
+    public void _3c() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -920,7 +920,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 14, groups = "Cash Items", description = "Importing invalid data from two batches - Opening Balance inconsistent with Last Closing Balance")
-    public void importingInvalidDataFromTwoBatches_3d() throws Exception {
+    public void _3d() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -995,7 +995,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 15, groups = "Cash Items", description = "Importing invalid data from two batches - Balance missing or inconsistent")
-    public void importingInvalidDataFromTwoBatches_3e() throws Exception {
+    public void _3e() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1070,7 +1070,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 16, groups = "Cash Items", description = "Importing invalid data from two batches - Missing Mandatory Fields")
-    public void importingInvalidDataFromTwoBatches_3f() throws Exception {
+    public void _3f() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1145,7 +1145,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from two batches")
     @Test(priority = 17, groups = "Cash Items", description = "Importing invalid data from two batches - Account Mapping Not Found")
-    public void importingInvalidDataFromTwoBatches_3g() throws Exception {
+    public void _3g() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1220,7 +1220,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from two batches")
     @Test(priority = 18, groups = "Cash Items", description = "Importing invalid data from two batches - Failed In Transformations")
-    public void importingInvalidData_3h() throws Exception {
+    public void _3h() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1296,7 +1296,7 @@ public class CashReconTest extends BaseTest {
     @Description("Known issue: Clarity required regarding this case")
     @Issue("JIRA yet to be created")
     @Test(priority = 19, groups = "Cash Items", description = "Importing invalid data from two batches - Duplicate Batch Identified")
-    public void importingInvalidData_3i() throws Exception {
+    public void _3i() throws Exception {
 
         boolean isBugStillPresent = true;
 
@@ -1376,7 +1376,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 20, groups = "Cash Items", description = "Calculations cases - Calculation on Description field & data with Validated status. Check whether calculation is applied properly and the status remains unchanged")
-    public void calculationsCases_4a() throws Exception {
+    public void _4a() throws Exception {
 
         /*
           Assumptions:
@@ -1438,7 +1438,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 21, groups = "Cash Items", description = "Calculations cases - Calculation on DB/CR field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Opening/Closing balance inconsistent)")
-    public void calculationsCases_4b() throws Exception {
+    public void _4b() throws Exception {
 
         /*
           Assumptions:
@@ -1500,7 +1500,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 22, groups = "Cash Items", description = "Calculations cases - Calculation on DB/CR field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Balance missing or Inconsistent)")
-    public void calculationsCases_4d() throws Exception {
+    public void _4d() throws Exception {
 
         /*
           Assumptions:
@@ -1562,7 +1562,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 23, groups = "Cash Items", description = "Calculations cases - Calculation on Account/Sub Account field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Account Mapping not found)")
-    public void calculationsCases_4e() throws Exception {
+    public void _4e() throws Exception {
 
         /*
           Assumptions:
@@ -1624,7 +1624,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 24, groups = "Cash Items", description = "Right click cases - Ignore Item")
-    public void rightClickCases_7a() throws Exception {
+    public void _7a() throws Exception {
 
         /*
           Assumptions:
@@ -1696,7 +1696,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 25, groups = "Cash Items", description = "Right click cases - Ignore Batch")
-    public void rightClickCases_7b() throws Exception {
+    public void _7b() throws Exception {
 
         /*
           Assumptions:
@@ -1768,7 +1768,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 26, groups = "Cash Items", description = "Right click cases - Ignore File")
-    public void rightClickCases_7c() throws Exception {
+    public void _7c() throws Exception {
 
         /*
           Assumptions:
@@ -1841,7 +1841,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 27, groups = "Cash Items", description = "Right click cases - Add Item to Batch")
-    public void rightClickCases_7f() throws Exception {
+    public void _7f() throws Exception {
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -1890,7 +1890,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 26, groups = "Cash Items", description = "Right click cases - Update Batch Balances")
-    public void rightClickCases_7g() throws Exception {
+    public void _7g() throws Exception {
 
         /*
           Assumptions:
@@ -1964,7 +1964,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 27, groups = "Cash Items", description = "Right click cases - Add Batch")
-    public void rightClickCases_7h() throws Exception {
+    public void _7h() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -2049,7 +2049,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 27, groups = "Cash Items", description = "Right click cases - Approve Duplicates")
-    public void rightClickCases_7i() throws Exception {
+    public void _7i() throws Exception {
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -2111,7 +2111,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 28, groups = "Cash Items", description = "Right click cases with MC - Ignore Item")
-    public void rightClickCases_6a() throws Exception {
+    public void _6a() throws Exception {
 
         /*
           Assumptions:
@@ -2217,7 +2217,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 29, groups = "Cash Items", description = "Right click cases with MC - Ignore Batch")
-    public void rightClickCases_6b() throws Exception {
+    public void _6b() throws Exception {
 
         /*
           Assumptions:
@@ -2320,7 +2320,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 30, groups = "Cash Items", description = "Right click cases with MC - Ignore File")
-    public void rightClickCases_6c() throws Exception {
+    public void _6c() throws Exception {
 
         /*
           Assumptions:
@@ -2426,7 +2426,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 31, groups = "Cash Items", description = "Right click cases - Add Item to Batch")
-    public void rightClickCases_6f() throws Exception {
+    public void _6f() throws Exception {
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -2501,7 +2501,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing valid data")
     @Test(priority = 32, groups = "Cash Items", description = "Right click cases - Update Batch Balances")
-    public void rightClickCases_6g() throws Exception {
+    public void _6g() throws Exception {
 
         /*
           Assumptions:
@@ -2606,7 +2606,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 33, groups = "Cash Items", description = "Right click cases - Add Batch")
-    public void rightClickCases_6h() throws Exception {
+    public void _6h() throws Exception {
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -2728,7 +2728,7 @@ public class CashReconTest extends BaseTest {
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 34, groups = "Cash Items", description = "Right click cases - Approve Duplicates")
-    public void rightClickCases_6i() throws Exception {
+    public void _6i() throws Exception {
         /*
           Assumptions:
           1. Test data is properly imported to the source
