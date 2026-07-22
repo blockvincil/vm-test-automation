@@ -150,9 +150,9 @@ public class CashItemsPage {
         rightClick(firstPendingRecord);
         eleUtil.doClick(approveOrRejectButton);
         eleUtil.doClick(approveButton, AppConstants.time10);
-        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+//        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
-        waitUtil.waitFor(1);
+        waitUtil.waitFor(5);
 //        System.out.println("Ignore item done");
     }
 
