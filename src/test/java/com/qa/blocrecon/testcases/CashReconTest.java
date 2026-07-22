@@ -2706,7 +2706,7 @@ public class CashReconTest extends BaseTest {
             // Switch back to Chrome for validation
             driver = chromeDriver;
             cashItemsPage.reprocess();
-//            cashItemsPage.refresh();
+            cashItemsPage.refresh();
 
             List<String> statusListFromUi = cashItemsPage.getStatusBasedOnBatchId(batchIdForFirstFailedRecord);
 
