@@ -23,6 +23,8 @@ public class EventRuleHierarchiesPageDTO {
     private String case_4e;
     private String case_7i;
     private String case_7f;
+    private String case_8d;
+    private String case_8e;
 
     public String getImportData() {
         return importData;
@@ -198,6 +200,22 @@ public class EventRuleHierarchiesPageDTO {
 
     public void setCase_7f(String case_7f) {
         this.case_7f = case_7f;
+    }
+
+    public String getCase_8d() {
+        return case_8d;
+    }
+
+    public void setCase_8d(String case_8d) {
+        this.case_8d = case_8d;
+    }
+
+    public String getCase_8e() {
+        return case_8e;
+    }
+
+    public void setCase_8e(String case_8e) {
+        this.case_8e = case_8e;
     }
 //    private String importData;
 //    private String csvImport;

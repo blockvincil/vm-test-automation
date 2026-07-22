@@ -2815,4 +2815,188 @@ public class CashReconTest extends BaseTest {
         }
     }
 
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data")
+    @Test(priority = 35, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    public void _8a() throws Exception {
+
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getB1_openingClosingInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        cashItemsPage.rightClickFirstFailedRecord();
+
+        //System.out.println(cashItemsPage.getRightClickActionsList());
+
+        List<String> expectedRightClickOptions = List.of("Ignore Item", "Ignore Batch", "Ignore File", "Add Item to Batch", "Update Batch Balances");
+        List<String> unexpectedRightClickOptions = List.of("Add Batch");
+        List<String> actualRightClickOptions = List.of(cashItemsPage.getRightClickActionsList().get(0).split("\\R"));
+
+//        System.out.println(expectedRightClickOptions);
+//        System.out.println(actualRightClickOptions);
+
+        softAssert.assertTrue(actualRightClickOptions.containsAll(expectedRightClickOptions), "Expected right click action not found");
+        softAssert.assertTrue(!actualRightClickOptions.containsAll(unexpectedRightClickOptions), "Unexpected right click action found");
+        softAssert.assertAll();
+
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data")
+    @Test(priority = 36, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    public void _8b() throws Exception {
+
+
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getB2_openingInconsistentWithLastClosing()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        cashItemsPage.rightClickFirstFailedRecord();
+
+        //System.out.println(cashItemsPage.getRightClickActionsList());
+
+        List<String> expectedRightClickOptions = List.of("Ignore Item", "Ignore Batch", "Ignore File", "Add Batch", "Update Batch Balances");
+        List<String> unexpectedRightClickOptions = List.of("Add Item to Batch");
+        List<String> actualRightClickOptions = List.of(cashItemsPage.getRightClickActionsList().get(0).split("\\R"));
+
+//        System.out.println(expectedRightClickOptions);
+//        System.out.println(actualRightClickOptions);
+
+        softAssert.assertTrue(actualRightClickOptions.containsAll(expectedRightClickOptions), "Expected right click action not found");
+        softAssert.assertTrue(!actualRightClickOptions.containsAll(unexpectedRightClickOptions), "Unexpected right click action found");
+        softAssert.assertAll();
+
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data")
+    @Test(priority = 37, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    public void _8c() throws Exception {
+
+
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getB1_balanceMissingOrInconsistent()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        cashItemsPage.rightClickFirstFailedRecord();
+
+        //System.out.println(cashItemsPage.getRightClickActionsList());
+
+        List<String> expectedRightClickOptions = List.of("Ignore Item", "Ignore Batch", "Ignore File", "Update Batch Balances");
+        List<String> unexpectedRightClickOptions = List.of("Add Item to Batch", "Add batch");
+        List<String> actualRightClickOptions = List.of(cashItemsPage.getRightClickActionsList().get(0).split("\\R"));
+
+//        System.out.println(expectedRightClickOptions);
+//        System.out.println(actualRightClickOptions);
+
+        softAssert.assertTrue(actualRightClickOptions.containsAll(expectedRightClickOptions), "Expected right click action not found");
+        softAssert.assertTrue(!actualRightClickOptions.containsAll(unexpectedRightClickOptions), "Unexpected right click action found");
+        softAssert.assertAll();
+
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data")
+    @Test(priority = 38, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    public void _8d() throws Exception {
+
+
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getCase_8d()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        cashItemsPage.addItemToBatch();
+        String toastMessage = cashItemsPage.getToastMessage();
+
+        Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing invalid data")
+    @Test(priority = 39, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    public void _8e() throws Exception {
+
+
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getCase_8e()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        cashItemsPage.addBatch();
+        String toastMessage = cashItemsPage.getToastMessage();
+
+        Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
+    }
+
 }

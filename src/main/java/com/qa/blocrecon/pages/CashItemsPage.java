@@ -28,6 +28,8 @@ public class CashItemsPage {
     /**************************************************** Static Locators *************************************************/
 
     private final By pageLoader = By.xpath("//div[contains(@class, 'spinner')]");
+    private final By toastMessage = By.xpath("//div[@class='notification-message']");
+    private final By rightClickActionsList = By.xpath("(//div[@role='tree'])[last()]");
     private final By cashItemsDropdown = By.xpath("//select[@name='explorerName']");
     private final By cashItemsDataLoader = By.xpath("//div[contains(@class, 'ag-row-loading')]");
     private final By cashItemsDataRows = By.xpath("//div[@class='ag-center-cols-container']//div[@role='row']");
@@ -78,6 +80,10 @@ public class CashItemsPage {
 
     }
 
+    public List<String> getRightClickActionsList() {
+        return eleUtil.getTextAsList(rightClickActionsList);
+    }
+
     public void refresh() {
             eleUtil.doClick(refreshButton, AppConstants.time10);
             eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
@@ -119,6 +125,12 @@ public class CashItemsPage {
 
     public void rightClick(By locator) {
         WebElement element = driver.findElement(locator);
+        Actions actions = new Actions(driver);
+        actions.contextClick(element).perform();
+    }
+
+    public void rightClickFirstFailedRecord() {
+        WebElement element = driver.findElement(firstFailedRecord);
         Actions actions = new Actions(driver);
         actions.contextClick(element).perform();
     }
@@ -171,6 +183,20 @@ public class CashItemsPage {
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
         waitUtil.waitFor(1);
         reprocess();
+    }
+
+    public void addBatch() {
+        Allure.step("Add batch and reprocess");
+        rightClick(firstFailedRecord);
+        eleUtil.doClick(addBatchButton);
+        eleUtil.doClick(submitButton, AppConstants.time5);
+        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+        eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
+        waitUtil.waitFor(1);
+    }
+
+    public String getToastMessage() {
+        return eleUtil.doGetText(toastMessage, AppConstants.time3);
     }
 
     public void addItemToBatch() {
