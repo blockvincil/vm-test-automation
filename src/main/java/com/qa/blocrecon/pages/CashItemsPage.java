@@ -54,25 +54,26 @@ public class CashItemsPage {
     /*****************************************************Dynamic Locators*************************************************/
 
     private By returnStatusBasedOnAssetId(String assetId) {
-        return By.xpath("//*[text()='"+assetId+"']/../div[@col-id='status']");
+        return By.xpath("//*[text()='" + assetId + "']/../div[@col-id='status']");
     }
 
     private By returnStatusBasedOnBatchId(String batchId) {
-        return By.xpath("//*[text()='"+batchId+"']/../div[@col-id='status']");
+        return By.xpath("//*[text()='" + batchId + "']/../div[@col-id='status']");
     }
 
     private By returnStatusDetailsBasedOnBatchId(String batchId) {
-        return By.xpath("//*[text()='"+batchId+"']/../div[@col-id='status_details']");
+        return By.xpath("//*[text()='" + batchId + "']/../div[@col-id='status_details']");
     }
 
     private By returnStatusBasedOnFileName(String fileName) {
-        return By.xpath("//*[text()='"+fileName+"']/../div[@col-id='status']");
+        return By.xpath("//*[text()='" + fileName + "']/../div[@col-id='status']");
     }
 
     /******************************************************** Methods *****************************************************/
 
 
     public void reprocess() {
+        Allure.step("Reprocess");
         eleUtil.doClick(reprocessButton, AppConstants.time10);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
@@ -81,16 +82,19 @@ public class CashItemsPage {
     }
 
     public List<String> getRightClickActionsList() {
+        Allure.step("Get list of right click actions");
         return eleUtil.getTextAsList(rightClickActionsList);
     }
 
     public void refresh() {
-            eleUtil.doClick(refreshButton, AppConstants.time10);
-            eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
-            eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
-            waitUtil.waitFor(2);
+        Allure.step("Manual refresh on citems page");
+        eleUtil.doClick(refreshButton, AppConstants.time10);
+        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+        eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
+        waitUtil.waitFor(2);
 
     }
+
     /**
      * Selects a reconciliation from the dropdown.
      *
@@ -116,20 +120,24 @@ public class CashItemsPage {
     }
 
     public String getAssetIdForFirstFailedRecord() {
+        Allure.step("Get asset ID for first failed record");
         return eleUtil.doGetText(assetIdForFirstFailedRecord, AppConstants.time5);
     }
 
     public String getBatchIdForFirstFailedRecord() {
+        Allure.step("Get batch ID for first failed record");
         return eleUtil.doGetText(batchIdForFirstFailedRecord, AppConstants.time5);
     }
 
-    public void rightClick(By locator) {
+    private void rightClick(By locator) {
+        Allure.step("Right click based on locator");
         WebElement element = driver.findElement(locator);
         Actions actions = new Actions(driver);
         actions.contextClick(element).perform();
     }
 
     public void rightClickFirstFailedRecord() {
+        Allure.step("Right click the first failed record");
         WebElement element = driver.findElement(firstFailedRecord);
         Actions actions = new Actions(driver);
         actions.contextClick(element).perform();
@@ -181,8 +189,9 @@ public class CashItemsPage {
         eleUtil.doClick(submitButton, AppConstants.time5);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
-        waitUtil.waitFor(5);
+        waitUtil.waitFor(2);
         reprocess();
+        waitUtil.waitFor(3);
     }
 
     public void addBatch() {
@@ -196,11 +205,12 @@ public class CashItemsPage {
     }
 
     public String getToastMessage() {
+        Allure.step("Capture toast message");
         return eleUtil.doGetText(toastMessage, AppConstants.time3);
     }
 
     public void addItemToBatch() {
-        Allure.step("Add batch and reprocess");
+        Allure.step("Add item to batch");
         rightClick(firstFailedRecord);
         eleUtil.doClick(addItemToBatchButton);
         eleUtil.doClick(submitButton, AppConstants.time5);
