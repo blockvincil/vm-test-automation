@@ -181,7 +181,7 @@ public class CashItemsPage {
         eleUtil.doClick(submitButton, AppConstants.time5);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
-        waitUtil.waitFor(1);
+        waitUtil.waitFor(5);
         reprocess();
     }
 
@@ -192,7 +192,7 @@ public class CashItemsPage {
         eleUtil.doClick(submitButton, AppConstants.time5);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
-        waitUtil.waitFor(1);
+        waitUtil.waitFor(3);
     }
 
     public String getToastMessage() {

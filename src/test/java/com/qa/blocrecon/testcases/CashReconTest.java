@@ -2680,7 +2680,7 @@ public class CashReconTest extends BaseTest {
 
         String batchIdForFirstFailedRecord = cashItemsPage.getBatchIdForFirstFailedRecord();
 
-        cashItemsPage.addBatchAndReprocess();
+        cashItemsPage.addBatch();
 
         // Open a new Edge browser after existing operations
         WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
