@@ -97,7 +97,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 1, groups = "Cash Items", description = "Importing valid data - Check if data is present in source")
+    @Test(priority = 1, groups = "Cash Items", description = "1a")
     public void _1a() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -154,7 +154,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 2, groups = "Cash Items", description = "Importing valid data - Check if data is present with Validated status in cash items")
+    @Test(priority = 2, groups = "Cash Items", description = "1b")
     public void _1b() throws Exception {
 
         /*
@@ -216,7 +216,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 3, groups = "Cash Items", description = "Importing valid data - Check if entries are recorded properly in cash balances")
+    @Test(priority = 3, groups = "Cash Items", description = "1c")
     public void _1c() throws Exception {
 
         /*  Assumptions:
@@ -282,7 +282,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 4, groups = "Cash Items", description = "Importing invalid data - Check if data is present in source")
+    @Test(priority = 4, groups = "Cash Items", description = "2a")
     public void _2a() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -339,7 +339,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 5, groups = "Cash Items", description = "Importing invalid data - Verify that no entries are recorded in cash balances for the failed subaccounts")
+    @Test(priority = 5, groups = "Cash Items", description = "2b")
     public void _2b() throws Exception {
 
         /*  Assumptions:
@@ -405,7 +405,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 6, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    @Test(priority = 6, groups = "Cash Items", description = "2c")
     public void _2c() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -463,7 +463,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 7, groups = "Cash Items", description = "Importing invalid data - Balance missing or inconsistent")
+    @Test(priority = 7, groups = "Cash Items", description = "2d")
     public void _2d() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -521,7 +521,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 8, groups = "Cash Items", description = "Importing invalid data - Missing Mandatory Fields")
+    @Test(priority = 8, groups = "Cash Items", description = "2e")
     public void _2e() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -579,7 +579,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 9, groups = "Cash Items", description = "Importing invalid data - Account Mapping Not Found")
+    @Test(priority = 9, groups = "Cash Items", description = "2f")
     public void _2f() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -637,7 +637,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 10, groups = "Cash Items", description = "Importing invalid data - Failed In Transformations")
+    @Test(priority = 10, groups = "Cash Items", description = "2g")
     public void _2g() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -694,7 +694,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 11, groups = "Cash Items", description = "Importing invalid data from two batches - Check if data is present in source")
+    @Test(priority = 11, groups = "Cash Items", description = "3a")
     public void _3a() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -771,7 +771,7 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Description("Known issue: Incorrect entries in cash balances")
     @Issue("JIRA yet to be created")
-    @Test(priority = 12, groups = "Cash Items", description = "Importing invalid data from two batches - Verify that no entries are recorded in cash balances for the failed subaccounts")
+    @Test(priority = 12, groups = "Cash Items", description = "3b")
     public void _3b() throws Exception {
 
         /*  Assumptions:
@@ -844,7 +844,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 13, groups = "Cash Items", description = "Importing invalid data from two batches - Opening/Closing balance inconsistent")
+    @Test(priority = 13, groups = "Cash Items", description = "3c")
     public void _3c() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -919,7 +919,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 14, groups = "Cash Items", description = "Importing invalid data from two batches - Opening Balance inconsistent with Last Closing Balance")
+    @Test(priority = 14, groups = "Cash Items", description = "3d")
     public void _3d() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -994,7 +994,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 15, groups = "Cash Items", description = "Importing invalid data from two batches - Balance missing or inconsistent")
+    @Test(priority = 15, groups = "Cash Items", description = "3e")
     public void _3e() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -1069,7 +1069,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 16, groups = "Cash Items", description = "Importing invalid data from two batches - Missing Mandatory Fields")
+    @Test(priority = 16, groups = "Cash Items", description = "3f")
     public void _3f() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -1144,7 +1144,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from two batches")
-    @Test(priority = 17, groups = "Cash Items", description = "Importing invalid data from two batches - Account Mapping Not Found")
+    @Test(priority = 17, groups = "Cash Items", description = "3g")
     public void _3g() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -1219,7 +1219,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from two batches")
-    @Test(priority = 18, groups = "Cash Items", description = "Importing invalid data from two batches - Failed In Transformations")
+    @Test(priority = 18, groups = "Cash Items", description = "3h")
     public void _3h() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -1295,7 +1295,7 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from two batches")
     @Description("Known issue: Clarity required regarding this case")
     @Issue("JIRA yet to be created")
-    @Test(priority = 19, groups = "Cash Items", description = "Importing invalid data from two batches - Duplicate Batch Identified")
+    @Test(priority = 19, groups = "Cash Items", description = "3i")
     public void _3i() throws Exception {
 
         boolean isBugStillPresent = true;
@@ -1375,7 +1375,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 20, groups = "Cash Items", description = "Calculations cases - Calculation on Description field & data with Validated status. Check whether calculation is applied properly and the status remains unchanged")
+    @Test(priority = 20, groups = "Cash Items", description = "4a")
     public void _4a() throws Exception {
 
         /*
@@ -1437,7 +1437,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 21, groups = "Cash Items", description = "Calculations cases - Calculation on DB/CR field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Opening/Closing balance inconsistent)")
+    @Test(priority = 21, groups = "Cash Items", description = "4b")
     public void _4b() throws Exception {
 
         /*
@@ -1499,7 +1499,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 22, groups = "Cash Items", description = "Calculations cases - Calculation on DB/CR field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Balance missing or Inconsistent)")
+    @Test(priority = 22, groups = "Cash Items", description = "4d")
     public void _4d() throws Exception {
 
         /*
@@ -1561,7 +1561,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 23, groups = "Cash Items", description = "Calculations cases - Calculation on Account/Sub Account field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Account Mapping not found)")
+    @Test(priority = 23, groups = "Cash Items", description = "4e")
     public void _4e() throws Exception {
 
         /*
@@ -1623,7 +1623,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 24, groups = "Cash Items", description = "Right click cases - Ignore Item")
+    @Test(priority = 24, groups = "Cash Items", description = "7a")
     public void _7a() throws Exception {
 
         /*
@@ -1695,7 +1695,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 25, groups = "Cash Items", description = "Right click cases - Ignore Batch")
+    @Test(priority = 25, groups = "Cash Items", description = "7b")
     public void _7b() throws Exception {
 
         /*
@@ -1767,7 +1767,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 26, groups = "Cash Items", description = "Right click cases - Ignore File")
+    @Test(priority = 26, groups = "Cash Items", description = "7c")
     public void _7c() throws Exception {
 
         /*
@@ -1840,7 +1840,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 27, groups = "Cash Items", description = "Right click cases - Add Item to Batch")
+    @Test(priority = 27, groups = "Cash Items", description = "7f")
     public void _7f() throws Exception {
         /*
           Assumptions:
@@ -1889,7 +1889,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 26, groups = "Cash Items", description = "Right click cases - Update Batch Balances")
+    @Test(priority = 26, groups = "Cash Items", description = "7g")
     public void _7g() throws Exception {
 
         /*
@@ -1963,7 +1963,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 27, groups = "Cash Items", description = "Right click cases - Add Batch")
+    @Test(priority = 27, groups = "Cash Items", description = "7h")
     public void _7h() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -2048,7 +2048,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 27, groups = "Cash Items", description = "Right click cases - Approve Duplicates")
+    @Test(priority = 27, groups = "Cash Items", description = "7i")
     public void _7i() throws Exception {
         /*
           Assumptions:
@@ -2110,7 +2110,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 28, groups = "Cash Items", description = "Right click cases with MC - Ignore Item")
+    @Test(priority = 28, groups = "Cash Items", description = "6a")
     public void _6a() throws Exception {
 
         /*
@@ -2216,7 +2216,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 29, groups = "Cash Items", description = "Right click cases with MC - Ignore Batch")
+    @Test(priority = 29, groups = "Cash Items", description = "6b")
     public void _6b() throws Exception {
 
         /*
@@ -2319,7 +2319,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 30, groups = "Cash Items", description = "Right click cases with MC - Ignore File")
+    @Test(priority = 30, groups = "Cash Items", description = "6c")
     public void _6c() throws Exception {
 
         /*
@@ -2425,7 +2425,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 31, groups = "Cash Items", description = "Right click cases - Add Item to Batch")
+    @Test(priority = 31, groups = "Cash Items", description = "6f")
     public void _6f() throws Exception {
         /*
           Assumptions:
@@ -2500,7 +2500,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 32, groups = "Cash Items", description = "Right click cases - Update Batch Balances")
+    @Test(priority = 32, groups = "Cash Items", description = "6g")
     public void _6g() throws Exception {
 
         /*
@@ -2605,7 +2605,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 33, groups = "Cash Items", description = "Right click cases - Add Batch")
+    @Test(priority = 33, groups = "Cash Items", description = "6h")
     public void _6h() throws Exception {
 
         // 0. Define the list of required columns required for validation
@@ -2727,7 +2727,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 34, groups = "Cash Items", description = "Right click cases - Approve Duplicates")
+    @Test(priority = 34, groups = "Cash Items", description = "6i")
     public void _6i() throws Exception {
         /*
           Assumptions:
@@ -2819,7 +2819,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 35, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    @Test(priority = 35, groups = "Cash Items", description = "8a")
     public void _8a() throws Exception {
 
 
@@ -2861,7 +2861,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 36, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    @Test(priority = 36, groups = "Cash Items", description = "8b")
     public void _8b() throws Exception {
 
 
@@ -2902,7 +2902,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 37, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    @Test(priority = 37, groups = "Cash Items", description = "8c")
     public void _8c() throws Exception {
 
 
@@ -2943,7 +2943,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 38, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    @Test(priority = 38, groups = "Cash Items", description = "8d")
     public void _8d() throws Exception {
 
 
@@ -2973,7 +2973,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data")
-    @Test(priority = 39, groups = "Cash Items", description = "Importing invalid data - Opening/Closing balance inconsistent")
+    @Test(priority = 39, groups = "Cash Items", description = "8e")
     public void _8e() throws Exception {
 
 
