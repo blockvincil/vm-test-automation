@@ -186,7 +186,7 @@ public class CashItemsPage {
     }
 
     public void addBatch() {
-        Allure.step("Add batch and reprocess");
+        Allure.step("Add batch");
         rightClick(firstFailedRecord);
         eleUtil.doClick(addBatchButton);
         eleUtil.doClick(submitButton, AppConstants.time5);
