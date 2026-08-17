@@ -7,6 +7,7 @@ import org.testng.SkipException;
 import utils.TestListener;
 import com.qa.blocrecon.pages.*;
 import com.qa.blocrecon.records.EventRuleHierarchiesPageDTO;
+import com.qa.blocrecon.queries.queries;
 import com.qa.blocrecon.utils.*;
 import io.qameta.allure.*;
 import org.testng.Assert;
@@ -2997,6 +2998,101 @@ public class CashReconTest extends BaseTest {
         String toastMessage = cashItemsPage.getToastMessage();
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
+    }
+    /********************************************** Production Issues *************************************************/
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Items")
+    @Story("Importing valid data")
+    @Test(priority = 40, groups = "Prod Issues", description = "PROD 1")
+    public void _PROD1() throws Exception {
+
+        /*
+          Assumptions:
+          1. Test data is properly imported to the source
+             (This test case does not perform source vs test data validation)
+        */
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
+                "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
+                "closingbalancedate", "status", "status_details", "fund", "fundgroup");
+
+        String changeCurrencyToAED = "update cr_accounts_map set currency='AED' where account='ACCSUB0884';";
+
+        queries dbQueries = new queries(dbUtil);
+        dbQueries.executeUpdate(changeCurrencyToAED);
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getProd1()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 3. Read the required columns from the excel file
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/prod1.xlsx");
+
+        List<Map<String, String>> excelData =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : excelData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData), "Data mismatch before reprocess");
+
+        String changeCurrencyToINR = "update cr_accounts_map set currency='INR' where account='ACCSUB0884';";
+        dbQueries.executeUpdate(changeCurrencyToINR);
+
+        cashItemsPage.waitFor(5);
+
+        cashItemsPage.reprocess();
+
+        InputStream is1 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/prod1_after.xlsx");
+
+        List<Map<String, String>> excelDataAfterReprocess =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is1, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
+
+//        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawDataAfterReprocess = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        softAssert.assertTrue(ListUtil.compare2DMaps(excelDataAfterReprocess, rawDataAfterReprocess), "Data mismatch after reprocess");
+        softAssert.assertAll();
     }
 
 }

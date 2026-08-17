@@ -81,6 +81,10 @@ public class CashItemsPage {
 
     }
 
+    public void waitFor(int seconds) {
+        waitUtil.waitFor(seconds);
+    }
+
     public List<String> getRightClickActionsList() {
         Allure.step("Get list of right click actions");
         return eleUtil.getTextAsList(rightClickActionsList);

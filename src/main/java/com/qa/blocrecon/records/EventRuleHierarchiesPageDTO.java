@@ -25,9 +25,14 @@ public class EventRuleHierarchiesPageDTO {
     private String case_7f;
     private String case_8d;
     private String case_8e;
+    private String prod1;
 
     public String getImportData() {
         return importData;
+    }
+
+    public String getProd1() {
+        return prod1;
     }
 
     public void setImportData(String importData) {
