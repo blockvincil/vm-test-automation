@@ -3095,4 +3095,65 @@ public class CashReconTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Cash Recon")
+    @Story("Prod issues")
+    @Test(priority = 41, groups = "Prod Issues", description = "PROD 2")
+    public void _PROD2() throws Exception {
+
+        List<String> requiredColumns = Arrays.asList("status", "status_details");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getLe_import()
+        );
+
+//         2. Backend verification (Event status validation)
+        try {
+            eventService.assertLatestEventFailedOrCompletedWithError(
+                    prop.getProperty("recon_id")
+            );
+        } catch (AssertionError e) {
+            softAssert.fail(e.getMessage());
+        }
+
+        // 3. Read the required columns from the excel file
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/le_51_records.xlsx");
+
+        List<Map<String, String>> excelData =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
+
+//      Debug print
+//        for (Map<String, String> excelDatum : excelData)
+//            System.out.println(excelDatum);
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        softAssert.assertEquals(excelData, rawData, "Status mismatch");
+
+        softAssert.assertAll();
+
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.qa.blocrecon.services;
 
+import com.qa.blocrecon.constants.AppConstants;
 import com.qa.blocrecon.db.EventLockRepository;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
@@ -32,6 +33,15 @@ public class EventService {
 
     public void assertLatestEventFailedOrCompletedWithError(String reconId) {
         assertLatestEventFailedOrCompletedWithError(reconId, DEFAULT_TIMEOUT_SEC);
+    }
+
+    /**
+     * Asserts that the latest event for the given reconciliation ID is not in running state.
+     * @param reconId The reconciliation ID to check.
+     */
+    public void assertEventNotRunning(String reconId) {
+        Allure.step("Check if the latest triggered event is not in running state");
+        assertEventNotRunning(reconId, AppConstants.time10);
     }
 
     /* ======================================================
@@ -78,9 +88,22 @@ public class EventService {
         }
 
         Assert.fail(
-                "Expected event to fail, but status was: " + finalStatus +
+                "Expected error in the event monitor, but status was: " + finalStatus +
                         " for reconId: " + reconId
         );
+    }
+
+    /**
+     * Asserts that the latest event for the given reconciliation ID is not in running state within the specified timeout.
+     * @param reconId The reconciliation ID to check.
+     * @param timeoutSeconds The maximum time to wait for the event to not be in running state.
+     */
+    private void assertEventNotRunning(String reconId, int timeoutSeconds) {
+        String finalStatus = waitForEventToFinish(reconId, timeoutSeconds);
+
+        if ("Running".equalsIgnoreCase(finalStatus)) {
+            Assert.fail("Event is still in running state after " + timeoutSeconds + " seconds for reconId: " + reconId);
+        }
     }
 
     /* ======================================================
@@ -113,7 +136,7 @@ public class EventService {
         return repository.getLatestEventStatus(reconId);
     }
 
-    private boolean isFinalStatus(String status) {
+    public boolean isFinalStatus(String status) {
         return "Completed".equalsIgnoreCase(status)
                 || "Failed".equalsIgnoreCase(status)
                 || "Error".equalsIgnoreCase(status)

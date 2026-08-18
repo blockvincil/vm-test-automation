@@ -96,4 +96,8 @@ public class EventRuleHierarchiesPage {
         waitUtil.waitFor(5);
     }
 
+    public void wait(int seconds) {
+        waitUtil.waitFor(seconds);
+    }
+
 }
