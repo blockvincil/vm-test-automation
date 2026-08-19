@@ -8,6 +8,21 @@ import org.testng.ITestResult;
 
 public class TestListener implements ITestListener {
 
+    // Attach Excel whenever the test starts
+    @Override
+    public void onTestStart(ITestResult result) {
+
+        System.out.println("TEST STARTED: " + result.getName());
+
+        try {
+            FileAttachmentUtil.attachExcel(
+                    "src/test/resources/testdata/CashItems.xlsx"
+            );
+        } catch (Exception e) {
+            System.out.println("Unable to attach Excel file: " + e.getMessage());
+        }
+    }
+
     private void capture(ITestResult result) {
 
         System.out.println("LISTENER TRIGGERED");
@@ -20,10 +35,13 @@ public class TestListener implements ITestListener {
             // Screenshot
             ScreenshotUtil.attachScreenshot(driver);
 
-            // Attach additional debug info
+            // Page URL
             Allure.addAttachment("Page URL", driver.getCurrentUrl());
+
+            // Test Name
             Allure.addAttachment("Test Name", result.getName());
 
+            // Exception
             if (result.getThrowable() != null) {
                 Allure.addAttachment(
                         "Exception",

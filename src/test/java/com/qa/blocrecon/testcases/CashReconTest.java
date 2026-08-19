@@ -4,6 +4,7 @@ import com.qa.blocrecon.base.BaseTest;
 import com.qa.blocrecon.factory.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.SkipException;
+import utils.FileAttachmentUtil;
 import utils.TestListener;
 import com.qa.blocrecon.pages.*;
 import com.qa.blocrecon.records.EventRuleHierarchiesPageDTO;
@@ -98,8 +99,10 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 1, groups = "Cash Items", description = "1a")
+    @Test(priority = 1, groups = "Cash Items", description = "1a - Check data in source")
     public void _1a() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
@@ -163,6 +166,8 @@ public class CashReconTest extends BaseTest {
           1. Test data is properly imported to the source
              (This test case does not perform source vs test data validation)
         */
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "db_cr", "openingbalance",
@@ -228,6 +233,8 @@ public class CashReconTest extends BaseTest {
                (This test case does not perform cash items vs enriched source data validation)
          */
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumnsFromCashItems = Arrays.asList("account", "fund", "subaccount", "currency", "closingbalance",
                 "closingbalance_dbcr", "batch_id", "source_batch_id");
@@ -285,6 +292,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data")
     @Test(priority = 4, groups = "Cash Items", description = "2a")
     public void _2a() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
@@ -351,6 +360,8 @@ public class CashReconTest extends BaseTest {
                (This test case does not perform cash items vs enriched source data validation)
          */
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumnsFromCashItems = Arrays.asList("account", "fund", "subaccount", "currency", "closingbalance",
                 "closingbalance_dbcr", "batch_id", "source_batch_id");
@@ -408,6 +419,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data")
     @Test(priority = 6, groups = "Cash Items", description = "2c")
     public void _2c() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -467,6 +480,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 7, groups = "Cash Items", description = "2d")
     public void _2d() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
@@ -524,6 +539,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data")
     @Test(priority = 8, groups = "Cash Items", description = "2e")
     public void _2e() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/missingMandatoryFieldsWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -583,6 +600,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 9, groups = "Cash Items", description = "2f")
     public void _2f() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/accountMappingNotFoundWithStatus.xlsx");
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
@@ -641,6 +660,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 10, groups = "Cash Items", description = "2g")
     public void _2g() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/failedInTransformationWithStatus.xlsx");
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
@@ -697,6 +718,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 11, groups = "Cash Items", description = "3a")
     public void _3a() throws Exception {
+
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
@@ -775,6 +798,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 12, groups = "Cash Items", description = "3b")
     public void _3b() throws Exception {
 
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
         /*  Assumptions:
             1. Test data is properly imported to the source
                (This test case does not perform source vs test data validation)
@@ -847,6 +872,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 13, groups = "Cash Items", description = "3c")
     public void _3c() throws Exception {
+
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -923,6 +950,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 14, groups = "Cash Items", description = "3d")
     public void _3d() throws Exception {
 
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
@@ -997,6 +1026,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 15, groups = "Cash Items", description = "3e")
     public void _3e() throws Exception {
+
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1073,6 +1104,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 16, groups = "Cash Items", description = "3f")
     public void _3f() throws Exception {
 
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
@@ -1147,6 +1180,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from two batches")
     @Test(priority = 17, groups = "Cash Items", description = "3g")
     public void _3g() throws Exception {
+
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1223,6 +1258,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 18, groups = "Cash Items", description = "3h")
     public void _3h() throws Exception {
 
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
@@ -1298,6 +1335,8 @@ public class CashReconTest extends BaseTest {
     @Issue("JIRA yet to be created")
     @Test(priority = 19, groups = "Cash Items", description = "3i")
     public void _3i() throws Exception {
+
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         boolean isBugStillPresent = true;
 
@@ -1379,6 +1418,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 20, groups = "Cash Items", description = "4a")
     public void _4a() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/4a_AfterCalculation.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -1440,6 +1481,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing valid data")
     @Test(priority = 21, groups = "Cash Items", description = "4b")
     public void _4b() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/4b_AfterCalculation.xlsx");
 
         /*
           Assumptions:
@@ -1503,6 +1546,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 22, groups = "Cash Items", description = "4d")
     public void _4d() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/4d_AfterCalculation.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -1565,6 +1610,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 23, groups = "Cash Items", description = "4e")
     public void _4e() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/4e_AfterCalculation.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -1626,6 +1673,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing valid data")
     @Test(priority = 24, groups = "Cash Items", description = "7a")
     public void _7a() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
 
         /*
           Assumptions:
@@ -1699,6 +1748,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 25, groups = "Cash Items", description = "7b")
     public void _7b() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -1770,6 +1821,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing valid data")
     @Test(priority = 26, groups = "Cash Items", description = "7c")
     public void _7c() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
 
         /*
           Assumptions:
@@ -1843,6 +1896,10 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 27, groups = "Cash Items", description = "7f")
     public void _7f() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case7/7f_file1.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case7/7f_file2.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -1892,6 +1949,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing valid data")
     @Test(priority = 26, groups = "Cash Items", description = "7g")
     public void _7g() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
 
         /*
           Assumptions:
@@ -1966,6 +2025,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 27, groups = "Cash Items", description = "7h")
     public void _7h() throws Exception {
+
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -2051,6 +2112,9 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 27, groups = "Cash Items", description = "7i")
     public void _7i() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -2113,6 +2177,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing valid data")
     @Test(priority = 28, groups = "Cash Items", description = "6a")
     public void _6a() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
 
         /*
           Assumptions:
@@ -2220,6 +2286,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 29, groups = "Cash Items", description = "6b")
     public void _6b() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -2322,6 +2390,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing valid data")
     @Test(priority = 30, groups = "Cash Items", description = "6c")
     public void _6c() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
 
         /*
           Assumptions:
@@ -2428,6 +2498,10 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 31, groups = "Cash Items", description = "6f")
     public void _6f() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case7/7f_file1.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case7/7f_file2.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -2503,6 +2577,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing valid data")
     @Test(priority = 32, groups = "Cash Items", description = "6g")
     public void _6g() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
 
         /*
           Assumptions:
@@ -2608,6 +2684,8 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 33, groups = "Cash Items", description = "6h")
     public void _6h() throws Exception {
+
+//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -2730,6 +2808,9 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data from 2 batches")
     @Test(priority = 34, groups = "Cash Items", description = "6i")
     public void _6i() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
         /*
           Assumptions:
           1. Test data is properly imported to the source
@@ -2823,6 +2904,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 35, groups = "Cash Items", description = "8a")
     public void _8a() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -2865,6 +2947,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 36, groups = "Cash Items", description = "8b")
     public void _8b() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
@@ -2906,6 +2989,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 37, groups = "Cash Items", description = "8c")
     public void _8c() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
 
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
@@ -2947,6 +3031,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 38, groups = "Cash Items", description = "8d")
     public void _8d() throws Exception {
 
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles//dataFiles/8d.xlsx");
 
         String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
 
@@ -2984,6 +3069,9 @@ public class CashReconTest extends BaseTest {
     @Story("Importing invalid data")
     @Test(priority = 39, groups = "Cash Items", description = "8e")
     public void _8e() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles//dataFiles/8e_1.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles//dataFiles/8e_2.xlsx");
 
         String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
 
@@ -3023,6 +3111,9 @@ public class CashReconTest extends BaseTest {
     @Story("Importing valid data")
     @Test(priority = 40, groups = "Prod Issues", description = "PROD 1")
     public void _PROD1() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod1.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod1_after.xlsx");
 
         /*
           Assumptions:
@@ -3117,6 +3208,8 @@ public class CashReconTest extends BaseTest {
     @Story("Prod issues")
     @Test(priority = 41, groups = "Prod Issues", description = "PROD 2")
     public void _PROD2() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/le_51_records.xlsx");
 
         List<String> requiredColumns = Arrays.asList("status", "status_details");
 
