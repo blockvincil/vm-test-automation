@@ -232,6 +232,7 @@ public class CashItemsPage {
         rightClick(firstFailedRecord);
         waitUtil.waitFor(2);
         eleUtil.doClick(addItemToBatchButton);
+        waitUtil.waitFor(2);
         eleUtil.doClick(submitButton, AppConstants.time5);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
