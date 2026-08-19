@@ -3066,7 +3066,7 @@ public class CashReconTest extends BaseTest {
         cashItemsPage.addItemToBatchWithoutWaits();
         String toastMessage = cashItemsPage.getToastMessage();
 
-        String setFundValue = "update cr_accounts set fund='FG4' where account='AUTO4';";
+        String setFundValue = "update cr_accounts set fund='F4' where account='AUTO4';";
         dbQueries.executeUpdate(setFundValue);
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
@@ -3107,7 +3107,7 @@ public class CashReconTest extends BaseTest {
         String toastMessage = cashItemsPage.getToastMessage();
         System.out.println(toastMessage);
 
-        String setFundValue = "update cr_accounts set fund='FG4' where account='AUTO4';";
+        String setFundValue = "update cr_accounts set fund='F4' where account='AUTO4';";
         dbQueries.executeUpdate(setFundValue);
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
