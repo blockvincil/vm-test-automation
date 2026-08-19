@@ -183,9 +183,9 @@ public class CashItemsPage {
         rightClick(firstFailedRecord);
         waitUtil.waitFor(2);
         eleUtil.doClick(ignoreFileButton);
-        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
-        eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
-        waitUtil.waitFor(1);
+//        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+//        eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
+        waitUtil.waitFor(5);
     }
 
     public void addBatchAndReprocess() {
