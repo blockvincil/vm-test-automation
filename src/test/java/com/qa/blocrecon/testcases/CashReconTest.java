@@ -2969,7 +2969,7 @@ public class CashReconTest extends BaseTest {
         cashItemsPage = homePage.goToCashItems();
         cashItemsPage.selectRecon(prop.getProperty("recon_name"));
 
-        cashItemsPage.addItemToBatch();
+        cashItemsPage.addItemToBatchWithoutWaits();
         String toastMessage = cashItemsPage.getToastMessage();
 
         String setFundValue = "update cr_accounts set fund='FG4' where account='AUTO4';";

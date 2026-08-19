@@ -226,11 +226,23 @@ public class CashItemsPage {
 
     public void addItemToBatch() {
         Allure.step("Add item to batch");
+        waitUtil.waitFor(2);
         rightClick(firstFailedRecord);
+        waitUtil.waitFor(2);
         eleUtil.doClick(addItemToBatchButton);
         eleUtil.doClick(submitButton, AppConstants.time5);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
+        waitUtil.waitFor(1);
+    }
+
+    public void addItemToBatchWithoutWaits() {
+        Allure.step("Add item to batch");
+        waitUtil.waitFor(2);
+        rightClick(firstFailedRecord);
+        waitUtil.waitFor(2);
+        eleUtil.doClick(addItemToBatchButton);
+        eleUtil.doClick(submitButton, AppConstants.time5);
         waitUtil.waitFor(1);
     }
 
