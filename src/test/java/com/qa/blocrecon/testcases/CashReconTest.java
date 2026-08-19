@@ -2948,6 +2948,11 @@ public class CashReconTest extends BaseTest {
     public void _8d() throws Exception {
 
 
+        String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
+
+        queries dbQueries = new queries(dbUtil);
+        dbQueries.executeUpdate(setFundToNull);
+
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
         eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
@@ -2966,6 +2971,9 @@ public class CashReconTest extends BaseTest {
 
         cashItemsPage.addItemToBatch();
         String toastMessage = cashItemsPage.getToastMessage();
+
+        String setFundValue = "update cr_accounts set fund='FG4' where account='AUTO4';";
+        dbQueries.executeUpdate(setFundValue);
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
     }
