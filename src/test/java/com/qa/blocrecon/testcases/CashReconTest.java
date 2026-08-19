@@ -1425,7 +1425,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 20, groups = "Cash Items", description = "4a")
     public void _4a() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case4/4a_AfterCalculation.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case4/4a_AfterCalculation.xlsx");
 
         /*
           Assumptions:
@@ -1489,7 +1489,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 21, groups = "Cash Items", description = "4b")
     public void _4b() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case4/4b_AfterCalculation.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case4/4b_AfterCalculation.xlsx");
 
         /*
           Assumptions:
@@ -1553,7 +1553,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 22, groups = "Cash Items", description = "4d")
     public void _4d() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case4/4d_AfterCalculation.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case4/4d_AfterCalculation.xlsx");
 
         /*
           Assumptions:
@@ -1617,7 +1617,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 23, groups = "Cash Items", description = "4e")
     public void _4e() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case4/4e_AfterCalculation.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case4/4e_AfterCalculation.xlsx");
 
         /*
           Assumptions:
@@ -1904,8 +1904,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 27, groups = "Cash Items", description = "7f")
     public void _7f() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case7/7f_file1.xlsx");
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case7/7f_file2.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case7/7f_file1.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case7/7f_file2.xlsx");
 
         /*
           Assumptions:
