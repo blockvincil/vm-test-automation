@@ -32,6 +32,7 @@ public class EventService {
     }
 
     public void assertLatestEventFailedOrCompletedWithError(String reconId) {
+        Allure.step("Check if the latest triggered event is Failed or Completed with Error using DB query");
         assertLatestEventFailedOrCompletedWithError(reconId, DEFAULT_TIMEOUT_SEC);
     }
 

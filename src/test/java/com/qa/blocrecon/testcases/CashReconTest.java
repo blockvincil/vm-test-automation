@@ -719,8 +719,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 11, groups = "Cash Items", description = "3a")
     public void _3a() throws Exception {
 
-        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingClosingInconsistentWithStatus1.xlsx");
-        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingClosingInconsistentWithStatus2.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
@@ -799,7 +799,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 12, groups = "Cash Items", description = "3b")
     public void _3b() throws Exception {
 
-        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+//        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/correctAutomationWithStatus.xlsx");
 
         /*  Assumptions:
             1. Test data is properly imported to the source
@@ -2033,8 +2033,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 27, groups = "Cash Items", description = "7h")
     public void _7h() throws Exception {
 
-        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingInconsistentWithLastClosingWithStatus1.csv");
-        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingInconsistentWithLastClosingWithStatus2.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -2693,8 +2693,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 33, groups = "Cash Items", description = "6h")
     public void _6h() throws Exception {
 
-        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingInconsistentWithLastClosingWithStatus1.csv");
-        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingInconsistentWithLastClosingWithStatus2.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus2.csv");
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
