@@ -254,6 +254,7 @@ public class CashItemsPage {
         rightClick(firstFailedRecord);
         waitUtil.waitFor(2);
         eleUtil.doClick(updateBatchBalancesButton);
+        waitUtil.waitFor(2);
         eleUtil.doSendKeys(updateBatchBalancesDialogBox_clisingBalanceTextBox, String.valueOf(amount), AppConstants.time3);
         eleUtil.doClick(submitButton);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
