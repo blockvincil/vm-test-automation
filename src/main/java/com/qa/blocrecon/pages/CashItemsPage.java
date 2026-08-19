@@ -179,7 +179,9 @@ public class CashItemsPage {
 
     public void ignoreFile() {
         Allure.step("Ignore file");
+        waitUtil.waitFor(2);
         rightClick(firstFailedRecord);
+        waitUtil.waitFor(2);
         eleUtil.doClick(ignoreFileButton);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
