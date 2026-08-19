@@ -2977,6 +2977,10 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 39, groups = "Cash Items", description = "8e")
     public void _8e() throws Exception {
 
+        String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
+
+        queries dbQueries = new queries(dbUtil);
+        dbQueries.executeUpdate(setFundToNull);
 
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
@@ -2994,8 +2998,12 @@ public class CashReconTest extends BaseTest {
         cashItemsPage = homePage.goToCashItems();
         cashItemsPage.selectRecon(prop.getProperty("recon_name"));
 
-        cashItemsPage.addBatch();
+        cashItemsPage.addBatchWithoutWaits();
         String toastMessage = cashItemsPage.getToastMessage();
+        System.out.println(toastMessage);
+
+        String setFundValue = "update cr_accounts set fund='FG4' where account='AUTO4';";
+        dbQueries.executeUpdate(setFundValue);
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
     }

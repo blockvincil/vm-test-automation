@@ -204,13 +204,24 @@ public class CashItemsPage {
         eleUtil.doClick(addBatchButton);
         eleUtil.doClick(submitButton, AppConstants.time5);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+        System.out.println("Page loader disappeared");
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
-        waitUtil.waitFor(3);
+        System.out.println("Cash items data loader disappeared");
+        waitUtil.waitFor(1);
+    }
+
+    public void addBatchWithoutWaits() {
+        Allure.step("Add batch");
+        rightClick(firstFailedRecord);
+        eleUtil.doClick(addBatchButton);
+        eleUtil.doClick(submitButton, AppConstants.time5);
+        waitUtil.waitFor(1);
     }
 
     public String getToastMessage() {
         Allure.step("Capture toast message");
-        return eleUtil.doGetText(toastMessage, AppConstants.time3);
+        System.out.println("Searching for toast message");
+        return eleUtil.doGetText(toastMessage, AppConstants.time10);
     }
 
     public void addItemToBatch() {
@@ -225,7 +236,9 @@ public class CashItemsPage {
 
     public void updateBatchBalances(int amount) {
         Allure.step("Update batch balances");
+        waitUtil.waitFor(2);
         rightClick(firstFailedRecord);
+        waitUtil.waitFor(2);
         eleUtil.doClick(updateBatchBalancesButton);
         eleUtil.doSendKeys(updateBatchBalancesDialogBox_clisingBalanceTextBox, String.valueOf(amount), AppConstants.time3);
         eleUtil.doClick(submitButton);
