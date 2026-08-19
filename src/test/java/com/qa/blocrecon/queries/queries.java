@@ -1,6 +1,7 @@
 package com.qa.blocrecon.queries;
 
 import com.qa.blocrecon.utils.DatabaseUtil;
+import io.qameta.allure.Allure;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,10 +16,12 @@ public class queries {
     }
 
     public void executeUpdate(String query) {
-        try (PreparedStatement ps = dbUtil.conn.prepareStatement(query)) {
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException("Failed to execute query: " + query, e);
-        }
+        Allure.step("Executing SQL update: " + query, () -> {
+            try (PreparedStatement ps = dbUtil.conn.prepareStatement(query)) {
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException("Failed to execute query: " + query, e);
+            }
+        });
     }
 }

@@ -1425,7 +1425,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 20, groups = "Cash Items", description = "4a")
     public void _4a() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/4a_AfterCalculation.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case4/4a_AfterCalculation.xlsx");
 
         /*
           Assumptions:
@@ -1489,7 +1489,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 21, groups = "Cash Items", description = "4b")
     public void _4b() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/4b_AfterCalculation.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case4/4b_AfterCalculation.xlsx");
 
         /*
           Assumptions:
@@ -1553,7 +1553,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 22, groups = "Cash Items", description = "4d")
     public void _4d() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/4d_AfterCalculation.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case4/4d_AfterCalculation.xlsx");
 
         /*
           Assumptions:
@@ -1617,7 +1617,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 23, groups = "Cash Items", description = "4e")
     public void _4e() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/4e_AfterCalculation.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case4/4e_AfterCalculation.xlsx");
 
         /*
           Assumptions:
