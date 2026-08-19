@@ -99,7 +99,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 1, groups = "Cash Items", description = "1a - Check data in source")
+    @Test(priority = 1, groups = "Cash Items", description = "1a")
     public void _1a() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
@@ -289,7 +289,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from single batch")
     @Test(priority = 4, groups = "Cash Items", description = "2a")
     public void _2a() throws Exception {
 
@@ -348,7 +348,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from single batch")
     @Test(priority = 5, groups = "Cash Items", description = "2b")
     public void _2b() throws Exception {
 
@@ -416,7 +416,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from single batch")
     @Test(priority = 6, groups = "Cash Items", description = "2c")
     public void _2c() throws Exception {
 
@@ -476,7 +476,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from single batch")
     @Test(priority = 7, groups = "Cash Items", description = "2d")
     public void _2d() throws Exception {
 
@@ -536,7 +536,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from single batch")
     @Test(priority = 8, groups = "Cash Items", description = "2e")
     public void _2e() throws Exception {
 
@@ -596,7 +596,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from single batch")
     @Test(priority = 9, groups = "Cash Items", description = "2f")
     public void _2f() throws Exception {
 
@@ -656,7 +656,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Importing invalid data from single batch")
     @Test(priority = 10, groups = "Cash Items", description = "2g")
     public void _2g() throws Exception {
 
@@ -719,7 +719,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 11, groups = "Cash Items", description = "3a")
     public void _3a() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingClosingInconsistentWithStatus1.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingClosingInconsistentWithStatus2.xlsx");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "amount", "dbcr_4", "openingbalance",
@@ -798,7 +799,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 12, groups = "Cash Items", description = "3b")
     public void _3b() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
 
         /*  Assumptions:
             1. Test data is properly imported to the source
@@ -873,7 +874,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 13, groups = "Cash Items", description = "3c")
     public void _3c() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -950,7 +952,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 14, groups = "Cash Items", description = "3d")
     public void _3d() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1027,7 +1030,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 15, groups = "Cash Items", description = "3e")
     public void _3e() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/balanceMissingOrInconsistentWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/balanceMissingOrInconsistentWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1104,8 +1108,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 16, groups = "Cash Items", description = "3f")
     public void _3f() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
-
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/missingMandatoryFieldsWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/missingMandatoryFieldsWithStatus2.csv");
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
@@ -1181,7 +1185,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 17, groups = "Cash Items", description = "3g")
     public void _3g() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/accountMappingNotFoundWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/accountMappingNotFoundWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1258,7 +1263,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 18, groups = "Cash Items", description = "3h")
     public void _3h() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/failedInTransformationWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/failedInTransformationWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1336,7 +1342,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 19, groups = "Cash Items", description = "3i")
     public void _3i() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/duplicateBatchIdentifiedWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/duplicateBatchIdentifiedWithStatus2.csv");
 
         boolean isBugStillPresent = true;
 
@@ -1414,7 +1421,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Have calculations and check citems dashboard")
     @Test(priority = 20, groups = "Cash Items", description = "4a")
     public void _4a() throws Exception {
 
@@ -1478,7 +1485,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Have calculations and check citems dashboard")
     @Test(priority = 21, groups = "Cash Items", description = "4b")
     public void _4b() throws Exception {
 
@@ -1542,7 +1549,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Have calculations and check citems dashboard")
     @Test(priority = 22, groups = "Cash Items", description = "4d")
     public void _4d() throws Exception {
 
@@ -1606,7 +1613,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Have calculations and check citems dashboard")
     @Test(priority = 23, groups = "Cash Items", description = "4e")
     public void _4e() throws Exception {
 
@@ -1670,7 +1677,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Right click actions on cash items dashboard without maker checker")
     @Test(priority = 24, groups = "Cash Items", description = "7a")
     public void _7a() throws Exception {
 
@@ -1744,7 +1751,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Right click actions on cash items dashboard without maker checker")
     @Test(priority = 25, groups = "Cash Items", description = "7b")
     public void _7b() throws Exception {
 
@@ -1818,7 +1825,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Right click actions on cash items dashboard without maker checker")
     @Test(priority = 26, groups = "Cash Items", description = "7c")
     public void _7c() throws Exception {
 
@@ -1893,7 +1900,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data from 2 batches")
+    @Story("Right click actions on cash items dashboard without maker checker")
     @Test(priority = 27, groups = "Cash Items", description = "7f")
     public void _7f() throws Exception {
 
@@ -1946,7 +1953,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Right click actions on cash items dashboard without maker checker")
     @Test(priority = 26, groups = "Cash Items", description = "7g")
     public void _7g() throws Exception {
 
@@ -2022,11 +2029,12 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data from 2 batches")
+    @Story("Right click actions on cash items dashboard without maker checker")
     @Test(priority = 27, groups = "Cash Items", description = "7h")
     public void _7h() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingInconsistentWithLastClosingWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingInconsistentWithLastClosingWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -2109,7 +2117,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data from 2 batches")
+    @Story("Right click actions on cash items dashboard without maker checker")
     @Test(priority = 27, groups = "Cash Items", description = "7i")
     public void _7i() throws Exception {
 
@@ -2174,7 +2182,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Right click actions with maker checker enabled")
     @Test(priority = 28, groups = "Cash Items", description = "6a")
     public void _6a() throws Exception {
 
@@ -2282,7 +2290,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Right click actions with maker checker enabled")
     @Test(priority = 29, groups = "Cash Items", description = "6b")
     public void _6b() throws Exception {
 
@@ -2387,7 +2395,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Right click actions with maker checker enabled")
     @Test(priority = 30, groups = "Cash Items", description = "6c")
     public void _6c() throws Exception {
 
@@ -2495,7 +2503,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data from 2 batches")
+    @Story("Right click actions with maker checker enabled")
     @Test(priority = 31, groups = "Cash Items", description = "6f")
     public void _6f() throws Exception {
 
@@ -2574,7 +2582,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
+    @Story("Right click actions with maker checker enabled")
     @Test(priority = 32, groups = "Cash Items", description = "6g")
     public void _6g() throws Exception {
 
@@ -2681,12 +2689,12 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data from 2 batches")
+    @Story("Right click actions with maker checker enabled")
     @Test(priority = 33, groups = "Cash Items", description = "6h")
     public void _6h() throws Exception {
 
-//        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
-
+        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingInconsistentWithLastClosingWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/excelFiles/openingInconsistentWithLastClosingWithStatus2.csv");
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
@@ -2805,7 +2813,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data from 2 batches")
+    @Story("Right click actions with maker checker enabled")
     @Test(priority = 34, groups = "Cash Items", description = "6i")
     public void _6i() throws Exception {
 
@@ -2900,11 +2908,11 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Check right click actions for certain failure messages")
     @Test(priority = 35, groups = "Cash Items", description = "8a")
     public void _8a() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -2943,11 +2951,12 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Check right click actions for certain failure messages")
     @Test(priority = 36, groups = "Cash Items", description = "8b")
     public void _8b() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus2.csv");
 
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
@@ -2985,7 +2994,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Check right click actions for certain failure messages")
     @Test(priority = 37, groups = "Cash Items", description = "8c")
     public void _8c() throws Exception {
 
@@ -3027,7 +3036,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Check right click actions for certain failure messages")
     @Test(priority = 38, groups = "Cash Items", description = "8d")
     public void _8d() throws Exception {
 
@@ -3066,7 +3075,7 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing invalid data")
+    @Story("Check right click actions for certain failure messages")
     @Test(priority = 39, groups = "Cash Items", description = "8e")
     public void _8e() throws Exception {
 
@@ -3108,8 +3117,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
-    @Story("Importing valid data")
-    @Test(priority = 40, groups = "Prod Issues", description = "PROD 1")
+    @Story("Fund and fund group lookup after reprocess")
+    @Test(priority = 40, groups = "Prod Issues", description = "PROD - Fund and fund group lookup after reprocess")
     public void _PROD1() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod1.xlsx");
@@ -3205,8 +3214,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Recon")
-    @Story("Prod issues")
-    @Test(priority = 41, groups = "Prod Issues", description = "PROD 2")
+    @Story("Transformation errors in API Import - Event & Citems statuses")
+    @Test(priority = 41, groups = "Prod Issues", description = "PROD - Transformation errors in API Import - Event & citems statuses")
     public void _PROD2() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/le_51_records.xlsx");

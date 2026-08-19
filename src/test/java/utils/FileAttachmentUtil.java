@@ -31,4 +31,29 @@ public class FileAttachmentUtil {
             );
         }
     }
+
+    public static void attachCsv(String resourcePath) {
+
+        try (InputStream inputStream = FileAttachmentUtil.class
+                .getClassLoader()
+                .getResourceAsStream(resourcePath)) {
+
+            if (inputStream == null) {
+                System.out.println("Failed to attach CSV: File not found in classpath: " + resourcePath);
+                return;
+            }
+
+            Allure.addAttachment(
+                    "Test Data - CSV",
+                    "text/csv",
+                    inputStream,
+                    ".csv"
+            );
+
+        } catch (IOException e) {
+            System.out.println(
+                    "Failed to attach CSV: " + e.getMessage()
+            );
+        }
+    }
 }
