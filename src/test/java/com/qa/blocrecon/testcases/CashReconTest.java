@@ -3031,7 +3031,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 38, groups = "Cash Items", description = "8d")
     public void _8d() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles//dataFiles/8d.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case8/8d.xlsx");
 
         String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
 
@@ -3070,8 +3070,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 39, groups = "Cash Items", description = "8e")
     public void _8e() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles//dataFiles/8e_1.xlsx");
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles//dataFiles/8e_2.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case8/8e_1.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/case8/8e_2.xlsx");
 
         String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
 
