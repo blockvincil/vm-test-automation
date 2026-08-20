@@ -3116,8 +3116,8 @@ public class CashReconTest extends BaseTest {
 
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
-    @Feature("Cash Items")
-    @Story("Fund and fund group lookup after reprocess")
+    @Feature("PROD ISSUES")
+    @Story("PROD - Fund and fund group lookup after reprocess")
     @Test(priority = 40, groups = "Prod Issues", description = "PROD - Fund and fund group lookup after reprocess")
     public void _PROD1() throws Exception {
 
@@ -3213,8 +3213,8 @@ public class CashReconTest extends BaseTest {
 
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
-    @Feature("Cash Recon")
-    @Story("Transformation errors in API Import - Event & Citems statuses")
+    @Feature("PROD ISSUES")
+    @Story("PROD - Transformation errors in API Import - Event & Citems statuses")
     @Test(priority = 41, groups = "Prod Issues", description = "PROD - Transformation errors in API Import - Event & citems statuses")
     public void _PROD2() throws Exception {
 
