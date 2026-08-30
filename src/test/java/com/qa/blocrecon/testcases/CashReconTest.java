@@ -30,6 +30,7 @@ public class CashReconTest extends BaseTest {
     private EventRuleHierarchiesPage eventRuleHierarchiesPage;
     private SourceExplorerPage sourceExplorerPage;
     private CashItemsPage cashItemsPage;
+    private CashReconPage cashReconPage;
     private CashBalancesPage cashBalancesPage;
     private EventRuleHierarchiesPageDTO eventRuleHierarchiesPageDTO;
 
@@ -794,12 +795,11 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Description("Known issue: Incorrect entries in cash balances")
-    @Issue("JIRA yet to be created")
     @Test(priority = 12, groups = "Cash Items", description = "3b")
     public void _3b() throws Exception {
 
-//        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus2.csv");
 
         /*  Assumptions:
             1. Test data is properly imported to the source
@@ -809,7 +809,7 @@ public class CashReconTest extends BaseTest {
                (This test case does not perform cash items vs enriched source data validation)
          */
 
-        boolean isBugStillPresent = true;
+        boolean isBugStillPresent = false;
 
         if (isBugStillPresent) {
             throw new SkipException("Skipping due to known bug");
@@ -847,8 +847,8 @@ public class CashReconTest extends BaseTest {
         List<Map<String, String>> cashItemsGridData = gridPage.getGridRawData(requiredColumnsFromCashItems, "cashItems_balancesValidation");
 
 //      Debug print
-//        for (Map<String, String> row : cashItemsGridData)
-//            System.out.println(row);
+        for (Map<String, String> row : cashItemsGridData)
+            System.out.println(row);
 
         // 6. Navigate to cash balances and select recon
         cashBalancesPage = homePage.goToCashBalances();
@@ -859,9 +859,9 @@ public class CashReconTest extends BaseTest {
         // 7. Fetch required data from Cash Balances through UI
         List<Map<String, String>> cashBalancesData = gridPage.getGridRawData(requiredColumnsFromCashBalances, "cashBalances");
 //      Debug print
-//        System.out.println("\n");
-//        for (Map<String, String> row : cashBalancesData)
-//            System.out.println(row);
+        System.out.println("\n");
+        for (Map<String, String> row : cashBalancesData)
+            System.out.println(row);
 
         // 8. Compare Cash Items data with Cash Balances data
         Assert.assertTrue(ListUtil.compare2DMaps(cashItemsGridData, cashBalancesData));
@@ -1337,15 +1337,13 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from two batches")
-    @Description("Known issue: Clarity required regarding this case")
-    @Issue("JIRA yet to be created")
-    @Test(priority = 19, groups = "Cash Items", description = "3i")
+    @Test(priority = 19, groups = "Cash Items", description = "3i (Expected failure)")
     public void _3i() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/duplicateBatchIdentifiedWithStatus1.csv");
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/duplicateBatchIdentifiedWithStatus2.csv");
 
-        boolean isBugStillPresent = true;
+        boolean isBugStillPresent = false;
 
         if (isBugStillPresent) {
             throw new SkipException("Skipping due to known bug");
@@ -3268,10 +3266,53 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertEquals(excelData, rawData, "Status mismatch");
+        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData), "Status mismatch");
 
         softAssert.assertAll();
 
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("PROD ISSUES")
+    @Story("PROD - Group exists after grouped items removed")
+    @Test(priority = 42, groups = "Prod Issues", description = "PROD - Group exists after grouped items removed")
+    public void _PROD3() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getprod_group_issue()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 4. Navigate to cash items and select recon & view
+        cashReconPage = homePage.goToCashRecon();
+        cashReconPage.selectRecon(prop.getProperty("recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashReconPage.isCashReconDataPresent(), "Cash Items table is empty but event is completed");
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        gridPage.adjustZoom(15);
+
+        Assert.assertTrue(cashReconPage.groupItems().contains("Items Grouped Successfully"), "Grouping failed");
+        String viewOrRemoveGroupToastMessage = cashReconPage.viewOrRemoveGroup();
+        if (viewOrRemoveGroupToastMessage.equals("Application Crash Detected!")) {
+            Assert.fail(viewOrRemoveGroupToastMessage);
+        }
+        Assert.assertTrue(viewOrRemoveGroupToastMessage.contains("Items Removed Successfully"), "View/Remove Group failed");
+        cashReconPage.refresh();
+        Assert.assertEquals(cashReconPage.filterByAssetId("|group"), 1, "Group not removed");
     }
 
 }

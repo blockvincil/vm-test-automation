@@ -15,7 +15,7 @@ public class ListUtil {
             List<Map<String, String>> list1,
             List<Map<String, String>> list2) {
 
-        Allure.step("Compare data");
+        Allure.step("Compare test data with actual data");
 
         if (list1.size() != list2.size()) {
             return false;

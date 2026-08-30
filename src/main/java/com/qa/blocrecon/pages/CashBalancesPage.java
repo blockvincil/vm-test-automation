@@ -42,6 +42,7 @@ public class CashBalancesPage {
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashBalancesDataLoader, AppConstants.time3, AppConstants.time10);
         waitUtil.waitForElementVisible(cashBalancesDataList, AppConstants.time10);
+        waitUtil.waitFor(3);
     }
 
     public boolean isCashBalancesDataPresent() {

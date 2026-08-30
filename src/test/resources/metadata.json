@@ -25,6 +25,7 @@
     "case_8d": "case_8d",
     "case_8e": "case_8e",
     "prod1": "prod1",
-    "le_import": "LE_WF_IMPORT"
+    "le_import": "LE_WF_IMPORT",
+    "prod_group_issue": "prod_group_issue"
   }
 }

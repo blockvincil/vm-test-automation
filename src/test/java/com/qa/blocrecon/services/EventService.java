@@ -32,7 +32,7 @@ public class EventService {
     }
 
     public void assertLatestEventFailedOrCompletedWithError(String reconId) {
-        Allure.step("Check if the latest triggered event is Failed or Completed with Error using DB query");
+        Allure.step("Check if the latest triggered event has status as Error or Completed with Error using DB query");
         assertLatestEventFailedOrCompletedWithError(reconId, DEFAULT_TIMEOUT_SEC);
     }
 
@@ -80,7 +80,7 @@ public class EventService {
 
         String finalStatus = waitForEventToFinish(reconId, timeoutSeconds);
 
-        if ("Failed".equalsIgnoreCase(finalStatus) || "Completed With Error".equalsIgnoreCase(finalStatus)) {
+        if ("Error".equalsIgnoreCase(finalStatus) || "Completed With Error".equalsIgnoreCase(finalStatus)) {
             return;
         }
 

@@ -27,6 +27,7 @@ public class EventRuleHierarchiesPageDTO {
     private String case_8e;
     private String prod1;
     private String le_import;
+    private String prod_group_issue;
 
     public String getImportData() {
         return importData;
@@ -38,6 +39,10 @@ public class EventRuleHierarchiesPageDTO {
 
     public String getLe_import() {
         return le_import;
+    }
+
+    public String getprod_group_issue() {
+        return prod_group_issue;
     }
 
     public void setImportData(String importData) {

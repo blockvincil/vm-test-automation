@@ -25,7 +25,7 @@ public class CashItemsPage {
         this.waitUtil = new WaitUtil(driver);
     }
 
-    /**************************************************** Static Locators *************************************************/
+    /************************************************ Static Locators *************************************************/
 
     private final By pageLoader = By.xpath("//div[contains(@class, 'spinner')]");
     private final By toastMessage = By.xpath("//div[@class='notification-message']");
@@ -51,7 +51,7 @@ public class CashItemsPage {
     private final By reprocessButton = By.xpath("//button[@title='reprocess']");
     private final By refreshButton = By.xpath("//button[@title='refresh']");
 
-    /*****************************************************Dynamic Locators*************************************************/
+    /************************************************** Dynamic Locators **********************************************/
 
     private By returnStatusBasedOnAssetId(String assetId) {
         return By.xpath("//*[text()='" + assetId + "']/../div[@col-id='status']");
@@ -69,7 +69,7 @@ public class CashItemsPage {
         return By.xpath("//*[text()='" + fileName + "']/../div[@col-id='status']");
     }
 
-    /******************************************************** Methods *****************************************************/
+    /******************************************************** Methods ***************************************************/
 
 
     public void reprocess() {
@@ -109,7 +109,7 @@ public class CashItemsPage {
         eleUtil.doSelectByVisibleText(cashItemsDropdown, reconName);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
-        waitUtil.waitFor(1);
+        waitUtil.waitFor(3);
     }
 
     /**

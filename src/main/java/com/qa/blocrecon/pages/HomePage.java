@@ -27,10 +27,11 @@ public class HomePage {
     private final By responsiveSidebarSlider = By.xpath("//div[text()='Responsive Sidebar']/..//span");
     private final By processSetup = By.xpath("//span[text()='Process Setup']/..");
     private final By explorers = By.xpath("//span[text()='Explorers']/..");
-    private final By cashRecon = By.xpath("(//span[text()='Cash Recon']/..)[1]");
+    private final By cashReconMainDropdown = By.xpath("(//span[text()='Cash Recon']/..)[1]");
     private final By eventRuleHierarchies = By.xpath("//span[text()='Event Rule Hierarchies']/..");
     private final By sourceExplorer = By.xpath("//span[text()='Source Explorer']/..");
     private final By cashItems = By.xpath("//span[text()='Cash Items']/..");
+    private final By cashReconDashboard = By.xpath("(//span[text()='Cash Recon']/..)[last()]");
     private final By cashBalances = By.xpath("//span[text()='Cash Balances']/..");
     private final By eventRuleHierarchiesList = By.xpath("//ul[@class='flex-nowrap px-0 nav flex-column nav-tabs']");
     private final By cashItemsDropdown = By.xpath("//select[@name='explorerName']");
@@ -61,17 +62,22 @@ public class HomePage {
         waitUtil.waitFor(2);
     }
 
-    private void clickCashRecon() {
+    private void clickCashReconMainDropdown() {
         try {
-            waitUtil.waitForElementToBeClickable(cashRecon, AppConstants.time10).click();
+            waitUtil.waitForElementToBeClickable(cashReconMainDropdown, AppConstants.time10).click();
         } catch (Exception e) {
             clickProcessSetup();
-            waitUtil.waitForElementToBeClickable(cashRecon, AppConstants.time10).click();
+            waitUtil.waitForElementToBeClickable(cashReconMainDropdown, AppConstants.time10).click();
         }
     }
 
     private void clickCashItems() {
         waitUtil.waitForElementToBeClickable(cashItems, AppConstants.time10).click();
+        waitUtil.waitForElementToBeClickable(cashItemsDropdown, AppConstants.time60);
+    }
+
+    private void clickCashRecon() {
+        waitUtil.waitForElementToBeClickable(cashReconDashboard, AppConstants.time10).click();
         waitUtil.waitForElementToBeClickable(cashItemsDropdown, AppConstants.time60);
     }
 
@@ -124,7 +130,7 @@ public class HomePage {
             waitUtil.waitFor(1);
             clickCashBalances();
         } catch (Exception e) {
-            clickCashRecon();
+            clickCashReconMainDropdown();
             waitUtil.waitFor(1);
             clickCashBalances();
         }
@@ -138,11 +144,20 @@ public class HomePage {
      */
     public CashItemsPage goToCashItems() {
         Allure.step("Navigate to Cash Items dashboard");
-        clickCashRecon();
+        clickCashReconMainDropdown();
         waitUtil.waitFor(1);
         clickCashItems();
         waitUtil.waitFor(1);
         return new CashItemsPage(driver);
+    }
+
+    public CashReconPage goToCashRecon() {
+        Allure.step("Navigate to Cash Recon dashboard");
+        clickCashReconMainDropdown();
+        waitUtil.waitFor(1);
+        clickCashRecon();
+        waitUtil.waitFor(1);
+        return new CashReconPage(driver);
     }
 
     /**
