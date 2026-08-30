@@ -147,7 +147,6 @@ public class CashReconPage {
         try {
             eleUtil.doClick(updateGroupButton, AppConstants.time5);
         } catch (Exception e) {
-            Allure.step("Application Crash Detected!");
             return "Application Crash Detected!";
         }
 //        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
