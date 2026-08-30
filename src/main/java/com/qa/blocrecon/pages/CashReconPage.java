@@ -143,12 +143,12 @@ public class CashReconPage {
         waitUtil.waitFor(2);
         rightClick(firstGroupedRecord);
         eleUtil.doClick(viewOrRemoveGroupButton);
-        removeRecordsFromGroup(eleUtil.getElements(removeButtons).size());
-        try {
-            eleUtil.doClick(updateGroupButton, AppConstants.time5);
-        } catch (Exception e) {
+        int removeButtonsCount = eleUtil.getElements(removeButtons).size();
+        if (removeButtonsCount == 0) {
             return "Application Crash Detected!";
         }
+        removeRecordsFromGroup(removeButtonsCount);
+        eleUtil.doClick(updateGroupButton, AppConstants.time5);
 //        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
 //        System.out.println("Page loader disappeared");
 //        eleUtil.waitForElementToDisappear(cashReconDataLoader, AppConstants.time3, AppConstants.time10);

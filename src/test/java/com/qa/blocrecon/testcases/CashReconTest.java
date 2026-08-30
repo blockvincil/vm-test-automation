@@ -3299,7 +3299,7 @@ public class CashReconTest extends BaseTest {
         cashReconPage.selectRecon(prop.getProperty("recon_name"));
 
         // 5. Check if Cash Items table is not empty
-        Assert.assertTrue(cashReconPage.isCashReconDataPresent(), "Cash Items table is empty but event is completed");
+        Assert.assertTrue(cashReconPage.isCashReconDataPresent(), "Cash Recon table is empty but event is completed");
 
         // 6. Get required columns from Cash Items dashboard
         gridPage = new GridPage(driver);
