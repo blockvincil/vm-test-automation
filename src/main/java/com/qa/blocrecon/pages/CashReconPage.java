@@ -109,7 +109,6 @@ public class CashReconPage {
     }
 
     public String groupItems() {
-        Allure.step("Group items");
         int unmatchedRecordsCount = filterByMatchStatus("UNMATCHED");
 
         if (unmatchedRecordsCount == 1) {
@@ -124,10 +123,9 @@ public class CashReconPage {
             checkboxesToCheck = unmatchedRecordsCount - 1;
         }
 
-
-
         checkMultipleCheckboxes(checkboxesToCheck);
         rightClick(firstCheckedRecord);
+        Allure.step("Group items");
         eleUtil.doClick(groupItemsButton);
         eleUtil.doClick(submitButton, AppConstants.time5);
 //        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
