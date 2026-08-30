@@ -3279,7 +3279,7 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 42, groups = "Prod Issues", description = "PROD - Group exists after grouped items removed")
     public void _PROD3() throws Exception {
 
-        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod3.xlsx");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
