@@ -144,7 +144,7 @@ public class CashReconPage {
         if (removeButtonsCount == 0) {
             return "Application Crash Detected!";
         }
-        Allure.step("Removing all records from group view");
+        Allure.step("Removing all records from group view and update group");
         removeRecordsFromGroup(removeButtonsCount);
         eleUtil.doClick(updateGroupButton, AppConstants.time5);
 //        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
