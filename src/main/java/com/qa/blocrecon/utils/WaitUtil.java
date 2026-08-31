@@ -96,4 +96,21 @@ public class WaitUtil {
                 .until(ExpectedConditions.visibilityOfElementLocated(loaderLocator));
     }
 
+    /**
+     * Waits for an element to be fully loaded in the DOM and interactable
+     * @param locator The locator of the element
+     * @param timeout Maximum time to wait in seconds
+     * @return The WebElement when ready
+     */
+    public WebElement waitForElementToBeReady(By locator, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        return wait.until(drv -> {
+            WebElement element = drv.findElement(locator);
+            if (!element.isDisplayed() || !element.isEnabled()) {
+                return null;
+            }
+            return element;
+        });
+    }
+
 }

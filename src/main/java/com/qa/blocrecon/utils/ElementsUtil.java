@@ -149,6 +149,12 @@ public class ElementsUtil {
         select.selectByVisibleText(visibleText);
     }
 
+    public void doSelectByValue(By locator, String value) {
+        WebElement element = driver.findElement(locator);
+        Select select = new Select(element);
+        select.selectByValue(value);
+    }
+
     public boolean areElementsVisible(By locator) {
         try {
             List<WebElement> elements = driver.findElements(locator);

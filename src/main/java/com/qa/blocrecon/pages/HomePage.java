@@ -31,6 +31,8 @@ public class HomePage {
     private final By eventRuleHierarchies = By.xpath("//span[text()='Event Rule Hierarchies']/..");
     private final By sourceExplorer = By.xpath("//span[text()='Source Explorer']/..");
     private final By cashItems = By.xpath("//span[text()='Cash Items']/..");
+    private final By signOff = By.xpath("//span[text()='Sign Off']/..");
+    private final By signOffText = By.xpath("(//div[normalize-space()='Sign Off:'])[last()]");
     private final By cashReconDashboard = By.xpath("(//span[text()='Cash Recon']/..)[last()]");
     private final By cashBalances = By.xpath("//span[text()='Cash Balances']/..");
     private final By eventRuleHierarchiesList = By.xpath("//ul[@class='flex-nowrap px-0 nav flex-column nav-tabs']");
@@ -74,6 +76,11 @@ public class HomePage {
     private void clickCashItems() {
         waitUtil.waitForElementToBeClickable(cashItems, AppConstants.time10).click();
         waitUtil.waitForElementToBeClickable(cashItemsDropdown, AppConstants.time60);
+    }
+
+    private void clickSignOff() {
+        waitUtil.waitForElementToBeClickable(signOff, AppConstants.time10).click();
+        waitUtil.waitForElementVisible(signOffText, AppConstants.time60);
     }
 
     private void clickCashRecon() {
@@ -149,6 +156,15 @@ public class HomePage {
         clickCashItems();
         waitUtil.waitFor(1);
         return new CashItemsPage(driver);
+    }
+
+    public SignOffPage goToSignOff() {
+        Allure.step("Navigate to Sign Off dashboard");
+//        clickCashReconMainDropdown();
+//        waitUtil.waitFor(1);
+        clickSignOff();
+        waitUtil.waitFor(1);
+        return new SignOffPage(driver);
     }
 
     public CashReconPage goToCashRecon() {

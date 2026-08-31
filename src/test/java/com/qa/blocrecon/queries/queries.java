@@ -4,7 +4,6 @@ import com.qa.blocrecon.utils.DatabaseUtil;
 import io.qameta.allure.Allure;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class queries {
@@ -15,8 +14,8 @@ public class queries {
         this.dbUtil = dbUtil;
     }
 
-    public void executeUpdate(String query) {
-        Allure.step("Executing SQL update: " + query, () -> {
+    public void executeQuery(String query) {
+        Allure.step("Executing SQL query: " + query, () -> {
             try (PreparedStatement ps = dbUtil.conn.prepareStatement(query)) {
                 ps.executeUpdate();
             } catch (SQLException e) {

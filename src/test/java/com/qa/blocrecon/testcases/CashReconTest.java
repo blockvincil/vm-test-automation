@@ -18,8 +18,9 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.InputStream;
-import java.time.Duration;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Listeners(TestListener.class)
 public class CashReconTest extends BaseTest {
@@ -32,6 +33,7 @@ public class CashReconTest extends BaseTest {
     private CashItemsPage cashItemsPage;
     private CashReconPage cashReconPage;
     private CashBalancesPage cashBalancesPage;
+    private SignOffPage signOffPage;
     private EventRuleHierarchiesPageDTO eventRuleHierarchiesPageDTO;
 
     @BeforeClass
@@ -46,6 +48,12 @@ public class CashReconTest extends BaseTest {
         homePage = loginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username"), prop.getProperty("password"));
         homePage.disableResponsiveSidebar();
     }
+
+    private final Map<String, String> signOffDashboardColumnKeyMapping = Map.ofEntries(
+            Map.entry("sign_off_date", "SIGN OFF DATE"),
+            Map.entry("reconName", "RECON NAME"),
+            Map.entry("fund", "FUND")
+    );
 
     private final Map<String, String> cashDashboardsColumnKeyMapping = Map.ofEntries(
             Map.entry("account", "Account"),
@@ -90,6 +98,7 @@ public class CashReconTest extends BaseTest {
             Map.entry("itemdate", "Item Date"),
             Map.entry("openingbalancedate", "Opening Balance Date"),
             Map.entry("closingbalancedate", "Closing Balance Date"),
+            Map.entry("cashbalanceclosingbalancedate", "CLOSINGBALANCEDATE"),
             Map.entry("description", "Description"),
             Map.entry("status_details", "Status Details"),
             Map.entry("batch_id", "Batch ID"),
@@ -3043,7 +3052,7 @@ public class CashReconTest extends BaseTest {
         String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
 
         queries dbQueries = new queries(dbUtil);
-        dbQueries.executeUpdate(setFundToNull);
+        dbQueries.executeQuery(setFundToNull);
 
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
@@ -3065,7 +3074,7 @@ public class CashReconTest extends BaseTest {
         String toastMessage = cashItemsPage.getToastMessage();
 
         String setFundValue = "update cr_accounts set fund='F4' where account='AUTO4';";
-        dbQueries.executeUpdate(setFundValue);
+        dbQueries.executeQuery(setFundValue);
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
     }
@@ -3083,7 +3092,7 @@ public class CashReconTest extends BaseTest {
         String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
 
         queries dbQueries = new queries(dbUtil);
-        dbQueries.executeUpdate(setFundToNull);
+        dbQueries.executeQuery(setFundToNull);
 
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
@@ -3106,7 +3115,7 @@ public class CashReconTest extends BaseTest {
         System.out.println(toastMessage);
 
         String setFundValue = "update cr_accounts set fund='F4' where account='AUTO4';";
-        dbQueries.executeUpdate(setFundValue);
+        dbQueries.executeQuery(setFundValue);
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
     }
@@ -3136,7 +3145,7 @@ public class CashReconTest extends BaseTest {
         String changeCurrencyToAED = "update cr_accounts_map set currency='AED' where account='ACCSUB0884';";
 
         queries dbQueries = new queries(dbUtil);
-        dbQueries.executeUpdate(changeCurrencyToAED);
+        dbQueries.executeQuery(changeCurrencyToAED);
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -3183,7 +3192,7 @@ public class CashReconTest extends BaseTest {
         softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData), "Data mismatch before reprocess");
 
         String changeCurrencyToINR = "update cr_accounts_map set currency='INR' where account='ACCSUB0884';";
-        dbQueries.executeUpdate(changeCurrencyToINR);
+        dbQueries.executeQuery(changeCurrencyToINR);
 
         cashItemsPage.waitFor(5);
 
@@ -3313,6 +3322,106 @@ public class CashReconTest extends BaseTest {
         Assert.assertTrue(viewOrRemoveGroupToastMessage.contains("Items Removed Successfully"), "View/Remove Group failed");
         cashReconPage.refresh();
         Assert.assertEquals(cashReconPage.filterByAssetId("|group"), 1, "Group not removed");
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("PROD ISSUES")
+    @Story("PROD - Date filter issue in cash balances and sign off")
+    @Test(priority = 43, groups = "Prod Issues", description = "PROD - Date filter issue in cash balances and sign off")
+    public void _PROD4() {
+
+        String insertRecordIntoBalanceTable =
+                "INSERT INTO public.br_cbalances_autoRecon " +
+                        "(closingbalancedate, balance_id, subaccount, account, currency, " +
+                        "closingbalance, closingbalance_dbcr, balance_created_date, status, " +
+                        "side_name, source_batch_id, bloc_recon_file_sequence_id, fund) " +
+                        "VALUES (CURRENT_DATE, 'autoSub1_INR_BAT20260831365985697_BAT20260831365985697', " +
+                        "'autoSub1', 'AUTO1', 'INR', 3600, 'CR', CURRENT_TIMESTAMP, 'Approved', " +
+                        "'they', 'BAT20260831365985697', 'FILE20260831365985697_0', 'autoFund1');";
+
+        String snapshotId = "SP0000" + ThreadLocalRandom.current().nextInt(10000, 100000);
+
+        String insertSignOffRecord =
+                "INSERT INTO public.st_rec_sign_off " +
+                        "(recon_name, recon_type, sign_off_type, sign_off_date, created_date, " +
+                        "created_by, approved_date, approved_by, snapshot_status, snapshot_id, " +
+                        "status, recon_id, last_modified_date, last_modified_by, fund, " +
+                        "error_description, is_override, validated_by) " +
+                        "VALUES ('autoRecon', 'Cash Recon', 'End Of Day', CURRENT_DATE, " +
+                        "CURRENT_TIMESTAMP, 'teamindia@recon.com', CURRENT_TIMESTAMP, " +
+                        "'murali1@recon.com', 'PROCESSED', '" + snapshotId + "', 'Approved', " +
+                        "'REC20250725000822999', CURRENT_TIMESTAMP, 'murali1@recon.com', " +
+                        "'autoFund1', NULL, NULL, NULL);";
+
+        List<String> requiredColumnsFromCashBalances = Arrays.asList("cashbalanceclosingbalancedate");
+        List<String> requiredColumnsFromSignOff = Arrays.asList("sign_off_date");
+
+        queries dbQueries = new queries(dbUtil);
+        dbQueries.executeQuery(insertRecordIntoBalanceTable);
+
+        cashBalancesPage = homePage.goToCashBalances();
+        cashBalancesPage.selectRecon(prop.getProperty("recon_name"));
+        cashBalancesPage.selectDateFilter("Today");
+
+        String deleteTheCreatedBalanceEntry = "delete from br_cbalances_autoRecon where closingbalancedate = CURRENT_DATE;";
+        boolean isDataPresentInBalancesAfterDateFilter = cashBalancesPage.isCashBalancesDataPresent();
+        if (!isDataPresentInBalancesAfterDateFilter) {
+            softAssert.fail("No records found in Cash Balances after date filter");
+            dbQueries.executeQuery(deleteTheCreatedBalanceEntry);
+        }
+
+        gridPage = new GridPage(driver);
+        gridPage.adjustZoom(15);
+
+        // Get required columns from Cash Balances dashboard
+        List<Map<String, String>> closingBalanceDateFromUi = gridPage.getGridRawData(requiredColumnsFromCashBalances);
+
+        // Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : gridPage.getGridRawData(requiredColumnsFromCashBalances))
+//            System.out.println(row);
+
+        // Check if all closing balance dates equal today's date
+        LocalDate today = LocalDate.now();
+        for (Map<String, String> row : closingBalanceDateFromUi) {
+            String dateStr = row.get("cashbalanceclosingbalancedate");
+            LocalDate rowDate = LocalDate.parse(dateStr);
+            if (!rowDate.equals(today)) {
+                softAssert.fail("Expected all dates to be " + today + ", but found " + rowDate);
+                dbQueries.executeQuery(deleteTheCreatedBalanceEntry);
+            }
+        }
+
+        dbQueries.executeQuery(insertSignOffRecord);
+
+        signOffPage = homePage.goToSignOff();
+        signOffPage.selectDateFilter("Today");
+
+        String deleteTheCreatedSignoffEntry = "delete from st_rec_sign_off where sign_off_date = CURRENT_DATE;";
+        boolean isDataPresentInSignOffAfterDateFilter = signOffPage.signOffDataPresent();
+        if (!isDataPresentInSignOffAfterDateFilter) {
+            softAssert.fail("No records found n Sign Off after Date Filter");
+            dbQueries.executeQuery(deleteTheCreatedSignoffEntry);
+        }
+
+        gridPage = new GridPage(driver);
+        gridPage.adjustZoom(15);
+
+        // Get required columns from Cash Balances dashboard
+        List<Map<String, String>> signOffDateFromUi = gridPage.getGridRawData(requiredColumnsFromSignOff);
+
+        for (Map<String, String> row : signOffDateFromUi) {
+            String dateStr = row.get("sign_off_date");
+            LocalDate rowDate = LocalDate.parse(dateStr);
+            if (!rowDate.equals(today)) {
+                softAssert.fail("Expected all dates to be " + today + ", but found " + rowDate);
+                dbQueries.executeQuery(deleteTheCreatedBalanceEntry);
+            }
+        }
+
+        softAssert.assertAll();
+
     }
 
 }
