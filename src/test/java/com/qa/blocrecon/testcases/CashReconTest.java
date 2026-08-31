@@ -3393,6 +3393,8 @@ public class CashReconTest extends BaseTest {
             }
         }
 
+        dbQueries.executeQuery(deleteTheCreatedBalanceEntry);
+
         dbQueries.executeQuery(insertSignOffRecord);
 
         signOffPage = homePage.goToSignOff();
@@ -3416,9 +3418,11 @@ public class CashReconTest extends BaseTest {
             LocalDate rowDate = LocalDate.parse(dateStr);
             if (!rowDate.equals(today)) {
                 softAssert.fail("Expected all dates to be " + today + ", but found " + rowDate);
-                dbQueries.executeQuery(deleteTheCreatedBalanceEntry);
+                dbQueries.executeQuery(deleteTheCreatedSignoffEntry);
             }
         }
+
+        dbQueries.executeQuery(deleteTheCreatedSignoffEntry);
 
         softAssert.assertAll();
 
