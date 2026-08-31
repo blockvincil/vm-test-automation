@@ -39,6 +39,7 @@ public class CashBalancesPage {
 
     public void selectRecon(String reconName) {
         Allure.step("Select recon in Cash Balances dashboard");
+        waitUtil.waitFor(3);
         waitUtil.waitForElementToBeReady(cashBalancesDropdown, AppConstants.time10);
         waitUtil.waitFor(3);
         eleUtil.doSelectByValue(cashBalancesDropdown, reconName);
