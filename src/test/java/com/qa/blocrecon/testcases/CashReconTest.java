@@ -49,12 +49,6 @@ public class CashReconTest extends BaseTest {
         homePage.disableResponsiveSidebar();
     }
 
-    private final Map<String, String> signOffDashboardColumnKeyMapping = Map.ofEntries(
-            Map.entry("sign_off_date", "SIGN OFF DATE"),
-            Map.entry("reconName", "RECON NAME"),
-            Map.entry("fund", "FUND")
-    );
-
     private final Map<String, String> cashDashboardsColumnKeyMapping = Map.ofEntries(
             Map.entry("account", "Account"),
             Map.entry("status", "Status"),
@@ -961,8 +955,8 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 14, groups = "Cash Items", description = "3d")
     public void _3d() throws Exception {
 
-        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
-        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus2.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus1.csv");
+        FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus2.csv");
 
         // 0. Define the list of required columns required for validation
         List<String> requiredColumns = Arrays.asList("subaccount", "currency", "db_cr", "amount", "openingbalance",
@@ -1908,7 +1902,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions on cash items dashboard without maker checker")
-    @Test(priority = 27, groups = "Cash Items", description = "7f")
+        @Test(priority = 27, groups = "Cash Items", description = "7f")
     public void _7f() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/case7/7f_file1.xlsx");
@@ -3052,7 +3046,7 @@ public class CashReconTest extends BaseTest {
         String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
 
         queries dbQueries = new queries(dbUtil);
-        dbQueries.executeQuery(setFundToNull);
+        dbQueries.executeQuery(setFundToNull, "Setting fund to null for a subaccount using DB query");
 
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
@@ -3074,7 +3068,7 @@ public class CashReconTest extends BaseTest {
         String toastMessage = cashItemsPage.getToastMessage();
 
         String setFundValue = "update cr_accounts set fund='F4' where account='AUTO4';";
-        dbQueries.executeQuery(setFundValue);
+        dbQueries.executeQuery(setFundValue, "Repopulate fund for the subaccount using DB query");
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
     }
@@ -3092,7 +3086,7 @@ public class CashReconTest extends BaseTest {
         String setFundToNull = "update cr_accounts set fund=null where account='AUTO4';";
 
         queries dbQueries = new queries(dbUtil);
-        dbQueries.executeQuery(setFundToNull);
+        dbQueries.executeQuery(setFundToNull, "Setting fund to null for a subaccount using DB query");
 
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
@@ -3115,7 +3109,7 @@ public class CashReconTest extends BaseTest {
         System.out.println(toastMessage);
 
         String setFundValue = "update cr_accounts set fund='F4' where account='AUTO4';";
-        dbQueries.executeQuery(setFundValue);
+        dbQueries.executeQuery(setFundValue, "Repopulate fund for the subaccount using DB query");
 
         Assert.assertTrue(toastMessage.contains("Add Item To Batch Failed"), "Add item to batch should not be allowed, but was allowed");
     }
@@ -3124,8 +3118,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD - Fund and fund group lookup after reprocess")
-    @Test(priority = 40, groups = "Prod Issues", description = "PROD - Fund and fund group lookup after reprocess")
+    @Story("PROD1 - Fund and fund group lookup after reprocess")
+    @Test(priority = 40, groups = "Prod Issues", description = "PROD1 - Fund and fund group lookup after reprocess")
     public void _PROD1() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod1.xlsx");
@@ -3145,7 +3139,7 @@ public class CashReconTest extends BaseTest {
         String changeCurrencyToAED = "update cr_accounts_map set currency='AED' where account='ACCSUB0884';";
 
         queries dbQueries = new queries(dbUtil);
-        dbQueries.executeQuery(changeCurrencyToAED);
+        dbQueries.executeQuery(changeCurrencyToAED, "Modify currency to unmap the subaccount using DB query");
 
         // 1. Trigger import from Event Rule Hierarchies dashboard
         eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
@@ -3192,7 +3186,7 @@ public class CashReconTest extends BaseTest {
         softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData), "Data mismatch before reprocess");
 
         String changeCurrencyToINR = "update cr_accounts_map set currency='INR' where account='ACCSUB0884';";
-        dbQueries.executeQuery(changeCurrencyToINR);
+        dbQueries.executeQuery(changeCurrencyToINR, "Rollback currency to properly remap the subaccount using DB query");
 
         cashItemsPage.waitFor(5);
 
@@ -3221,8 +3215,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD - Transformation errors in API Import - Event & Citems statuses")
-    @Test(priority = 41, groups = "Prod Issues", description = "PROD - Transformation errors in API Import - Event & citems statuses")
+    @Story("PROD2 - Transformation errors in API Import - Event & Citems statuses")
+    @Test(priority = 41, groups = "Prod Issues", description = "PROD2 - Transformation errors in API Import - Event & citems statuses")
     public void _PROD2() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/le_51_records.xlsx");
@@ -3284,8 +3278,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD - Group exists after grouped items removed")
-    @Test(priority = 42, groups = "Prod Issues", description = "PROD - Group exists after grouped items removed")
+    @Story("PROD3 - Group exists after grouped items removed")
+    @Test(priority = 42, groups = "Prod Issues", description = "PROD3 - Group exists after grouped items removed")
     public void _PROD3() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod3.xlsx");
@@ -3327,8 +3321,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD - Date filter issue in cash balances and sign off")
-    @Test(priority = 43, groups = "Prod Issues", description = "PROD - Date filter issue in cash balances and sign off")
+    @Story("PROD4 - Date filter issue in cash balances and sign off")
+    @Test(priority = 43, groups = "Prod Issues", description = "PROD4 - Date filter issue in cash balances and sign off")
     public void _PROD4() {
 
         String insertRecordIntoBalanceTable =
@@ -3358,73 +3352,71 @@ public class CashReconTest extends BaseTest {
         List<String> requiredColumnsFromSignOff = Arrays.asList("sign_off_date");
 
         queries dbQueries = new queries(dbUtil);
-        dbQueries.executeQuery(insertRecordIntoBalanceTable);
-
-        cashBalancesPage = homePage.goToCashBalances();
-        cashBalancesPage.selectRecon(prop.getProperty("recon_name"));
-        cashBalancesPage.selectDateFilter("Today");
-
         String deleteTheCreatedBalanceEntry = "delete from br_cbalances_autoRecon where closingbalancedate = CURRENT_DATE;";
-        boolean isDataPresentInBalancesAfterDateFilter = cashBalancesPage.isCashBalancesDataPresent();
-        if (!isDataPresentInBalancesAfterDateFilter) {
-            softAssert.fail("No records found in Cash Balances after date filter");
-            dbQueries.executeQuery(deleteTheCreatedBalanceEntry);
-        }
-
-        gridPage = new GridPage(driver);
-        gridPage.adjustZoom(15);
-
-        // Get required columns from Cash Balances dashboard
-        List<Map<String, String>> closingBalanceDateFromUi = gridPage.getGridRawData(requiredColumnsFromCashBalances);
-
-        // Debug print
-//        System.out.println("\n");
-//        for (Map<String, String> row : gridPage.getGridRawData(requiredColumnsFromCashBalances))
-//            System.out.println(row);
-
-        // Check if all closing balance dates equal today's date
-        LocalDate today = LocalDate.now();
-        for (Map<String, String> row : closingBalanceDateFromUi) {
-            String dateStr = row.get("cashbalanceclosingbalancedate");
-            LocalDate rowDate = LocalDate.parse(dateStr);
-            if (!rowDate.equals(today)) {
-                softAssert.fail("Expected all dates to be " + today + ", but found " + rowDate);
-                dbQueries.executeQuery(deleteTheCreatedBalanceEntry);
-            }
-        }
-
-        dbQueries.executeQuery(deleteTheCreatedBalanceEntry);
-
-        dbQueries.executeQuery(insertSignOffRecord);
-
-        signOffPage = homePage.goToSignOff();
-        signOffPage.selectDateFilter("Today");
-
         String deleteTheCreatedSignoffEntry = "delete from st_rec_sign_off where sign_off_date = CURRENT_DATE;";
-        boolean isDataPresentInSignOffAfterDateFilter = signOffPage.signOffDataPresent();
-        if (!isDataPresentInSignOffAfterDateFilter) {
-            softAssert.fail("No records found n Sign Off after Date Filter");
-            dbQueries.executeQuery(deleteTheCreatedSignoffEntry);
-        }
 
-        gridPage = new GridPage(driver);
-        gridPage.adjustZoom(15);
+        try {
+            dbQueries.executeQuery(insertRecordIntoBalanceTable, "Insert entry with today's date into cash balances table");
 
-        // Get required columns from Cash Balances dashboard
-        List<Map<String, String>> signOffDateFromUi = gridPage.getGridRawData(requiredColumnsFromSignOff);
+            cashBalancesPage = homePage.goToCashBalances();
+            cashBalancesPage.selectRecon(prop.getProperty("recon_name"));
+            cashBalancesPage.selectDateFilter("Today");
 
-        for (Map<String, String> row : signOffDateFromUi) {
-            String dateStr = row.get("sign_off_date");
-            LocalDate rowDate = LocalDate.parse(dateStr);
-            if (!rowDate.equals(today)) {
-                softAssert.fail("Expected all dates to be " + today + ", but found " + rowDate);
-                dbQueries.executeQuery(deleteTheCreatedSignoffEntry);
+            boolean isDataPresentInBalancesAfterDateFilter = cashBalancesPage.isCashBalancesDataPresent();
+            if (!isDataPresentInBalancesAfterDateFilter) {
+                softAssert.fail("No records found in Cash Balances after date filter");
             }
+
+            gridPage = new GridPage(driver);
+            gridPage.adjustZoom(15);
+
+            // Get required columns from Cash Balances dashboard
+            List<Map<String, String>> closingBalanceDateFromUi = gridPage.getGridRawData(requiredColumnsFromCashBalances);
+
+            // Debug print
+    //        System.out.println("\n");
+    //        for (Map<String, String> row : gridPage.getGridRawData(requiredColumnsFromCashBalances))
+    //            System.out.println(row);
+
+            // Check if all closing balance dates equal today's date
+            LocalDate today = LocalDate.now();
+            for (Map<String, String> row : closingBalanceDateFromUi) {
+                String dateStr = row.get("cashbalanceclosingbalancedate");
+                LocalDate rowDate = LocalDate.parse(dateStr);
+                if (!rowDate.equals(today)) {
+                    softAssert.fail("Expected all dates to be " + today + ", but found " + rowDate);
+                }
+            }
+
+            dbQueries.executeQuery(insertSignOffRecord, "Insert a record with today's date in signoff table");
+
+            signOffPage = homePage.goToSignOff();
+            signOffPage.selectDateFilter("Today");
+
+            boolean isDataPresentInSignOffAfterDateFilter = signOffPage.signOffDataPresent();
+            if (!isDataPresentInSignOffAfterDateFilter) {
+                softAssert.fail("No records found n Sign Off after Date Filter");
+            }
+
+            gridPage = new GridPage(driver);
+            gridPage.adjustZoom(15);
+
+            // Get required columns from Cash Balances dashboard
+            List<Map<String, String>> signOffDateFromUi = gridPage.getGridRawData(requiredColumnsFromSignOff);
+
+            for (Map<String, String> row : signOffDateFromUi) {
+                String dateStr = row.get("sign_off_date");
+                LocalDate rowDate = LocalDate.parse(dateStr);
+                if (!rowDate.equals(today)) {
+                    softAssert.fail("Expected all dates to be " + today + ", but found " + rowDate);
+                }
+            }
+
+            softAssert.assertAll();
+        } finally {
+            dbQueries.executeQuery(deleteTheCreatedBalanceEntry, "Delete the created entry from cash balances table");
+            dbQueries.executeQuery(deleteTheCreatedSignoffEntry, "Delete the created entry from signoff table");
         }
-
-        dbQueries.executeQuery(deleteTheCreatedSignoffEntry);
-
-        softAssert.assertAll();
 
     }
 

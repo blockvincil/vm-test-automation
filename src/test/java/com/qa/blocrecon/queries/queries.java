@@ -14,8 +14,8 @@ public class queries {
         this.dbUtil = dbUtil;
     }
 
-    public void executeQuery(String query) {
-        Allure.step("Executing SQL query: " + query, () -> {
+    public void executeQuery(String query, String description) {
+        Allure.step("Running SQL Query for: " + description, () -> {
             try (PreparedStatement ps = dbUtil.conn.prepareStatement(query)) {
                 ps.executeUpdate();
             } catch (SQLException e) {
