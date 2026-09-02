@@ -200,8 +200,8 @@ public class CashReconTest extends BaseTest {
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
 
 //      Debug print
-        for (Map<String, String> row : excelData)
-            System.out.println(row);
+//        for (Map<String, String> row : excelData)
+//            System.out.println(row);
 
         // 4. Navigate to cash items and select recon & view
         cashItemsPage = homePage.goToCashItems();
@@ -214,9 +214,9 @@ public class CashReconTest extends BaseTest {
         gridPage = new GridPage(driver);
         List<Map<String, String>> cashItemsGridData = gridPage.getGridRawData(requiredColumns);
 //      Debug print
-        System.out.println("\n");
-        for (Map<String, String> row : cashItemsGridData)
-            System.out.println(row);
+//        System.out.println("\n");
+//        for (Map<String, String> row : cashItemsGridData)
+//            System.out.println(row);
 
         // 7. Compare Excel data with cash items data
         Assert.assertTrue(ListUtil.compare2DMaps(excelData, cashItemsGridData));
@@ -513,8 +513,8 @@ public class CashReconTest extends BaseTest {
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
 
 //      Debug print
-        for (Map<String, String> excelDatum : excelData)
-            System.out.println(excelDatum);
+//        for (Map<String, String> excelDatum : excelData)
+//            System.out.println(excelDatum);
 
         // 4. Navigate to cash items and select recon & view
         cashItemsPage = homePage.goToCashItems();
@@ -528,9 +528,9 @@ public class CashReconTest extends BaseTest {
         List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
 
 //      Debug print
-        System.out.println("\n");
-        for (Map<String, String> row : rawData)
-            System.out.println(row);
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
         Assert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
@@ -850,8 +850,8 @@ public class CashReconTest extends BaseTest {
         List<Map<String, String>> cashItemsGridData = gridPage.getGridRawData(requiredColumnsFromCashItems, "cashItems_balancesValidation");
 
 //      Debug print
-        for (Map<String, String> row : cashItemsGridData)
-            System.out.println(row);
+//        for (Map<String, String> row : cashItemsGridData)
+//            System.out.println(row);
 
         // 6. Navigate to cash balances and select recon
         cashBalancesPage = homePage.goToCashBalances();
@@ -862,9 +862,9 @@ public class CashReconTest extends BaseTest {
         // 7. Fetch required data from Cash Balances through UI
         List<Map<String, String>> cashBalancesData = gridPage.getGridRawData(requiredColumnsFromCashBalances, "cashBalances");
 //      Debug print
-        System.out.println("\n");
-        for (Map<String, String> row : cashBalancesData)
-            System.out.println(row);
+//        System.out.println("\n");
+//        for (Map<String, String> row : cashBalancesData)
+//            System.out.println(row);
 
         // 8. Compare Cash Items data with Cash Balances data
         Assert.assertTrue(ListUtil.compare2DMaps(cashItemsGridData, cashBalancesData));
@@ -1002,8 +1002,8 @@ public class CashReconTest extends BaseTest {
         twoBatchesCombinedCsvData.addAll(secondBatchCsvData);
 
 //      Debug print
-        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
-            System.out.println(excelDatum);
+//        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
+//            System.out.println(excelDatum);
 
         // 4. Navigate to cash items and select recon
         cashItemsPage = homePage.goToCashItems();
@@ -1017,9 +1017,9 @@ public class CashReconTest extends BaseTest {
         List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
 
 //      Debug print
-        System.out.println("\n");
-        for (Map<String, String> row : rawData)
-            System.out.println(row);
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
         Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
@@ -1589,8 +1589,8 @@ public class CashReconTest extends BaseTest {
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
 
 //      Debug print
-        for (Map<String, String> row : excelData)
-            System.out.println(row);
+//        for (Map<String, String> row : excelData)
+//            System.out.println(row);
 
         // 4. Navigate to cash items and select recon & view
         cashItemsPage = homePage.goToCashItems();
@@ -1603,9 +1603,9 @@ public class CashReconTest extends BaseTest {
         gridPage = new GridPage(driver);
         List<Map<String, String>> cashItemsGridData = gridPage.getGridRawData(requiredColumns);
 //      Debug print
-        System.out.println("\n");
-        for (Map<String, String> row : cashItemsGridData)
-            System.out.println(row);
+//        System.out.println("\n");
+//        for (Map<String, String> row : cashItemsGridData)
+//            System.out.println(row);
 
         // 7. Compare Excel data with cash items data
         Assert.assertTrue(ListUtil.compare2DMaps(excelData, cashItemsGridData));
@@ -2081,8 +2081,8 @@ public class CashReconTest extends BaseTest {
         twoBatchesCombinedCsvData.addAll(secondBatchCsvData);
 
 //      Debug print
-        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
-            System.out.println(excelDatum);
+//        for (Map<String, String> excelDatum : twoBatchesCombinedCsvData)
+//            System.out.println(excelDatum);
 
         // 4. Navigate to cash items and select recon
         cashItemsPage = homePage.goToCashItems();
@@ -2096,9 +2096,9 @@ public class CashReconTest extends BaseTest {
         List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
 
 //      Debug print
-        System.out.println("\n");
-        for (Map<String, String> row : rawData)
-            System.out.println(row);
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
         Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
