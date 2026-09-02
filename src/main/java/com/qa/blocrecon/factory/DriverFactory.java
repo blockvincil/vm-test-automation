@@ -5,6 +5,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 public class DriverFactory {
     private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
@@ -19,7 +20,9 @@ public class DriverFactory {
         if (browser.equalsIgnoreCase("chrome")) {
             if (remote && gridUrl != null && !gridUrl.trim().isEmpty()) {
                 try {
-                    tlDriver.set(new RemoteWebDriver(new URL(gridUrl), optionsManager.getChromeOptions()));
+                    RemoteWebDriver remoteDriver = new RemoteWebDriver(new URL(gridUrl), optionsManager.getChromeOptions());
+                    configureTimeouts(remoteDriver);
+                    tlDriver.set(remoteDriver);
                 } catch (MalformedURLException e) {
                     throw new RuntimeException("Invalid Selenium Grid URL: " + gridUrl, e);
                 }
@@ -29,7 +32,9 @@ public class DriverFactory {
         }  else if (browser.equalsIgnoreCase("edge")) {
             if (remote && gridUrl != null && !gridUrl.trim().isEmpty()) {
                 try {
-                    tlDriver.set(new RemoteWebDriver(new URL(gridUrl), optionsManager.getEdgeOptions()));
+                    RemoteWebDriver remoteDriver = new RemoteWebDriver(new URL(gridUrl), optionsManager.getEdgeOptions());
+                    configureTimeouts(remoteDriver);
+                    tlDriver.set(remoteDriver);
                 } catch (MalformedURLException e) {
                     throw new RuntimeException("Invalid Selenium Grid URL: " + gridUrl, e);
                 }
@@ -48,6 +53,12 @@ public class DriverFactory {
         return getDriver();
     }
 
+    private void configureTimeouts(RemoteWebDriver remoteDriver) {
+        remoteDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        remoteDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+        remoteDriver.manage().timeouts().scriptTimeout(Duration.ofSeconds(30));
+    }
+
     public static WebDriver getDriver() {
         return tlDriver.get();
     }
@@ -58,7 +69,11 @@ public class DriverFactory {
 
         if (remote && gridUrl != null && !gridUrl.trim().isEmpty()) {
             try {
-                edgeDriver = new RemoteWebDriver(new URL(gridUrl), optionsManager.getEdgeOptions());
+                RemoteWebDriver remoteDriver = new RemoteWebDriver(new URL(gridUrl), optionsManager.getEdgeOptions());
+                remoteDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+                remoteDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+                remoteDriver.manage().timeouts().scriptTimeout(Duration.ofSeconds(30));
+                edgeDriver = remoteDriver;
             } catch (MalformedURLException e) {
                 throw new RuntimeException("Invalid Selenium Grid URL: " + gridUrl, e);
             }
