@@ -57,6 +57,7 @@ public class EventService {
     private void assertLatestEventCompleted(String reconId, int timeoutSeconds) {
 
         String finalStatus = waitForEventToFinish(reconId, timeoutSeconds);
+        System.out.println("Final status: " + finalStatus + " for reconId: " + reconId);
 
         if ("Completed".equalsIgnoreCase(finalStatus)) {
             return;

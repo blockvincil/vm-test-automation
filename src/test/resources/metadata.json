@@ -26,6 +26,10 @@
     "case_8e": "case_8e",
     "prod1": "prod1",
     "le_import": "LE_WF_IMPORT",
-    "prod_group_issue": "prod_group_issue"
+    "prod_group_issue": "prod_group_issue",
+    "splitSourceSingle": "BLANK_SINGLE",
+    "splitSourceMultiple": "BLANK_MULTIPLE",
+    "splitCash2Purge": "PURGE",
+    "prod6": "prod6"
   }
 }

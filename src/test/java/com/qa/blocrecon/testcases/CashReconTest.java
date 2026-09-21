@@ -3420,4 +3420,109 @@ public class CashReconTest extends BaseTest {
 
     }
 
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("PROD ISSUES")
+    @Story("PROD5 - Split Source for blank file/files")
+    @Test(priority = 44, groups = "Prod Issues", description = "PROD5 - Split Source for blank file/files")
+    public void _PROD5() throws Exception {
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/blankSingle.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/blankMultiple1.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/blankMultiple2.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/blankMultiple3.xlsx");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("ss_recon2"),
+                eventRuleHierarchiesPageDTO.getSplitCash2Purge()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("ss_recon2_id")
+        );
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("ss_recon1"),
+                eventRuleHierarchiesPageDTO.getSplitSourceSingle()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("ss_recon1_id")
+        );
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("ss_recon1"),
+                eventRuleHierarchiesPageDTO.getSplitSourceMultiple()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("ss_recon1_id")
+        );
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("PROD ISSUES")
+    @Story("PROD6 - Reprocess when Batch ID is null")
+    @Test(priority = 45, groups = "Prod Issues", description = "PROD6 - Reprocess when Batch ID is null")
+    public void _PROD6() throws Exception {
+
+        List<String> requiredColumns = Arrays.asList("status", "status_details");
+
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod6WithStatus.xlsx");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getProd6()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 4. Navigate to cash items and select recon & view
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("recon_name"));
+
+        // 5. Check if Cash Items table is not empty
+        Assert.assertTrue(cashItemsPage.isCashItemsDataPresent(), "Cash Recon table is empty but event is completed");
+
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/prod6WithStatus.xlsx");
+
+        List<Map<String, String>> excelData =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", cashDashboardsColumnKeyMapping, requiredColumns);
+
+        // 6. Get required columns from Cash Items dashboard
+        gridPage = new GridPage(driver);
+        gridPage.adjustZoom(15);
+
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> rawData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : rawData)
+//            System.out.println(row);
+
+        // 8. Compare Cash Items data with expected data
+        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData), "Data mismatch before reprocess");
+
+        cashItemsPage.reprocess();
+
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id"));
+    }
+
 }

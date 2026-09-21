@@ -28,10 +28,26 @@ public class EventRuleHierarchiesPageDTO {
     private String prod1;
     private String le_import;
     private String prod_group_issue;
+    private String splitSourceSingle;
+    private String splitSourceMultiple;
+    private String splitCash2Purge;
+    private String prod6;
 
     public String getImportData() {
         return importData;
     }
+
+    public String getProd6() {
+        return prod6;
+    }
+
+    public String getSplitCash2Purge() { return splitCash2Purge; }
+
+    public String getSplitSourceSingle() {
+        return splitSourceSingle;
+    }
+
+    public String getSplitSourceMultiple() {return splitSourceMultiple;}
 
     public String getProd1() {
         return prod1;
