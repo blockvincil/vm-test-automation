@@ -31,6 +31,7 @@ public class CashItemsPage {
     private final By toastMessage = By.xpath("//div[@class='notification-message']");
     private final By rightClickActionsList = By.xpath("(//div[@role='tree'])[last()]");
     private final By cashItemsDropdown = By.xpath("//select[@name='explorerName']");
+    private final By apiTemplateDropdown = By.xpath("//select[@name='apiTemplate']");
     private final By cashItemsDataLoader = By.xpath("//div[contains(@class, 'ag-row-loading')]");
     private final By cashItemsDataRows = By.xpath("//div[@class='ag-center-cols-container']//div[@role='row']");
     private final By assetIdForFirstFailedRecord = By.xpath("(//*[text()='Failed'])[1]/../div[@col-id='asset_id']");
@@ -50,6 +51,9 @@ public class CashItemsPage {
     private final By submitButton = By.xpath("//button[text()='Submit']");
     private final By reprocessButton = By.xpath("//button[@title='reprocess']");
     private final By refreshButton = By.xpath("//button[@title='refresh']");
+    private final By apiCallButton = By.xpath("//button[@title='API Call']");
+    private final By apiTriggerButton = By.xpath("//button[text()='Trigger']");
+    private final By apiFundCheckbox = By.xpath("//span[@aria-checked='false']");
 
     /************************************************** Dynamic Locators **********************************************/
 
@@ -107,6 +111,20 @@ public class CashItemsPage {
     public void selectRecon(String reconName) {
         Allure.step("Select recon on Cash Items dashboard");
         eleUtil.doSelectByVisibleText(cashItemsDropdown, reconName);
+        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+        eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
+        waitUtil.waitFor(3);
+    }
+
+    public void selectAndTriggerApi(String templateName) {
+        Allure.step("Select and trigger API on Cash Items dashboard");
+        eleUtil.doClick(apiCallButton, AppConstants.time10);
+//        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
+//        eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
+        waitUtil.waitFor(2);
+        eleUtil.doSelectByVisibleText(apiTemplateDropdown, templateName);
+        eleUtil.doClick(apiFundCheckbox);
+        eleUtil.doClick(apiTriggerButton);
         eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
         eleUtil.waitForElementToDisappear(cashItemsDataLoader, AppConstants.time3, AppConstants.time10);
         waitUtil.waitFor(3);

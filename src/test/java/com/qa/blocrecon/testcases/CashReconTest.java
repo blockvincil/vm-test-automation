@@ -103,7 +103,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 1, groups = "Cash Items", description = "1a")
+    @Test(priority = 1, groups = "Cash Items", description = "1a - Check if data is present in source")
     public void _1a() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
@@ -162,7 +162,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 2, groups = "Cash Items", description = "1b")
+    @Test(priority = 2, groups = "Cash Items", description = "1b - Check if data is present with Validated status in cash items")
     public void _1b() throws Exception {
 
         /*
@@ -226,7 +226,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing valid data")
-    @Test(priority = 3, groups = "Cash Items", description = "1c")
+    @Test(priority = 3, groups = "Cash Items", description = "1c - Check if entries are recorded properly in cash balances")
     public void _1c() throws Exception {
 
         /*  Assumptions:
@@ -294,7 +294,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from single batch")
-    @Test(priority = 4, groups = "Cash Items", description = "2a")
+    @Test(priority = 4, groups = "Cash Items", description = "2a - Check if data is present in the source")
     public void _2a() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
@@ -353,7 +353,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from single batch")
-    @Test(priority = 5, groups = "Cash Items", description = "2b")
+    @Test(priority = 5, groups = "Cash Items", description = "2b - Verify that no entries are recorded in cash balances for the failed subaccounts")
     public void _2b() throws Exception {
 
         /*  Assumptions:
@@ -421,7 +421,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from single batch")
-    @Test(priority = 6, groups = "Cash Items", description = "2c")
+    @Test(priority = 6, groups = "Cash Items", description = "2c - Opening/Closing balance inconsistent")
     public void _2c() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
@@ -481,7 +481,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from single batch")
-    @Test(priority = 7, groups = "Cash Items", description = "2d")
+    @Test(priority = 7, groups = "Cash Items", description = "2d - Balance missing or inconsistent")
     public void _2d() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -541,7 +541,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from single batch")
-    @Test(priority = 8, groups = "Cash Items", description = "2e")
+    @Test(priority = 8, groups = "Cash Items", description = "2e - Missing mandatory fields")
     public void _2e() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/missingMandatoryFieldsWithStatus.xlsx");
@@ -601,7 +601,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from single batch")
-    @Test(priority = 9, groups = "Cash Items", description = "2f")
+    @Test(priority = 9, groups = "Cash Items", description = "2f - Account mapping not found")
     public void _2f() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/accountMappingNotFoundWithStatus.xlsx");
@@ -661,7 +661,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from single batch")
-    @Test(priority = 10, groups = "Cash Items", description = "2g")
+    @Test(priority = 10, groups = "Cash Items", description = "2g - Failed in transformation")
     public void _2g() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/failedInTransformationWithStatus.xlsx");
@@ -720,7 +720,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 11, groups = "Cash Items", description = "3a")
+    @Test(priority = 11, groups = "Cash Items", description = "3a - Check if data is present in the source")
     public void _3a() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
@@ -798,7 +798,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 12, groups = "Cash Items", description = "3b")
+    @Test(priority = 12, groups = "Cash Items", description = "3b - Verify that no entries are recorded in cash balances for the failed subaccounts")
     public void _3b() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
@@ -874,7 +874,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 13, groups = "Cash Items", description = "3c")
+    @Test(priority = 13, groups = "Cash Items", description = "3c - Opening/Closing balance inconsistent")
     public void _3c() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
@@ -952,7 +952,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 14, groups = "Cash Items", description = "3d")
+    @Test(priority = 14, groups = "Cash Items", description = "3d - Opening balance inconsistent with last closing balance")
     public void _3d() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus1.csv");
@@ -1030,7 +1030,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 15, groups = "Cash Items", description = "3e")
+    @Test(priority = 15, groups = "Cash Items", description = "3e - Balance missing or inconsistent")
     public void _3e() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/balanceMissingOrInconsistentWithStatus1.csv");
@@ -1108,7 +1108,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from 2 batches")
-    @Test(priority = 16, groups = "Cash Items", description = "3f")
+    @Test(priority = 16, groups = "Cash Items", description = "3f - Missing mandatory fields")
     public void _3f() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/missingMandatoryFieldsWithStatus1.csv");
@@ -1185,7 +1185,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from two batches")
-    @Test(priority = 17, groups = "Cash Items", description = "3g")
+    @Test(priority = 17, groups = "Cash Items", description = "3g - Account mapping not found")
     public void _3g() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/accountMappingNotFoundWithStatus1.csv");
@@ -1263,7 +1263,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from two batches")
-    @Test(priority = 18, groups = "Cash Items", description = "3h")
+    @Test(priority = 18, groups = "Cash Items", description = "3h - Failed in transformation")
     public void _3h() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/failedInTransformationWithStatus1.csv");
@@ -1340,7 +1340,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Importing invalid data from two batches")
-    @Test(priority = 19, groups = "Cash Items", description = "3i (Expected failure)")
+    @Test(priority = 19, groups = "Cash Items", description = "3i (Expected failure) - Duplicate batches identified")
     public void _3i() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/duplicateBatchIdentifiedWithStatus1.csv");
@@ -1423,7 +1423,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Have calculations and check citems dashboard")
-    @Test(priority = 20, groups = "Cash Items", description = "4a")
+    @Test(priority = 20, groups = "Cash Items", description = "4a - Calculation on Description field & data with Validated status. Check whether calculation is applied properly and the status remains unchanged")
     public void _4a() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/case4/4a_AfterCalculation.xlsx");
@@ -1487,7 +1487,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Have calculations and check citems dashboard")
-    @Test(priority = 21, groups = "Cash Items", description = "4b")
+    @Test(priority = 21, groups = "Cash Items", description = "4b - Calculation on DB/CR field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Opening/Closing balance inconsistent)")
     public void _4b() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/case4/4b_AfterCalculation.xlsx");
@@ -1551,7 +1551,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Have calculations and check citems dashboard")
-    @Test(priority = 22, groups = "Cash Items", description = "4d")
+    @Test(priority = 22, groups = "Cash Items", description = "4d - Calculation on DB/CR field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Balance missing or Inconsistent)")
     public void _4d() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/case4/4d_AfterCalculation.xlsx");
@@ -1615,7 +1615,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Have calculations and check citems dashboard")
-    @Test(priority = 23, groups = "Cash Items", description = "4e")
+    @Test(priority = 23, groups = "Cash Items", description = "4e - Calculation on Account/Sub Account field such that status changes to Failed and data with Validated status. Check if calculation is applied properly and the status and status details is changed as expected (Account Mapping not found)")
     public void _4e() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/case4/4e_AfterCalculation.xlsx");
@@ -1679,7 +1679,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions on cash items dashboard without maker checker")
-    @Test(priority = 24, groups = "Cash Items", description = "7a")
+    @Test(priority = 24, groups = "Cash Items", description = "7a - Ignore Item")
     public void _7a() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -1753,7 +1753,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions on cash items dashboard without maker checker")
-    @Test(priority = 25, groups = "Cash Items", description = "7b")
+    @Test(priority = 25, groups = "Cash Items", description = "7b - Ignore Batch")
     public void _7b() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -1827,7 +1827,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions on cash items dashboard without maker checker")
-    @Test(priority = 26, groups = "Cash Items", description = "7c")
+    @Test(priority = 26, groups = "Cash Items", description = "7c - Ignore File")
     public void _7c() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -1902,7 +1902,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions on cash items dashboard without maker checker")
-        @Test(priority = 27, groups = "Cash Items", description = "7f")
+        @Test(priority = 27, groups = "Cash Items", description = "7f - Add Item to Batch")
     public void _7f() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/case7/7f_file1.xlsx");
@@ -1955,7 +1955,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions on cash items dashboard without maker checker")
-    @Test(priority = 26, groups = "Cash Items", description = "7g")
+    @Test(priority = 26, groups = "Cash Items", description = "7g - Update Batch Balances")
     public void _7g() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -2031,7 +2031,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions on cash items dashboard without maker checker")
-    @Test(priority = 27, groups = "Cash Items", description = "7h")
+    @Test(priority = 27, groups = "Cash Items", description = "7h - Add batch")
     public void _7h() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus1.csv");
@@ -2119,7 +2119,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions on cash items dashboard without maker checker")
-    @Test(priority = 27, groups = "Cash Items", description = "7i")
+    @Test(priority = 27, groups = "Cash Items", description = "7i - Approve Duplicates")
     public void _7i() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
@@ -2184,7 +2184,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions with maker checker enabled")
-    @Test(priority = 28, groups = "Cash Items", description = "6a")
+    @Test(priority = 28, groups = "Cash Items", description = "6a - Ignore Item")
     public void _6a() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -2292,7 +2292,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions with maker checker enabled")
-    @Test(priority = 29, groups = "Cash Items", description = "6b")
+    @Test(priority = 29, groups = "Cash Items", description = "6b - Ignore Batch")
     public void _6b() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -2397,7 +2397,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions with maker checker enabled")
-    @Test(priority = 30, groups = "Cash Items", description = "6c")
+    @Test(priority = 30, groups = "Cash Items", description = "6c - Ignore File")
     public void _6c() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -2505,7 +2505,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions with maker checker enabled")
-    @Test(priority = 31, groups = "Cash Items", description = "6f")
+    @Test(priority = 31, groups = "Cash Items", description = "6f - Add Item to Batch")
     public void _6f() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/case7/7f_file1.xlsx");
@@ -2584,7 +2584,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions with maker checker enabled")
-    @Test(priority = 32, groups = "Cash Items", description = "6g")
+    @Test(priority = 32, groups = "Cash Items", description = "6g - Update Batch Balances")
     public void _6g() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -2691,7 +2691,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions with maker checker enabled")
-    @Test(priority = 33, groups = "Cash Items", description = "6h")
+    @Test(priority = 33, groups = "Cash Items", description = "6h - Add Batch")
     public void _6h() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingInconsistentWithLastClosingWithStatus1.csv");
@@ -2815,7 +2815,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Right click actions with maker checker enabled")
-    @Test(priority = 34, groups = "Cash Items", description = "6i")
+    @Test(priority = 34, groups = "Cash Items", description = "6i - Approve Duplicates")
     public void _6i() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/correctAutomationWithStatus.xlsx");
@@ -2910,7 +2910,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Check right click actions for certain failure messages")
-    @Test(priority = 35, groups = "Cash Items", description = "8a")
+    @Test(priority = 35, groups = "Cash Items", description = "8a - Opening/Closing Balance Inconsistent- Add Item to Batch, Update Batch Balances")
     public void _8a() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/openingClosingInconsistentWithStatus.xlsx");
@@ -2953,7 +2953,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Check right click actions for certain failure messages")
-    @Test(priority = 36, groups = "Cash Items", description = "8b")
+    @Test(priority = 36, groups = "Cash Items", description = "8b - Opening balance inconsistent with last closing balance - Add Batch, Update Batch Balances")
     public void _8b() throws Exception {
 
         FileAttachmentUtil.attachCsv("dataFiles/csvFiles/openingClosingInconsistentWithStatus1.csv");
@@ -2996,7 +2996,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Check right click actions for certain failure messages")
-    @Test(priority = 37, groups = "Cash Items", description = "8c")
+    @Test(priority = 37, groups = "Cash Items", description = "8c - Balance missing or inconsistent - Update Batch Balances")
     public void _8c() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/balanceMissingOrInconsistentWithStatus.xlsx");
@@ -3038,7 +3038,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Check right click actions for certain failure messages")
-    @Test(priority = 38, groups = "Cash Items", description = "8d")
+    @Test(priority = 38, groups = "Cash Items", description = "8d - When there is no Fund and Fund Group, Add Item to Batch should not be allowed")
     public void _8d() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/case8/8d.xlsx");
@@ -3077,7 +3077,7 @@ public class CashReconTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Cash Items")
     @Story("Check right click actions for certain failure messages")
-    @Test(priority = 39, groups = "Cash Items", description = "8e")
+    @Test(priority = 39, groups = "Cash Items", description = "8e - When there is no Fund and Fund Group, Add Batch should not be allowed")
     public void _8e() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/case8/8e_1.xlsx");
@@ -3118,8 +3118,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD1 - Fund and fund group lookup after reprocess")
-    @Test(priority = 40, groups = "Prod Issues", description = "PROD1 - Fund and fund group lookup after reprocess")
+    @Story("PROD11 - Fund and fund group lookup after reprocess")
+    @Test(priority = 40, groups = "Prod Issues", description = "PROD11 - Fund and fund group lookup after reprocess")
     public void _PROD1() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod1.xlsx");
@@ -3215,8 +3215,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD2 - Transformation errors in API Import - Event & Citems statuses")
-    @Test(priority = 41, groups = "Prod Issues", description = "PROD2 - Transformation errors in API Import - Event & citems statuses")
+    @Story("PROD15 - Transformation errors in API Import - Event & Citems statuses")
+    @Test(priority = 41, groups = "Prod Issues", description = "PROD15 - Transformation errors in API Import - Event & citems statuses")
     public void _PROD2() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/le_51_records.xlsx");
@@ -3278,8 +3278,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD3 - Group exists after grouped items removed")
-    @Test(priority = 42, groups = "Prod Issues", description = "PROD3 - Group exists after grouped items removed")
+    @Story("PROD24 - Group exists after grouped items removed")
+    @Test(priority = 42, groups = "Prod Issues", description = "PROD24 - Group exists after grouped items removed")
     public void _PROD3() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/prod3.xlsx");
@@ -3321,8 +3321,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD4 - Date filter issue in cash balances and sign off")
-    @Test(priority = 43, groups = "Prod Issues", description = "PROD4 - Date filter issue in cash balances and sign off")
+    @Story("PROD9 - Date filter issue in cash balances and sign off")
+    @Test(priority = 43, groups = "Prod Issues", description = "PROD9 - Date filter issue in cash balances and sign off")
     public void _PROD4() {
 
         String insertRecordIntoBalanceTable =
@@ -3423,8 +3423,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD5 - Split Source for blank file/files")
-    @Test(priority = 44, groups = "Prod Issues", description = "PROD5 - Split Source for blank file/files")
+    @Story("PROD1 - Split Source for blank file/files")
+    @Test(priority = 44, groups = "Prod Issues", description = "PROD1 - Split Source for blank file/files")
     public void _PROD5() throws Exception {
 
         FileAttachmentUtil.attachExcel("dataFiles/excelFiles/blankSingle.xlsx");
@@ -3469,8 +3469,8 @@ public class CashReconTest extends BaseTest {
     @Owner("QA")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("PROD ISSUES")
-    @Story("PROD6 - Reprocess when Batch ID is null")
-    @Test(priority = 45, groups = "Prod Issues", description = "PROD6 - Reprocess when Batch ID is null")
+    @Story("PROD22 - Reprocess when Batch ID is null")
+    @Test(priority = 45, groups = "Prod Issues", description = "PROD22 - Reprocess when Batch ID is null")
     public void _PROD6() throws Exception {
 
         List<String> requiredColumns = Arrays.asList("status", "status_details");
@@ -3523,6 +3523,40 @@ public class CashReconTest extends BaseTest {
 
         eventService.assertLatestEventCompleted(
                 prop.getProperty("recon_id"));
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("PROD ISSUES")
+    @Story("PROD5 - UI API Call remains stuck in Running when API returns no data")
+    @Test(priority = 46, groups = "Prod Issues", description = "PROD5 - UI API Call remains stuck in Running when API returns no data")
+    public void _PROD7() {
+
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("empty_api_recon"));
+
+        cashItemsPage.selectAndTriggerApi("API_NO_RECORDS");
+
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("empty_api_recon_id")
+        );
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("PROD ISSUES")
+    @Story("PROD2 - When Parallel Processing handles the same file twice for a single import rule, the event remains stuck in Running")
+    @Test(priority = 47, groups = "Prod Issues", description = "PROD2 - When Parallel Processing handles the same file twice for a single import rule, the event remains stuck in Running")
+    public void _PROD8() {
+
+        cashItemsPage = homePage.goToCashItems();
+        cashItemsPage.selectRecon(prop.getProperty("empty_api_recon"));
+
+        cashItemsPage.selectAndTriggerApi("API_NO_RECORDS");
+
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("empty_api_recon_id")
+        );
     }
 
 }
