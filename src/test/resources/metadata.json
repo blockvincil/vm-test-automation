@@ -30,6 +30,9 @@
     "splitSourceSingle": "BLANK_SINGLE",
     "splitSourceMultiple": "BLANK_MULTIPLE",
     "splitCash2Purge": "PURGE",
-    "prod6": "prod6"
+    "prod6": "prod6",
+    "ppr1_import": "PPR1_IMPORT",
+    "ppr2_import": "PPR2_IMPORT",
+    "ppr3_import": "PPR3_IMPORT"
   }
 }

@@ -54,9 +54,19 @@ public class EventService {
      * @param reconId The reconciliation ID to check.
      * @param timeoutSeconds The maximum time to wait for the event to complete.
      */
-    private void assertLatestEventCompleted(String reconId, int timeoutSeconds) {
+    public void assertLatestEventCompleted(String reconId, int timeoutSeconds) {
+        assertLatestEventCompleted(reconId, timeoutSeconds, POLL_INTERVAL_MS);
+    }
 
-        String finalStatus = waitForEventToFinish(reconId, timeoutSeconds);
+    /**
+     * Asserts that the latest event for the given reconciliation ID has completed within the specified timeout.
+     * @param reconId The reconciliation ID to check.
+     * @param timeoutSeconds The maximum time to wait for the event to complete.
+     * @param pollIntervalMs The interval in milliseconds to check the status.
+     */
+    public void assertLatestEventCompleted(String reconId, int timeoutSeconds, int pollIntervalMs) {
+
+        String finalStatus = waitForEventToFinish(reconId, timeoutSeconds, pollIntervalMs);
         System.out.println("Final status: " + finalStatus + " for reconId: " + reconId);
 
         if ("Completed".equalsIgnoreCase(finalStatus)) {
@@ -113,6 +123,10 @@ public class EventService {
        ====================================================== */
 
     private String waitForEventToFinish(String reconId, int timeoutSeconds) {
+        return waitForEventToFinish(reconId, timeoutSeconds, POLL_INTERVAL_MS);
+    }
+
+    private String waitForEventToFinish(String reconId, int timeoutSeconds, int pollIntervalMs) {
 
         long endTime = System.currentTimeMillis()
                 + (timeoutSeconds * 1000L);
@@ -124,7 +138,7 @@ public class EventService {
             status = repository.getLatestEventStatus(reconId);
 
             if (status == null) {
-                sleep();
+                sleep(pollIntervalMs);
                 continue;
             }
 
@@ -132,7 +146,7 @@ public class EventService {
                 return status;
             }
 
-            sleep();
+            sleep(pollIntervalMs);
         }
 
         return repository.getLatestEventStatus(reconId);
@@ -146,8 +160,12 @@ public class EventService {
     }
 
     private void sleep() {
+        sleep(POLL_INTERVAL_MS);
+    }
+
+    private void sleep(int milliseconds) {
         try {
-            Thread.sleep(POLL_INTERVAL_MS);
+            Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

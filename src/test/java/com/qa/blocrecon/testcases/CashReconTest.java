@@ -3542,7 +3542,7 @@ public class CashReconTest extends BaseTest {
 
             boolean isDataPresentInSignOffAfterDateFilter = signOffPage.signOffDataPresent();
             if (!isDataPresentInSignOffAfterDateFilter) {
-                softAssert.fail("No records found n Sign Off after Date Filter");
+                softAssert.fail("No records found in Sign Off after Date Filter");
             }
 
             gridPage = new GridPage(driver);
@@ -3689,7 +3689,7 @@ public class CashReconTest extends BaseTest {
         cashItemsPage.selectAndTriggerApi("API_NO_RECORDS");
 
         eventService.assertLatestEventCompleted(
-                prop.getProperty("empty_api_recon_id")
+                prop.getProperty("empty_api_recon_id"), 90, 10000
         );
     }
 
@@ -3698,15 +3698,36 @@ public class CashReconTest extends BaseTest {
     @Feature("PROD ISSUES")
     @Story("PROD2 - When Parallel Processing handles the same file twice for a single import rule, the event remains stuck in Running")
     @Test(priority = 47, groups = "Prod Issues", description = "PROD2 - When Parallel Processing handles the same file twice for a single import rule, the event remains stuck in Running")
-    public void _PROD8() {
+    public void _PROD8() throws InterruptedException {
 
-        cashItemsPage = homePage.goToCashItems();
-        cashItemsPage.selectRecon(prop.getProperty("empty_api_recon"));
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
 
-        cashItemsPage.selectAndTriggerApi("API_NO_RECORDS");
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("ppr1"),
+                eventRuleHierarchiesPageDTO.getPPR1_import()
+        );
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("ppr2"),
+                eventRuleHierarchiesPageDTO.getPPR2_import()
+        );
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("ppr3"),
+                eventRuleHierarchiesPageDTO.getPPR3_import()
+        );
 
         eventService.assertLatestEventCompleted(
-                prop.getProperty("empty_api_recon_id")
+                prop.getProperty("ppr1_id"), 450, 15000
+        );
+
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("ppr2_id"), 450, 15000
+        );
+
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("ppr3_id"), 450, 15000
         );
     }
 

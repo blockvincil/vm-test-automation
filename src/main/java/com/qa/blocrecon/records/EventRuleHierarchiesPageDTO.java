@@ -32,6 +32,9 @@ public class EventRuleHierarchiesPageDTO {
     private String splitSourceMultiple;
     private String splitCash2Purge;
     private String prod6;
+    private String ppr1_import;
+    private String ppr2_import;
+    private String ppr3_import;
 
     public String getImportData() {
         return importData;
@@ -39,6 +42,18 @@ public class EventRuleHierarchiesPageDTO {
 
     public String getProd6() {
         return prod6;
+    }
+
+    public String getPPR1_import() {
+        return ppr1_import;
+    }
+
+    public String getPPR2_import() {
+        return ppr2_import;
+    }
+
+    public String getPPR3_import() {
+        return ppr3_import;
     }
 
     public String getSplitCash2Purge() { return splitCash2Purge; }
