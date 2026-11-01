@@ -35,6 +35,8 @@ public class EventRuleHierarchiesPageDTO {
     private String ppr1_import;
     private String ppr2_import;
     private String ppr3_import;
+    private String compareSourceImport1;
+    private String compareSourceImport2;
 
     public String getImportData() {
         return importData;
@@ -46,6 +48,14 @@ public class EventRuleHierarchiesPageDTO {
 
     public String getPPR1_import() {
         return ppr1_import;
+    }
+
+    public String getCompareSourceImport1() {
+        return compareSourceImport1;
+    }
+
+    public String getCompareSourceImport2() {
+        return compareSourceImport2;
     }
 
     public String getPPR2_import() {

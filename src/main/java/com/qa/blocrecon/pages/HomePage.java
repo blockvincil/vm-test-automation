@@ -29,6 +29,7 @@ public class HomePage {
     private final By explorers = By.xpath("//span[text()='Explorers']/..");
     private final By cashReconMainDropdown = By.xpath("(//span[text()='Cash Recon']/..)[1]");
     private final By eventRuleHierarchies = By.xpath("//span[text()='Event Rule Hierarchies']/..");
+    private final By reconConfiguration = By.xpath("//span[text()='Recon Configuration']/..");
     private final By sourceExplorer = By.xpath("//span[text()='Source Explorer']/..");
     private final By cashItems = By.xpath("//span[text()='Cash Items']/..");
     private final By signOff = By.xpath("//span[text()='Sign Off']/..");
@@ -36,6 +37,7 @@ public class HomePage {
     private final By cashReconDashboard = By.xpath("(//span[text()='Cash Recon']/..)[last()]");
     private final By cashBalances = By.xpath("//span[text()='Cash Balances']/..");
     private final By eventRuleHierarchiesList = By.xpath("//ul[@class='flex-nowrap px-0 nav flex-column nav-tabs']");
+    private final By reconConfigurationList = By.xpath("//ul[@class='flex-nowrap px-0 nav flex-column nav-tabs']");
     private final By cashItemsDropdown = By.xpath("//select[@name='explorerName']");
     private final By selectSourceDropdown = By.tagName("select");
     private final By cashBalancesDropdown = By.xpath("//select[@name='explorerName']");
@@ -93,6 +95,11 @@ public class HomePage {
         waitUtil.waitForElementVisible(eventRuleHierarchiesList, AppConstants.time10);
     }
 
+    private void clickReconConfiguration() {
+        waitUtil.waitForElementToBeClickable(reconConfiguration, AppConstants.time10).click();
+        waitUtil.waitForElementVisible(reconConfigurationList, AppConstants.time10);
+    }
+
     private void clickSourceExplorer() {
         waitUtil.waitForElementToBeClickable(sourceExplorer, AppConstants.time10).click();
         waitUtil.waitForElementVisible(selectSourceDropdown, AppConstants.time20);
@@ -116,6 +123,16 @@ public class HomePage {
         waitUtil.waitFor(1);
         // clickProcessSetup();
         return new EventRuleHierarchiesPage(driver);
+    }
+
+    public ReconConfigurationPage goToReconConfiguration () throws InterruptedException {
+        Allure.step("Navigate to Recon Configuration dashboard");
+        clickReconConfiguration();
+        waitUtil.waitFor(1);
+        clickEventRuleHierarchies();
+        waitUtil.waitFor(1);
+        // clickProcessSetup();
+        return new ReconConfigurationPage(driver);
     }
 
     /**

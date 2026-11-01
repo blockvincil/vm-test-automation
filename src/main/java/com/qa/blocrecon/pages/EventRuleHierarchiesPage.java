@@ -24,15 +24,15 @@ public class EventRuleHierarchiesPage {
     /*****************************************************Static Locators**************************************************/
 
     private final By reconList = By.xpath("//ul[@class='flex-nowrap px-0 nav flex-column nav-tabs']");
-    private final By eventsList = By.xpath("//span[@title='Events']/ancestor::ul");
     private final By reconSearchBar = By.xpath("//input[@placeholder='Search...']");
+    private final By eventsList = By.xpath("//span[@title='Events']/ancestor::ul");
     private final By eventSearchBar = By.xpath("//*[text()='Events']/following::input[@placeholder='Search...'][1]");
     private final By triggerEventButton = By.xpath("//button[text()='Trigger Event']");
     private final By eventTriggeredNotification = By.xpath("//div[@class='notification-message' and text()='Event triggered successfully']");
 
     /*****************************************************Dynamic Locators*************************************************/
 
-    private By searchResule(String searchTerm) {
+    private By searchResult(String searchTerm) {
         return By.xpath("//a[@title = '" + searchTerm + "']");
     }
 
@@ -45,14 +45,15 @@ public class EventRuleHierarchiesPage {
     private void searchAndSelectRecon(String reconName) {
         waitUtil.waitForElementVisible(reconList, AppConstants.time10);
         eleUtil.doSendKeys(reconSearchBar, reconName, AppConstants.time3);
-        eleUtil.doClick(searchResule(reconName), AppConstants.time10);
+        eleUtil.doClick(searchResult(reconName), AppConstants.time10);
         waitUtil.waitForElementsVisible(eventsList, AppConstants.time10);
     }
 
     private void searchAndSelectEvent(String eventName) {
         waitUtil.waitForElementVisible(eventsList, AppConstants.time10);
         eleUtil.doSendKeys(eventSearchBar, eventName, AppConstants.time3);
-        eleUtil.doClick(searchResule(eventName), AppConstants.time10);
+        waitUtil.waitFor(1);
+        eleUtil.doClick(searchResult(eventName), AppConstants.time10);
         waitUtil.waitForElementVisible(triggerEventButton, AppConstants.time20);
     }
 

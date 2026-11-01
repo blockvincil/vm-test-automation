@@ -1,14 +1,15 @@
+
 package com.qa.blocrecon.utils;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
 public final class DataNormalizerUtil {
 
-    // 🔹 Prevent instantiation
     private DataNormalizerUtil() {}
 
-    // 🔹 Define column categories
     private static final Set<String> NUMERIC_COLUMNS = Set.of(
             "amount",
             "openingbalance",
@@ -18,7 +19,12 @@ public final class DataNormalizerUtil {
     private static final Set<String> DATE_COLUMNS = Set.of(
             "itemdate",
             "openingbalancedate",
-            "closingbalancedate"
+            "closingbalancedate",
+            "datefield"
+    );
+
+    private static final Set<String> DATETIME_COLUMNS = Set.of(
+            "datetimefield"
     );
 
     private static final Set<String> DBCR_COLUMNS = Set.of(
@@ -27,10 +33,6 @@ public final class DataNormalizerUtil {
             "closingbalance_dbcr"
     );
 
-    /**
-     * Main normalization entry point.
-     * Call this everywhere before adding value to your Map.
-     */
     public static String normalize(String colId, String value) {
 
         if (value == null) {
@@ -38,77 +40,79 @@ public final class DataNormalizerUtil {
         }
 
         value = value.trim();
-
         String lowerCol = colId.toLowerCase();
 
-        // 🔹 Numeric handling
         if (NUMERIC_COLUMNS.contains(lowerCol)) {
             return normalizeNumeric(value);
         }
 
-        // 🔹 Date handling
         if (DATE_COLUMNS.contains(lowerCol)) {
             return normalizeDate(value);
         }
 
-        // 🔹 DB/CR handling
+        if (DATETIME_COLUMNS.contains(lowerCol)) {
+            return normalizeDateTime(value);
+        }
+
         if (DBCR_COLUMNS.contains(lowerCol)) {
             return normalizeDbCr(value);
         }
 
-        // 🔹 Default handling (text fields)
         return normalizeText(value);
     }
 
-    // -------------------------
-    // 🔹 Numeric Normalization
-    // -------------------------
     private static String normalizeNumeric(String value) {
-
         try {
-            // Remove commas if present (1,000.00)
-            value = value.replace(" ", "");
-            value = value.replace(",", "");
-
+            value = value.replace(" ", "").replace(",", "");
             BigDecimal bd = new BigDecimal(value);
-
-            // Remove trailing zeros
-            bd = bd.stripTrailingZeros();
-
-            return bd.toPlainString();
-
+            return bd.stripTrailingZeros().toPlainString();
         } catch (Exception e) {
-            return value; // fallback if not valid number
+            return value;
         }
     }
 
-    // -------------------------
-    // 🔹 Date Normalization
-    // -------------------------
     private static String normalizeDate(String value) {
+        return value.replace("/", "-");
+    }
 
-        // Standardize to YYYY-MM-DD format style
-        value = value.replace("/", "-");
+    private static String normalizeDateTime(String value) {
+
+        if (value.isEmpty()) {
+            return "";
+        }
+
+        String[] formats = {
+                "yyyy/MM/dd HH:mm:ss.SSS",
+                "yyyy-MM-dd HH:mm:ss.SSS",
+                "yyyy/MM/dd HH:mm:ss",
+                "yyyy-MM-dd HH:mm:ss"
+        };
+
+        for (String format : formats) {
+            SimpleDateFormat inputFormat = new SimpleDateFormat(format);
+            inputFormat.setLenient(false);
+
+            try {
+                java.util.Date date = inputFormat.parse(value);
+
+                SimpleDateFormat outputFormat =
+                        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+                return outputFormat.format(date);
+
+            } catch (ParseException ignored) {
+                // Try the next supported format.
+            }
+        }
 
         return value;
     }
 
-    // -------------------------
-    // 🔹 DB/CR Normalization
-    // -------------------------
     private static String normalizeDbCr(String value) {
-
-        return value.trim().toUpperCase();
+        return value.toUpperCase();
     }
 
-    // -------------------------
-    // 🔹 Text Normalization
-    // -------------------------
     private static String normalizeText(String value) {
-
-        // Remove multiple spaces but preserve meaningful spacing
-        value = value.replaceAll("\\s+", " ");
-
-        return value;
+        return value.replaceAll("\\s+", " ");
     }
 }

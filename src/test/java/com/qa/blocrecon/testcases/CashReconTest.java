@@ -31,6 +31,7 @@ public class CashReconTest extends BaseTest {
     private EventRuleHierarchiesPage eventRuleHierarchiesPage;
     private SourceExplorerPage sourceExplorerPage;
     private CashItemsPage cashItemsPage;
+    private ReconConfigurationPage reconConfigurationPage;
     private CashReconPage cashReconPage;
     private CashBalancesPage cashBalancesPage;
     private SignOffPage signOffPage;
@@ -83,6 +84,9 @@ public class CashReconTest extends BaseTest {
             Map.entry("basecurrency", "Base Currency"),
             Map.entry("dbcr_4", "DB/CR"),
             Map.entry("amount", "Amount"),
+            Map.entry("datefield", "dateField"),
+            Map.entry("datetimefield", "dateTimeField"),
+            Map.entry("booleanfield", "booleanField"),
             Map.entry("fund", "Fund"),
             Map.entry("fundgroup", "Fund Group"),
             Map.entry("openingbalance", "Opening Balance"),
@@ -142,17 +146,17 @@ public class CashReconTest extends BaseTest {
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", sourceColumnKeyMapping, requiredColumns);
 
 //      Debug print
-//        for (Map<String, String> row : excelData)
-//            System.out.println(row);
+        for (Map<String, String> row : excelData)
+            System.out.println(row);
 
         // 6. Fetch required data from source through UI
         gridPage = new GridPage(driver);
         List<Map<String, String>> sourceGridData = gridPage.getGridRawData(requiredColumns);
 
 //      Debug print
-//        System.out.println("\n");
-//        for (Map<String, String> row : sourceGridData)
-//            System.out.println(row);
+        System.out.println("\n");
+        for (Map<String, String> row : sourceGridData)
+            System.out.println(row);
 
         // 7. Compare Excel data with source data
         List<String> comparisonErrors =
@@ -3729,6 +3733,147 @@ public class CashReconTest extends BaseTest {
         eventService.assertLatestEventCompleted(
                 prop.getProperty("ppr3_id"), 450, 15000
         );
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("PROD ISSUES")
+    @Story("PROD3 - When Maker/Checker is enabled, newly added Recon fields are unavailable in the Recon Source Field Map and cannot be mapped")
+    @Test(priority = 47, groups = "Prod Issues", description = "PROD3 - When Maker/Checker is enabled, newly added Recon fields are unavailable in the Recon Source Field Map and cannot be mapped")
+    public void _PROD9() throws InterruptedException {
+
+        reconConfigurationPage = homePage.goToReconConfiguration();
+//        reconConfigurationPage.searchAndSelectRecon(prop.getProperty("recon_1334"));
+    }
+
+    @Owner("QA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("PROD ISSUES")
+    @Story("PROD25 - When Compare Source is used, duplicate asset_id values are generated instead of assigning a unique asset_id to each resulting record")
+    @Test(priority = 47, groups = "Prod Issues", description = "PROD25 - When Compare Source is used, duplicate asset_id values are generated instead of assigning a unique asset_id to each resulting record")
+    public void _PROD10() throws InterruptedException {
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/compareSourceAfterOneImport.xlsx");
+        FileAttachmentUtil.attachExcel("dataFiles/excelFiles/compareSourceAfterTwoImports.xlsx");
+
+        // 0. Define the list of required columns required for validation
+        List<String> requiredColumns = Arrays.asList("subaccount", "amount", "datefield", "datetimefield", "booleanfield");
+        List<String> assetId = Arrays.asList("asset_id");
+
+        // 1. Trigger import from Event Rule Hierarchies dashboard
+        eventRuleHierarchiesPage = homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getCompareSourceImport1()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 3. Navigate to source explorer and select source
+        sourceExplorerPage = homePage.goToSourceExplorer();
+        sourceExplorerPage.selectSource("BLOC_1385");
+
+        // 4. Check if source table is not empty
+        Assert.assertTrue(sourceExplorerPage.isSourcesDataPresent(), "Source table is empty but event is completed");
+
+        // 5. Fetch data from Excel
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/compareSourceAfterOneImport.xlsx");
+
+        List<Map<String, String>> excelData =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", sourceColumnKeyMapping, requiredColumns);
+
+//      Debug print
+//        for (Map<String, String> row : excelData)
+//            System.out.println(row);
+
+        // 6. Fetch required data from source through UI
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> sourceGridData = gridPage.getGridRawData(requiredColumns);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : sourceGridData)
+//            System.out.println(row);
+
+        // 7. Compare Excel data with source data
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, sourceGridData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Source data validation failed:\n" + String.join("\n", comparisonErrors));
+
+//      ********************************************Import 1 ends***********************************************      //
+
+        homePage.goToEventRuleHierarchies();
+
+        eventRuleHierarchiesPage.selectReconAndEventAndTrigger(
+                prop.getProperty("recon_name"),
+                eventRuleHierarchiesPageDTO.getCompareSourceImport2()
+        );
+
+        // 2. Backend verification (Event status validation)
+        eventService.assertLatestEventCompleted(
+                prop.getProperty("recon_id")
+        );
+
+        // 3. Navigate to source explorer and select source
+        sourceExplorerPage = homePage.goToSourceExplorer();
+        sourceExplorerPage.selectSource("BLOC_1385");
+
+        // 4. Check if source table is not empty
+        Assert.assertTrue(sourceExplorerPage.isSourcesDataPresent(), "Source table is empty but event is completed");
+
+        // 5. Fetch data from Excel
+        InputStream is1 = getClass()
+                .getClassLoader()
+                .getResourceAsStream("dataFiles/excelFiles/compareSourceAfterTwoImports.xlsx");
+
+        List<Map<String, String>> excelData2 =
+                ExcelUtil.readExcelNormalizedWithRequiredHeaders(is1, "Sheet1", sourceColumnKeyMapping, requiredColumns);
+
+//      Debug print
+//        for (Map<String, String> row : excelData)
+//            System.out.println(row);
+
+        // 6. Fetch required data from source through UI
+        gridPage = new GridPage(driver);
+        List<Map<String, String>> sourceGridData2 = gridPage.getGridRawData(requiredColumns);
+        List<Map<String, String>> assetIdList = gridPage.getGridRawData(assetId);
+
+        // Assert all asset_id values are unique
+        Set<String> uniqueAssetIds = new HashSet<>();
+        for (Map<String, String> row : assetIdList) {
+            String assetIdLocal = row.get("asset_id");
+            if (assetIdLocal != null) {
+                uniqueAssetIds.add(assetIdLocal);
+            }
+        }
+        softAssert.assertEquals(uniqueAssetIds.size(), assetIdList.size(),
+                "Duplicate asset_id values found. Expected " + assetIdList.size() + " unique values, but found " + uniqueAssetIds.size());
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : sourceGridData2)
+//            System.out.println(row);
+
+//      Debug print
+//        System.out.println("\n");
+//        for (Map<String, String> row : assetIdList)
+//            System.out.println(row);
+
+        // 7. Compare Excel data with source data
+        List<String> comparisonErrors2 =
+                ListUtil.compare2DMapsWithDetails(excelData2, sourceGridData2);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Source data validation failed:\n" + String.join("\n", comparisonErrors2));
+
+        softAssert.assertAll();
     }
 
 }

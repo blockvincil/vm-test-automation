@@ -15,6 +15,21 @@ import com.qa.blocrecon.utils.DataNormalizerUtil;
 
 public class ExcelUtil {
 
+    private static String normalizeDate(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            return "";
+        }
+
+        String normalized = value.trim().replace("/", "-");
+
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd")
+                    .format(new SimpleDateFormat("yyyy-MM-dd").parse(normalized));
+        } catch (Exception e) {
+            return normalized;
+        }
+    }
+
     public static List<Map<String, String>> readExcelNormalizedWithRequiredHeaders(
             InputStream inputStream,
             String sheetName,
