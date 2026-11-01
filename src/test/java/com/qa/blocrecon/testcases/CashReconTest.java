@@ -155,7 +155,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 7. Compare Excel data with source data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, sourceGridData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, sourceGridData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Source data validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -219,7 +223,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 7. Compare Excel data with cash items data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, cashItemsGridData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, cashItemsGridData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -287,7 +295,12 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with Cash Balances data
-        Assert.assertTrue(ListUtil.compare2DMaps(cashItemsGridData, cashBalancesData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(cashItemsGridData, cashBalancesData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items vs Cash Balances validation failed:\n"
+                        + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -346,7 +359,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 7. Compare Excel data with source data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, sourceGridData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, sourceGridData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Source data validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -414,7 +431,12 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with Cash Balances data
-        Assert.assertTrue(ListUtil.compare2DMaps(cashItemsGridData, cashBalancesData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(cashItemsGridData, cashBalancesData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items vs Cash Balances validation failed:\n"
+                        + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -473,7 +495,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -533,7 +559,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -593,7 +623,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -653,7 +687,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -713,7 +751,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -791,7 +833,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 7. Compare Excel data with source data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, sourceGridData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, sourceGridData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Source data validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -867,7 +913,12 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with Cash Balances data
-        Assert.assertTrue(ListUtil.compare2DMaps(cashItemsGridData, cashBalancesData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(cashItemsGridData, cashBalancesData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items vs Cash Balances validation failed:\n"
+                        + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -944,7 +995,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -1022,7 +1077,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -1100,7 +1159,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -1177,7 +1240,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -1255,7 +1322,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
     }
 
@@ -1333,7 +1404,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -1416,7 +1491,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -1480,7 +1559,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 7. Compare Excel data with cash items data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, cashItemsGridData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, cashItemsGridData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -1544,7 +1627,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 7. Compare Excel data with cash items data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, cashItemsGridData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, cashItemsGridData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -1608,7 +1695,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 7. Compare Excel data with cash items data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, cashItemsGridData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, cashItemsGridData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -1672,7 +1763,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 7. Compare Excel data with cash items data
-        Assert.assertTrue(ListUtil.compare2DMaps(excelData, cashItemsGridData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, cashItemsGridData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
     }
 
     @Owner("QA")
@@ -1737,7 +1832,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -1811,7 +1910,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -1885,7 +1988,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -2013,7 +2120,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -2101,7 +2212,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -2245,7 +2360,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
 
         gridPage.adjustZoom(15);
@@ -2352,7 +2471,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -2457,7 +2580,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -2644,7 +2771,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData));
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Cash Items validation failed:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -2762,7 +2893,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        Assert.assertTrue(ListUtil.compare2DMaps(twoBatchesCombinedCsvData, rawData), "Data mismatch in Cash Items");
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(twoBatchesCombinedCsvData, rawData);
+
+        Assert.assertTrue(comparisonErrors.isEmpty(),
+                "Data mismatch in Cash Items:\n" + String.join("\n", comparisonErrors));
 
         gridPage.adjustZoom(15);
 
@@ -3183,7 +3318,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData), "Data mismatch before reprocess");
+        List<String> comparisonErrorsBeforeReprocess =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrorsBeforeReprocess.isEmpty(),
+                "Data mismatch before reprocess:\n" + String.join("\n", comparisonErrorsBeforeReprocess));
 
         String changeCurrencyToINR = "update cr_accounts_map set currency='INR' where account='ACCSUB0884';";
         dbQueries.executeQuery(changeCurrencyToINR, "Rollback currency to properly remap the subaccount using DB query");
@@ -3208,7 +3347,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelDataAfterReprocess, rawDataAfterReprocess), "Data mismatch after reprocess");
+        List<String> comparisonErrorsAfterReprocess =
+                ListUtil.compare2DMapsWithDetails(excelDataAfterReprocess, rawDataAfterReprocess);
+
+        softAssert.assertTrue(comparisonErrorsAfterReprocess.isEmpty(),
+                "Data mismatch after reprocess:\n" + String.join("\n", comparisonErrorsAfterReprocess));
         softAssert.assertAll();
     }
 
@@ -3269,7 +3412,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData), "Status mismatch");
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Status mismatch:\n" + String.join("\n", comparisonErrors));
 
         softAssert.assertAll();
 
@@ -3517,7 +3664,11 @@ public class CashReconTest extends BaseTest {
 //            System.out.println(row);
 
         // 8. Compare Cash Items data with expected data
-        softAssert.assertTrue(ListUtil.compare2DMaps(excelData, rawData), "Data mismatch before reprocess");
+        List<String> comparisonErrors =
+                ListUtil.compare2DMapsWithDetails(excelData, rawData);
+
+        softAssert.assertTrue(comparisonErrors.isEmpty(),
+                "Data mismatch before reprocess:\n" + String.join("\n", comparisonErrors));
 
         cashItemsPage.reprocess();
 

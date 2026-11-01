@@ -1,14 +1,55 @@
 package com.qa.blocrecon.utils;
 
 import io.qameta.allure.Allure;
+import org.apache.logging.log4j.core.util.Assert;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ListUtil {
 
     private ListUtil() {
+    }
+
+    public static List<String> compare2DMapsWithDetails(
+            List<Map<String, String>> expected,
+            List<Map<String, String>> actual) {
+
+        List<String> errors = new ArrayList<>();
+
+        Map<Map<String, String>, Integer> expectedCounts = new HashMap<>();
+        Map<Map<String, String>, Integer> actualCounts = new HashMap<>();
+
+        for (Map<String, String> row : expected) {
+            expectedCounts.merge(new HashMap<>(row), 1, Integer::sum);
+        }
+
+        for (Map<String, String> row : actual) {
+            actualCounts.merge(new HashMap<>(row), 1, Integer::sum);
+        }
+
+        Set<Map<String, String>> allRows = new HashSet<>();
+        allRows.addAll(expectedCounts.keySet());
+        allRows.addAll(actualCounts.keySet());
+
+        for (Map<String, String> row : allRows) {
+
+            int expectedCount = expectedCounts.getOrDefault(row, 0);
+            int actualCount = actualCounts.getOrDefault(row, 0);
+
+            if (expectedCount > actualCount) {
+                errors.add("Missing in UI: " + row
+                        + " | Expected occurrences: " + expectedCount
+                        + " | Actual occurrences: " + actualCount);
+            }
+
+            if (actualCount > expectedCount) {
+                errors.add("Unexpected in UI: " + row
+                        + " | Expected occurrences: " + expectedCount
+                        + " | Actual occurrences: " + actualCount);
+            }
+        }
+
+        return errors;
     }
 
     public static boolean compare2DMaps(
