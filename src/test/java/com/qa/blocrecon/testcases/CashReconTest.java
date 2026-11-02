@@ -146,17 +146,17 @@ public class CashReconTest extends BaseTest {
                 ExcelUtil.readExcelNormalizedWithRequiredHeaders(is, "Sheet1", sourceColumnKeyMapping, requiredColumns);
 
 //      Debug print
-        for (Map<String, String> row : excelData)
-            System.out.println(row);
+//        for (Map<String, String> row : excelData)
+//            System.out.println(row);
 
         // 6. Fetch required data from source through UI
         gridPage = new GridPage(driver);
         List<Map<String, String>> sourceGridData = gridPage.getGridRawData(requiredColumns);
 
 //      Debug print
-        System.out.println("\n");
-        for (Map<String, String> row : sourceGridData)
-            System.out.println(row);
+//        System.out.println("\n");
+//        for (Map<String, String> row : sourceGridData)
+//            System.out.println(row);
 
         // 7. Compare Excel data with source data
         List<String> comparisonErrors =
