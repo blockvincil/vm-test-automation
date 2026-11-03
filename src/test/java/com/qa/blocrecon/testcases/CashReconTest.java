@@ -3742,8 +3742,43 @@ public class CashReconTest extends BaseTest {
     @Test(priority = 47, groups = "Prod Issues", description = "PROD3 - When Maker/Checker is enabled, newly added Recon fields are unavailable in the Recon Source Field Map and cannot be mapped")
     public void _PROD9() throws InterruptedException {
 
+        WebDriver chromeDriver = driver;
+
         reconConfigurationPage = homePage.goToReconConfiguration();
-//        reconConfigurationPage.searchAndSelectRecon(prop.getProperty("recon_1334"));
+        String newFieldName = "autoField_" + UUID.randomUUID().toString().substring(0, 8);
+        reconConfigurationPage.createNewFieldForRecon(prop.getProperty("recon_1334"), newFieldName);
+
+        // Open a new Edge browser after existing operations
+        WebDriver edgeDriver = DriverFactory.createStandaloneEdgeDriver(
+                Boolean.parseBoolean(prop.getProperty("remote")),
+                prop.getProperty("selenium.grid.url")
+        );
+        edgeDriver.get(prop.getProperty("url").trim());
+
+        try {
+            // Perform operations in Edge browser here
+            LoginPage edgeLoginPage = new LoginPage(edgeDriver);
+            HomePage edgeHomePage = edgeLoginPage.enterCredentialsAndClickLoginButton(prop.getProperty("username2"), prop.getProperty("password2"));
+            edgeHomePage.disableResponsiveSidebar();
+            ReconConfigurationPage edgeReconConfigurationPage = edgeHomePage.goToReconConfiguration();
+//            ReconSourceFieldMapPage edgeReconSourceFieldMapPage = edgeHomePage.goToReconSourceFieldMap();
+
+            edgeReconConfigurationPage.selectReconAndApproveChanges(prop.getProperty("recon_1334"));
+
+            // Switch back to Chrome for validation
+            driver = chromeDriver;
+            ReconSourceFieldMapPage reconSourceFieldMapPage = homePage.goToReconSourceFieldMap();
+            reconSourceFieldMapPage.selectReconAndSource(prop.getProperty("recon_1334"), "SOURCE_1334");
+            gridPage = new GridPage(driver);
+            gridPage.adjustZoom(75);
+            String result = reconSourceFieldMapPage.verifyFieldInMapping(newFieldName);
+            Assert.assertTrue(result.contains("found in mapping successfully"), result);
+
+        } finally {
+            // Close the Edge browser instance
+            edgeDriver.quit();
+        }
+
     }
 
     @Owner("QA")

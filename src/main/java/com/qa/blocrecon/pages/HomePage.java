@@ -30,6 +30,7 @@ public class HomePage {
     private final By cashReconMainDropdown = By.xpath("(//span[text()='Cash Recon']/..)[1]");
     private final By eventRuleHierarchies = By.xpath("//span[text()='Event Rule Hierarchies']/..");
     private final By reconConfiguration = By.xpath("//span[text()='Recon Configuration']/..");
+    private final By reconSourceFieldMap = By.xpath("//span[text()='Recon Source Field Map']/..");
     private final By sourceExplorer = By.xpath("//span[text()='Source Explorer']/..");
     private final By cashItems = By.xpath("//span[text()='Cash Items']/..");
     private final By signOff = By.xpath("//span[text()='Sign Off']/..");
@@ -100,6 +101,7 @@ public class HomePage {
         waitUtil.waitForElementVisible(reconConfigurationList, AppConstants.time10);
     }
 
+
     private void clickSourceExplorer() {
         waitUtil.waitForElementToBeClickable(sourceExplorer, AppConstants.time10).click();
         waitUtil.waitForElementVisible(selectSourceDropdown, AppConstants.time20);
@@ -108,6 +110,11 @@ public class HomePage {
     private void clickCashBalances() {
         waitUtil.waitForElementToBeClickable(cashBalances, AppConstants.time10).click();
         waitUtil.waitForElementVisible(cashBalancesDropdown, AppConstants.time20);
+    }
+
+    private void clickReconSourceFieldMap() {
+        waitUtil.waitForElementToBeClickable(reconSourceFieldMap, AppConstants.time10).click();
+        waitUtil.waitForElementVisible(reconConfigurationList, AppConstants.time20);
     }
 
     /**
@@ -127,12 +134,19 @@ public class HomePage {
 
     public ReconConfigurationPage goToReconConfiguration () throws InterruptedException {
         Allure.step("Navigate to Recon Configuration dashboard");
+        clickProcessSetup();
         clickReconConfiguration();
         waitUtil.waitFor(1);
-        clickEventRuleHierarchies();
-        waitUtil.waitFor(1);
-        // clickProcessSetup();
+        waitUtil.waitForElementVisible(reconConfigurationList, AppConstants.time10);
         return new ReconConfigurationPage(driver);
+    }
+
+    public ReconSourceFieldMapPage goToReconSourceFieldMap() throws InterruptedException {
+        Allure.step("Navigate to Recon Source Field Map dashboard");
+        clickReconSourceFieldMap();
+        waitUtil.waitFor(1);
+        waitUtil.waitForElementVisible(reconConfigurationList, AppConstants.time10);
+        return new ReconSourceFieldMapPage(driver);
     }
 
     /**
