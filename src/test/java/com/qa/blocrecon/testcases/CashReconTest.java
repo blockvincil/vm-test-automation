@@ -3275,7 +3275,7 @@ public class CashReconTest extends BaseTest {
                 "openingbalance_dbcr", "closingbalance", "closingbalance_dbcr", "itemdate", "openingbalancedate",
                 "closingbalancedate", "status", "status_details", "fund", "fundgroup");
 
-        String changeCurrencyToAED = "update cr_accounts_map set currency='AED' where account='ACCSUB0884';";
+        String changeCurrencyToAED = "update cr_accounts_map set currency='AED' where account='AUTO1';";
 
         queries dbQueries = new queries(dbUtil);
         dbQueries.executeQuery(changeCurrencyToAED, "Modify currency to unmap the subaccount using DB query");
@@ -3328,7 +3328,7 @@ public class CashReconTest extends BaseTest {
         softAssert.assertTrue(comparisonErrorsBeforeReprocess.isEmpty(),
                 "Data mismatch before reprocess:\n" + String.join("\n", comparisonErrorsBeforeReprocess));
 
-        String changeCurrencyToINR = "update cr_accounts_map set currency='INR' where account='ACCSUB0884';";
+        String changeCurrencyToINR = "update cr_accounts_map set currency='INR' where account='AUTO1';";
         dbQueries.executeQuery(changeCurrencyToINR, "Rollback currency to properly remap the subaccount using DB query");
 
         cashItemsPage.waitFor(5);
@@ -3772,7 +3772,7 @@ public class CashReconTest extends BaseTest {
             gridPage = new GridPage(driver);
             gridPage.adjustZoom(75);
             String result = reconSourceFieldMapPage.verifyFieldInMapping(newFieldName);
-            Assert.assertTrue(result.contains("found in mapping successfully"), result);
+            Assert.assertTrue(result.contains("found in source field mapping successfully"), result);
 
         } finally {
             // Close the Edge browser instance

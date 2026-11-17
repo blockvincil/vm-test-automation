@@ -133,26 +133,33 @@ public class CashReconPage {
 //        eleUtil.waitForElementToDisappear(cashReconDataLoader, AppConstants.time3, AppConstants.time10);
 //        System.out.println("Cash recon data loader disappeared");
         waitUtil.waitFor(1);
-        return getToastMessage();
+        String toastMessage = getToastMessage();
+        System.out.println(toastMessage);
+        return toastMessage;
     }
 
     public String viewOrRemoveGroup() {
         waitUtil.waitFor(2);
+        eleUtil.doClick(firstGroupedRecord);
         rightClick(firstGroupedRecord);
         eleUtil.doClick(viewOrRemoveGroupButton);
+        waitUtil.waitFor(1);
         int removeButtonsCount = eleUtil.getElements(removeButtons).size();
         if (removeButtonsCount == 0) {
             return "Application Crash Detected!";
         }
+//        eleUtil.doClick(viewOrRemoveGroupButton);
         Allure.step("Removing all records from group view and update group");
-        removeRecordsFromGroup(removeButtonsCount);
+        removeRecordsFromGroup(removeButtonsCount-2);
         eleUtil.doClick(updateGroupButton, AppConstants.time5);
 //        eleUtil.waitForElementToDisappear(pageLoader, AppConstants.time3, AppConstants.time10);
 //        System.out.println("Page loader disappeared");
 //        eleUtil.waitForElementToDisappear(cashReconDataLoader, AppConstants.time3, AppConstants.time10);
 //        System.out.println("Cash recon data loader disappeared");
         waitUtil.waitFor(1);
-        return getToastMessage();
+        String toastMessage = getToastMessage();
+        System.out.println(toastMessage);
+        return toastMessage;
     }
 
     public void refresh() {
